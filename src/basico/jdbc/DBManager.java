@@ -14,7 +14,13 @@ public class DBManager {
 
 	public static Connection connect() {
 		Connection c = null;
-			//Class.forName(DB_DRIVER);
+			
+		try {
+			Class.forName(DB_DRIVER);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+			System.exit(0);
+		}
 		try {
 			c = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 			c.setAutoCommit(false);
