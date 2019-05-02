@@ -9,7 +9,9 @@ public class TableManager {
 
 		Connection c = DBManager.connect();
 		
-		String sql = "CREATE TABLE empleados ( id INTEGER IDENTITY, user VARCHAR(256), email VARCHAR(256), pass VARCHAR(10))";		
+		String sql = "CREATE TABLE empleado ( legajo INTEGER IDENTITY, nombre VARCHAR(100), apellido VARCHAR(100), dni INTEGER, "
+					+ "direccion VARCHAR(100), honorarios DECIMAL(7,2), nombreUsuario VARVHAR(20), password VARCHAR(20))";		
+		
 		
 		try {
 			Statement s = c.createStatement();
@@ -37,7 +39,7 @@ public class TableManager {
 
 		Connection c = DBManager.connect();
 		
-		String sql = "DROP TABLE empleados";
+		String sql = "DROP TABLE empleado";
 		
 		try {
 			Statement s = c.createStatement();

@@ -14,12 +14,12 @@ public class EmpleadoDao {
 		
 		Connection con = DBManager.connect();
 		
-		String sql = "\"INSERT INTO empleados (nombre, apellido, dni, legajo, direccion, honorarios, nombreUsuario, password) "
-				+ "VALUES ('" + 
-				empleado.getNombre() + "',' " +
-				empleado.getApellido() + "', " +
-				empleado.getDni() + ", " +
+		String sql = "\"INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
+				+ "VALUES (" + 
 				empleado.getLegajo() + ", '" +
+				empleado.getNombre() + "', '" +
+				empleado.getApellido() + "', " +
+				empleado.getDni() + ", '" +
 				empleado.getDireccion() + "', " +
 				empleado.getHonorarios() + ", '" +
 				empleado.getNombreUsuario() + "', '" +
@@ -51,7 +51,7 @@ public void eliminarEmpleado(int legajo) {
 		
 		Connection con = DBManager.connect();
 		
-		String sql = "\"DELETE FROM empleados where legajo = '" + legajo + "'";
+		String sql = "\"DELETE FROM empleado where legajo = '" + legajo + "'";
 		
 		try {
 			Statement s = con.createStatement();
@@ -78,7 +78,7 @@ public void mostrarEmpleado(int legajo) {
 	
 	Connection con = DBManager.connect();
 	
-	String sql = "\"SELECT * FROM empleados where legajo = '" + legajo + "'";
+	String sql = "\"SELECT * FROM empleado where legajo = '" + legajo + "'";
 	
 	try {
 		Statement s = con.createStatement();
@@ -86,10 +86,10 @@ public void mostrarEmpleado(int legajo) {
 		
 		if(rs.next()) { 
 			System.out.println("Empleado:");
+			System.out.print("\t" + rs.getInt("legajo"));
 			System.out.print("\t" + rs.getString("nombre"));
 			System.out.print("\t" + rs.getString("apellido"));
 			System.out.print("\t" + rs.getInt("dni"));
-			System.out.print("\t" + rs.getInt("legajo"));
 			System.out.print("\t" + rs.getString("direccion"));
 			System.out.print("\t" + rs.getFloat("honorarios"));
 			System.out.print("\t" + rs.getString("nombreUsuario"));
