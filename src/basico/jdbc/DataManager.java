@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class DataManager {
 
 	public void crearUsuario(String user, String email, String pass) {
-		Connection c = DBManager.getConnection();
+		Connection c = DBManager.getInstance().connect();
 
 		try {
 			Statement s = c.createStatement();
@@ -33,7 +33,7 @@ public class DataManager {
 	
 	public void borraUsuario(String username) {
 		String sql = "DELETE FROM usuarios WHERE user = '" + username + "'";
-		Connection c = DBManager.getConnection();
+		Connection c = DBManager.getInstance().connect();
 		try {
 			Statement s = c.createStatement();
 			s.executeUpdate(sql);
@@ -56,7 +56,7 @@ public class DataManager {
 	
 	public void actualizaUsuario(String user, String email, String pass) {
 		String sql = "UPDATE usuarios set email = '" + email + "', pass = '" + user + "' WHERE user = '" + user + "'";
-		Connection c = DBManager.getConnection();
+		Connection c = DBManager.getInstance().connect();
 		try {
 			Statement s = c.createStatement();
 			s.executeUpdate(sql);
@@ -80,7 +80,7 @@ public class DataManager {
 	
 	public void muestraUsuario(String username) {
 		String sql = "SELECT * FROM usuarios WHERE user = '" + username + "'";
-		Connection c = DBManager.getConnection();
+		Connection c = DBManager.getInstance().connect();
 		try {
 			Statement s = c.createStatement();
 			ResultSet rs = s.executeQuery(sql);
@@ -113,7 +113,7 @@ public class DataManager {
 	
 	public void muestraTodosLosusuarios() {
 		String sql = "SELECT * FROM usuarios";
-		Connection c = DBManager.getConnection();
+		Connection c = DBManager.getInstance().connect();
 		try {
 			Statement s = c.createStatement();
 			ResultSet rs = s.executeQuery(sql);
