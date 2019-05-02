@@ -12,7 +12,7 @@ public class EmpleadoDao {
 	
 	public void crearEmpleado(Empleado empleado) {
 		
-		Connection con = DBManager.connect();
+		Connection con = DBManager.getConnection();
 		
 		String sql = "\"INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
 				+ "VALUES (" + 
@@ -49,7 +49,7 @@ public class EmpleadoDao {
 	
 public void eliminarEmpleado(int legajo) {
 		
-		Connection con = DBManager.connect();
+		Connection con = DBManager.getConnection();
 		
 		String sql = "\"DELETE FROM empleado where legajo = '" + legajo + "'";
 		
@@ -76,7 +76,7 @@ public void eliminarEmpleado(int legajo) {
 
 public void mostrarEmpleado(int legajo) {
 	
-	Connection con = DBManager.connect();
+	Connection con = DBManager.getConnection();
 	
 	String sql = "\"SELECT * FROM empleado where legajo = '" + legajo + "'";
 	
