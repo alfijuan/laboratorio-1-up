@@ -7,12 +7,13 @@ import java.sql.SQLException;
 
 import basico.jdbc.DBManager;
 import empresa.Empleado;
+import exceptions.HorasException;
 
-public class EmpleadoDao {
+public class EmpleadoDao implements EmpleadoDAO{
 	
-	public void crearEmpleado(Empleado empleado) {
+	public void crearEmpleado(Empleado empleado) throws HorasException{
 		
-		Connection con = DBManager.getConnection();
+		Connection con = DBManager.getInstance().connect();
 		
 		String sql = "\"INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
 				+ "VALUES (" + 
@@ -47,9 +48,9 @@ public class EmpleadoDao {
 	}
 	
 	
-public void eliminarEmpleado(int legajo) {
+public void eliminarEmpleado(int legajo) throws HorasException{
 		
-		Connection con = DBManager.getConnection();
+		Connection con = DBManager.getInstance().connect();
 		
 		String sql = "\"DELETE FROM empleado where legajo = '" + legajo + "'";
 		
@@ -74,9 +75,9 @@ public void eliminarEmpleado(int legajo) {
 		
 	}
 
-public void mostrarEmpleado(int legajo) {
+public void mostrarEmpleado(int legajo) throws HorasException{
 	
-	Connection con = DBManager.getConnection();
+	Connection con = DBManager.getInstance().connect();
 	
 	String sql = "\"SELECT * FROM empleado where legajo = '" + legajo + "'";
 	
