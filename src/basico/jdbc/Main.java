@@ -7,7 +7,8 @@ public class Main {
 	public static void main(String [] args) {
 		
 		System.out.println("here");
-		Connection c = DBManager.connect();
+		Connection c = DBManager.getConnection();
+		System.out.println(c);
 		System.out.println("here 2");
 		
 //		TableManager tm = new TableManager();
