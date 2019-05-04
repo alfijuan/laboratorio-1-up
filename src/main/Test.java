@@ -1,7 +1,6 @@
 package main;
 
-import basico.jdbc.DBManager;
-import dao.EmpleadoDao;
+import dao.EmpleadoDaoImpl;
 import empresa.Empleado;
 import exceptions.HorasException;
 import utils.Dentre;
@@ -11,9 +10,9 @@ public class Test {
 	
 	public static void main(String[] args) {
 	
-		EmpleadoDao empleadoDao = new EmpleadoDao();
+		EmpleadoDaoImpl empleadoDao = new EmpleadoDaoImpl();
 		boolean sigo = true;
-		DBManager con = DBManager.getInstance();
+//		DBManager con = DBManager.getInstance();
 		
 		
 		while (sigo) {			
@@ -35,7 +34,9 @@ public class Test {
 				break;
 			case 2:
 
-
+				break;
+			case 5:
+				
 			default:
 				System.out.println("Opción incorrecta!");
 				break;

@@ -1,18 +1,12 @@
 package basico.jdbc;
 
-import java.sql.Connection;
-
 public class Main {
 
 	public static void main(String [] args) {
+
 		
-		System.out.println("here");
-		Connection c = DBManager.getInstance().connect();
-		System.out.println(c);
-		System.out.println("here 2");
-		
-//		TableManager tm = new TableManager();
-//		tm.createUserTable();
+		TableManager tm = new TableManager();
+		tm.createUserTable();
 //		
 //		
 //		DataManager dm = new DataManager();

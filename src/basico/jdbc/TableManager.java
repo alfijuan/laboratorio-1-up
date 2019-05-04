@@ -10,7 +10,7 @@ public class TableManager {
 		Connection c = DBManager.getInstance().connect();
 		
 		String sql = "CREATE TABLE empleado ( legajo INTEGER IDENTITY, nombre VARCHAR(100), apellido VARCHAR(100), dni INTEGER, "
-					+ "direccion VARCHAR(100), honorarios DECIMAL(7,2), nombreUsuario VARVHAR(20), password VARCHAR(20))";		
+					+ "direccion VARCHAR(100), honorarios DECIMAL(7,2), nombreUsuario VARCHAR(20), password VARCHAR(20))";		
 		
 		
 		try {

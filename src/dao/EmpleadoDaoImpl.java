@@ -9,13 +9,13 @@ import basico.jdbc.DBManager;
 import empresa.Empleado;
 import exceptions.HorasException;
 
-public class EmpleadoDao implements EmpleadoDAO{
+public class EmpleadoDaoImpl implements EmpleadoDAO{
 	
 	public void crearEmpleado(Empleado empleado) throws HorasException{
 		
 		Connection con = DBManager.getInstance().connect();
 		
-		String sql = "\"INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
+		String sql = "INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
 				+ "VALUES (" + 
 				empleado.getLegajo() + ", '" +
 				empleado.getNombre() + "', '" +
@@ -52,7 +52,7 @@ public void eliminarEmpleado(int legajo) throws HorasException{
 		
 		Connection con = DBManager.getInstance().connect();
 		
-		String sql = "\"DELETE FROM empleado where legajo = '" + legajo + "'";
+		String sql = "DELETE FROM empleado where legajo = '" + legajo + "'";
 		
 		try {
 			Statement s = con.createStatement();
@@ -87,14 +87,7 @@ public void mostrarEmpleado(int legajo) throws HorasException{
 		
 		if(rs.next()) { 
 			System.out.println("Empleado:");
-			System.out.print("\t" + rs.getInt("legajo"));
-			System.out.print("\t" + rs.getString("nombre"));
-			System.out.print("\t" + rs.getString("apellido"));
-			System.out.print("\t" + rs.getInt("dni"));
-			System.out.print("\t" + rs.getString("direccion"));
-			System.out.print("\t" + rs.getFloat("honorarios"));
-			System.out.print("\t" + rs.getString("nombreUsuario"));
-			System.out.println();
+			System.out.println(rs);
 		}
 	}catch (SQLException e) {
 		try {

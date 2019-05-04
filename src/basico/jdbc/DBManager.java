@@ -9,6 +9,13 @@ public class DBManager {
 	
 	private static DBManager instance;
 
+	//ARCHIVO
+//	private static final String DB_DRIVER = "org.hsqldb.jdbcDriver";
+//	private static final String DB_URL = "jdbc:hsqldb:file:sql/testdb;shutdown=true;hsqldb.default_table_type=cached";
+//	private static final String DB_USERNAME = "sa";
+//	private static final String DB_PASSWORD = "";
+	
+	//AMAZON
 	private static final String DB_DRIVER = "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://ec2-174-129-10-235.compute-1.amazonaws.com:5432/d4kaca42s0k4ie?user=kjsnodphpydoph&password=61e8e88f01d2d12f691ee80d15af59c574e60c49ed8ddd1fae330b795ac38eaa";
 //	private static final String DB_URL = "jdbc:postgresql://ec2-174-129-10-235.compute-1.amazonaws.com:5432/d4kaca42s0k4ie";
