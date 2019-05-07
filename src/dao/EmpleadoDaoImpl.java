@@ -48,7 +48,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 	}
 	
 	
-public void eliminarEmpleado(int legajo) throws HorasException{
+	public void eliminarEmpleado(int legajo) throws HorasException{
 		
 		Connection con = DBManager.getInstance().connect();
 		
@@ -75,36 +75,70 @@ public void eliminarEmpleado(int legajo) throws HorasException{
 		
 	}
 
-public void mostrarEmpleado(int legajo) throws HorasException{
+	public void mostrarEmpleado(int legajo) throws HorasException{
 	
-	Connection con = DBManager.getInstance().connect();
-	
-	String sql = "\"SELECT * FROM empleado where legajo = '" + legajo + "'";
-	
-	try {
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery(sql);		
+		Connection con = DBManager.getInstance().connect();
 		
-		if(rs.next()) { 
-			System.out.println("Empleado:");
-			System.out.println(rs);
-		}
-	}catch (SQLException e) {
+		String sql = "\"SELECT * FROM empleado where legajo = '" + legajo + "'";
+		
 		try {
-			con.rollback();
-			e.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	} finally {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);		
+			
+			if(rs.next()) { 
+				System.out.println("Empleado:");
+				System.out.println(rs);
+			}
+		}catch (SQLException e) {
+			try {
+				con.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
-}
+	public void muestraTodosLosEmpleados() {
+		String sql = "SELECT * FROM empleado";
+		Connection c = DBManager.getInstance().connect();
+		try {
+			Statement s = c.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				System.out.println("Empleado:");
+				System.out.print("\t" + rs.getInt("legajo"));
+				System.out.print("\t" + rs.getString("nombre"));
+				System.out.print("\t" + rs.getString("apellido"));
+				System.out.print("\t" + rs.getInt("dni"));
+				System.out.print("\t" + rs.getString("direccion"));
+				System.out.print("\t" + rs.getFloat("honorarios"));
+				System.out.print("\t" + rs.getString("nombreUsuario"));
+				System.out.print("\t" + rs.getString("password"));
+				System.out.println();
+			
+			}
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+		}
+	}
 	
 	
 }

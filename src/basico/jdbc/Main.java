@@ -1,5 +1,7 @@
 package basico.jdbc;
 
+import dao.EmpleadoDaoImpl;
+
 public class Main {
 
 	public static void main(String [] args) {
@@ -7,6 +9,12 @@ public class Main {
 		
 		TableManager tm = new TableManager();
 		tm.createUserTable();
+		
+		EmpleadoDaoImpl emp = new EmpleadoDaoImpl();
+		
+		emp.muestraTodosLosEmpleados();
+		
+//		tm.dropUserTable();
 //		
 //		
 //		DataManager dm = new DataManager();

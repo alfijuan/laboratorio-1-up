@@ -1,5 +1,7 @@
 package empresa;
 
+import java.util.ArrayList;
+
 public class Empleado {
 	private String nombre;
 	private String apellido;
@@ -9,6 +11,7 @@ public class Empleado {
 	private float honorarios;
 	private String nombreUsuario;
 	private String password;
+	private ArrayList<Tarea> listaTareas = new ArrayList<Tarea>();
 	
 	
 	public Empleado() {		
@@ -77,6 +80,12 @@ public class Empleado {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public ArrayList<Tarea> getListaTareas() {
+		return listaTareas;
+	}
+	public void setListaTareas(ArrayList<Tarea> listaTareas) {
+		this.listaTareas = listaTareas;
 	}
 	
 }
