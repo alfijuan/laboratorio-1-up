@@ -1,14 +1,18 @@
 package empresa;
 
 public class Tarea {
+	private int id;
 	private String nombre;
 	private String descripcion;
 	private int horas;
+	private Empleado empleado;
 	
-	public Tarea(String nombre, String descripcion, int horas, Empleado empleado) {
+	public Tarea(int id, String nombre, String descripcion, int horas, Empleado empleado) {
+		this.setId(id);
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.horas = horas;
+		this.setEmpleado(empleado);
 	}
 	
 	public int getHoras() {
@@ -28,6 +32,18 @@ public class Tarea {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

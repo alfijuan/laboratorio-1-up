@@ -11,11 +11,10 @@ public class Empleado {
 	private float honorarios;
 	private String nombreUsuario;
 	private String password;
-	private ArrayList<Tarea> listaTareas = new ArrayList<Tarea>();
+
 	
 	
-	public Empleado() {		
-	}
+	public Empleado() {}
 	
 	public Empleado(String nombre, String apellido, int dni, int legajo, String direccion, float honorarios, String nombreUsuario, String password) {
 		setNombre(nombre);
@@ -80,12 +79,6 @@ public class Empleado {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public ArrayList<Tarea> getListaTareas() {
-		return listaTareas;
-	}
-	public void setListaTareas(ArrayList<Tarea> listaTareas) {
-		this.listaTareas = listaTareas;
 	}
 	
 }
