@@ -23,7 +23,6 @@ public class InputContainer {
 	    	field.setEditable(!disable);
 	    }
 	    row.add(field);
-	    
 	    return row;
 	                       
 	}

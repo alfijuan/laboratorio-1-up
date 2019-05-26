@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String [] args) {
 
 		
-		TableManager tm = new TableManager();
-		tm.createUserTable();
+//		TableManager tm = new TableManager();
+//		tm.createUserTable();
 		
 		EmpleadoDaoImpl emp = new EmpleadoDaoImpl();
 		
