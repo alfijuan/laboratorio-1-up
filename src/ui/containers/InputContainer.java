@@ -4,27 +4,44 @@ import javax.swing.*;
 
 public class InputContainer {
 	
-	public static Box createHelperBox(String textoLabel) {
-		return createHelperBox(textoLabel, null, false);
+	private JLabel label; 
+	private JTextField field;
+	
+	public InputContainer(String textoLabel, int length) {
+		this.label = new JLabel(textoLabel);
+		this.field = new JTextField(length);
 	}
 	
-	public static Box createHelperBox(String textoLabel, String textoInput) {
-		return createHelperBox(textoLabel, textoInput, false);
+	public Box createHelperBox(String textoLabel, String textoInput) {
+		return this.createHelperBox(textoInput, false);
 	}
 
-	public static Box createHelperBox(String textoLabel, String textoInput, Boolean disable) {
+	public Box createHelperBox(String textoInput, Boolean disable) {
 	    Box row = Box.createHorizontalBox();
-	    JLabel label = new JLabel(textoLabel);
-	    row.add(label);
+	    row.add(this.getLabel());
 	    row.add(Box.createHorizontalStrut(10));
-	    JTextField field = new JTextField(30);
 	    if(textoInput != null) {
-	    	field.setText(textoInput);
-	    	field.setEditable(!disable);
+	    	this.getField().setText(textoInput);
+	    	this.getField().setEditable(!disable);
 	    }
-	    row.add(field);
+	    row.add(this.getField());
 	    return row;
-	                       
+	}
+
+	public JLabel getLabel() {
+		return label;
+	}
+
+	public void setLabel(JLabel label) {
+		this.label = label;
+	}
+
+	public JTextField getField() {
+		return field;
+	}
+
+	public void setField(JTextField field) {
+		this.field = field;
 	}
 
 }

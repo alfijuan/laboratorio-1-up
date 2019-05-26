@@ -15,25 +15,33 @@ public class EmpleadoPanel extends JPanel {
     	initUI(titulo);
     }
     
-    private JTextField textField;
     private void initUI(String titulo) {
     	Box vertical = Box.createVerticalBox();
     	
-        vertical.add(InputContainer.createHelperBox("Nombre", null, false));
+    	InputContainer nameField = new InputContainer("Nombre", 30);
+    	InputContainer lastNameField = new InputContainer("Apellido", 30);
+    	InputContainer dniField = new InputContainer("DNI", 30);
+    	InputContainer legajoField = new InputContainer("Legajo", 30);
+    	InputContainer direccionField = new InputContainer("Direccion", 30);
+    	InputContainer honorariosField = new InputContainer("Honorarios", 30);
+    	InputContainer userField = new InputContainer("Nombre de usuario", 30);
+    	InputContainer passField = new InputContainer("Password", 30);
+    	
+        vertical.add(nameField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("Apellido", null, false));
+        vertical.add(lastNameField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("DNI", null, false));
+        vertical.add(dniField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("Legajo", null, false));
+        vertical.add(legajoField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("Direccion", null, false));
+        vertical.add(direccionField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("Honorarios", null, false));
+        vertical.add(honorariosField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("Nombre de usuario", null, false));
+        vertical.add(userField.createHelperBox(null, false));
         vertical.add(Box.createVerticalStrut(20));
-        vertical.add(InputContainer.createHelperBox("Password", null, false));
+        vertical.add(passField.createHelperBox(null, false));
         
         Box botonera = Box.createHorizontalBox();
         botonera.add(Box.createHorizontalGlue());
@@ -42,10 +50,15 @@ public class EmpleadoPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//aca iria el alta de empleado.
-				
-				String text = textField.getText();
-				System.out.println(text);
+				System.out.println("nombre: " + nameField.getField().getText() + "\n" +
+								   "apellido: " + lastNameField.getField().getText() + "\n" +
+								   "dni: " + dniField.getField().getText() + "\n" +
+								   "legajo: " + legajoField.getField().getText() + "\n" +
+								   "direccion: " + direccionField.getField().getText() + "\n" +
+								   "honorarios: " + honorariosField.getField().getText() + "\n" +
+								   "username: " + userField.getField().getText() + "\n" +
+								   "pass: " + passField.getField().getText() + "\n"
+				);
 				
 			}
 		});
