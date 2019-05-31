@@ -2,6 +2,8 @@ package ui.containers;
 
 import javax.swing.*;
 
+import verifiers.InputVerifier;
+
 public class InputContainer {
 	
 	private JLabel label; 

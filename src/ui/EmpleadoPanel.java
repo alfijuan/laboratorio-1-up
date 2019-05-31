@@ -2,17 +2,24 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
 import empresa.Empleado;
+import exceptions.HorasException;
+import handler.Handler;
 import ui.containers.InputContainer;
 import ui.containers.SalirListener;
 
 public class EmpleadoPanel extends JPanel {
 	 
-    public EmpleadoPanel(String titulo) {
-    	initUI(titulo);
+    private Handler handler;
+
+	public EmpleadoPanel(Handler handler, String titulo) {
+    	this.setHandler(handler);
+		initUI(titulo);
     }
     
     private void initUI(String titulo) {
@@ -46,20 +53,32 @@ public class EmpleadoPanel extends JPanel {
         Box botonera = Box.createHorizontalBox();
         botonera.add(Box.createHorizontalGlue());
         JButton OKBtn = new JButton("OK");
+        Handler handler = this.getHandler();
         OKBtn.addActionListener(new ActionListener() {
-			
+//        	Validar desde el front los textos
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("nombre: " + nameField.getField().getText() + "\n" +
-								   "apellido: " + lastNameField.getField().getText() + "\n" +
-								   "dni: " + dniField.getField().getText() + "\n" +
-								   "legajo: " + legajoField.getField().getText() + "\n" +
-								   "direccion: " + direccionField.getField().getText() + "\n" +
-								   "honorarios: " + honorariosField.getField().getText() + "\n" +
-								   "username: " + userField.getField().getText() + "\n" +
-								   "pass: " + passField.getField().getText() + "\n"
+	        	ArrayList<InputContainer> list = new ArrayList<InputContainer>();
+//	        	InputVerifier.verify(list.addAll(
+//	        			Arrays.asList(nameField.getField(), lastNameField.getField()
+//	        	)));
+				Empleado emp = new Empleado(
+					nameField.getField().getText(),
+					lastNameField.getField().getText(),
+					Integer.parseInt(dniField.getField().getText()),
+					Integer.parseInt(legajoField.getField().getText()),
+					direccionField.getField().getText(),
+					Float.parseFloat(honorariosField.getField().getText()),
+					userField.getField().getText(),
+					passField.getField().getText()
 				);
-				
+				try {
+					handler.getEmpleadoBO().agregarEmpleado(emp);
+				} catch (HorasException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
         
@@ -77,6 +96,14 @@ public class EmpleadoPanel extends JPanel {
         
         add(vertical);
     }
+
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
     
    
 }

@@ -8,17 +8,24 @@ import ui.MiFrame;
 public class Handler {
 	
 	private MiFrame frame;
-	private EmpleadoBO empleadoBO;
+	private EmpleadoBO empleadoBO = new EmpleadoBO();
 	
 	public Handler() {
 		frame = new MiFrame("Empleados v1.0");
-		empleadoBO = new EmpleadoBO();
 //		empleadoBO.setDAO(new EmpleadoDaoImpl());
 	}
 	
 	public void init() {
-		frame.cambiarPanel(new EmpleadoPanel("Panel"));
+		frame.cambiarPanel(new EmpleadoPanel(this, "Panel"));
         frame.setVisible(true);
+	}
+
+	public EmpleadoBO getEmpleadoBO() {
+		return empleadoBO;
+	}
+
+	public void setEmpleadoBO(EmpleadoBO empleadoBO) {
+		this.empleadoBO = empleadoBO;
 	}
 	
 	

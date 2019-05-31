@@ -12,7 +12,7 @@ public class Main {
 		
 		EmpleadoDaoImpl emp = new EmpleadoDaoImpl();
 		
-		emp.muestraTodosLosEmpleados();
+		emp.obtenerEmpleados();
 		
 //		tm.dropUserTable();
 //		

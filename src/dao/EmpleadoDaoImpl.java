@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +12,10 @@ import exceptions.HorasException;
 
 public class EmpleadoDaoImpl implements EmpleadoDAO{
 	
-	public void crearEmpleado(Empleado empleado) throws HorasException{
+	public boolean crearEmpleado(Empleado empleado) throws HorasException{
 		
 		Connection con = DBManager.getInstance().connect();
+		boolean returner = false;
 		
 		String sql = "INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
 				+ "VALUES (" + 
@@ -30,6 +32,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			Statement s = con.createStatement();
 			s.executeUpdate(sql);
 			con.commit();
+			returner = true;
 		}catch (SQLException e) {
 			try {
 				con.rollback();
@@ -44,20 +47,21 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				e.printStackTrace();
 			}
 		}
-		
+		return returner;
 	}
 	
 	
-	public void eliminarEmpleado(int legajo) throws HorasException{
+	public boolean eliminarEmpleado(int legajo) throws HorasException{
 		
 		Connection con = DBManager.getInstance().connect();
-		
-		String sql = "DELETE FROM empleado where legajo = '" + legajo + "'";
+		boolean returner = false;
+		String sql = "DELETE FROM empleado where legajo = " + legajo ;
 		
 		try {
 			Statement s = con.createStatement();
 			s.executeUpdate(sql);
 			con.commit();
+			returner = true;
 		}catch (SQLException e) {
 			try {
 				con.rollback();
@@ -72,22 +76,33 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				e.printStackTrace();
 			}
 		}
+		return returner;
 		
 	}
 
-	public void mostrarEmpleado(int legajo) throws HorasException{
+	public Empleado obtenerEmpleado(int legajo) throws HorasException{
 	
 		Connection con = DBManager.getInstance().connect();
 		
-		String sql = "\"SELECT * FROM empleado where legajo = '" + legajo + "'";
+		Empleado empleado = null;
+		
+		String sql = "SELECT * FROM empleado where legajo = " + legajo;
 		
 		try {
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(sql);		
 			
 			if(rs.next()) { 
-				System.out.println("Empleado:");
-				System.out.println(rs);
+				empleado = new Empleado(
+						rs.getString("nombre"),
+						rs.getString("apellido"),
+						rs.getInt("dni"),
+						rs.getInt("legajo"),
+						rs.getString("direccion"),
+						rs.getFloat("honorarios"),
+						rs.getString("nombreUsuario"),
+						rs.getString("password")
+				);
 			}
 		}catch (SQLException e) {
 			try {
@@ -103,27 +118,29 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				e.printStackTrace();
 			}
 		}
+		
+		return empleado;
 	}
 	
-	public void muestraTodosLosEmpleados() {
+	public ArrayList<Empleado> obtenerEmpleados() {
 		String sql = "SELECT * FROM empleado";
+		ArrayList<Empleado> lista = new ArrayList<Empleado>();
 		Connection c = DBManager.getInstance().connect();
 		try {
 			Statement s = c.createStatement();
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				System.out.println("Empleado:");
-				System.out.print("\t" + rs.getInt("legajo"));
-				System.out.print("\t" + rs.getString("nombre"));
-				System.out.print("\t" + rs.getString("apellido"));
-				System.out.print("\t" + rs.getInt("dni"));
-				System.out.print("\t" + rs.getString("direccion"));
-				System.out.print("\t" + rs.getFloat("honorarios"));
-				System.out.print("\t" + rs.getString("nombreUsuario"));
-				System.out.print("\t" + rs.getString("password"));
-				System.out.println();
-			
+				lista.add(new Empleado(
+						rs.getString("nombre"),
+						rs.getString("apellido"),
+						rs.getInt("dni"),
+						rs.getInt("legajo"),
+						rs.getString("direccion"),
+						rs.getFloat("honorarios"),
+						rs.getString("nombreUsuario"),
+						rs.getString("password")
+				));
 			}
 		} catch (SQLException e) {
 			try {
@@ -138,6 +155,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				//no hago nada
 			}
 		}
+		return lista;
 	}
 	
 	

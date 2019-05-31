@@ -28,8 +28,8 @@ public class Empleado {
 	}
 	
 	public String toString() {
-		return "Nombre: " + getNombre() + "Apellido: " + getApellido() + "DNI: " + getDni() + "Legajo: " + getLegajo() + 
-				"Direccion: " + getDireccion() + "Honorarios: " + getHonorarios();
+		return "Nombre: " + getNombre() + "\nApellido: " + getApellido() + "\nDNI: " + getDni() + "\nLegajo: " + getLegajo() + 
+				"\nDireccion: " + getDireccion() + "\nHonorarios: " + getHonorarios();
 	}
 	
 	public String getNombre() {
