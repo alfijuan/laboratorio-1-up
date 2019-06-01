@@ -13,10 +13,6 @@ public class InputContainer {
 		this.label = new JLabel(textoLabel);
 		this.field = new JTextField(length);
 	}
-	
-	public Box createHelperBox(String textoLabel, String textoInput) {
-		return this.createHelperBox(textoInput, false);
-	}
 
 	public Box createHelperBox(String textoInput, Boolean disable) {
 	    Box row = Box.createHorizontalBox();

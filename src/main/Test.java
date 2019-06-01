@@ -1,6 +1,7 @@
 package main;
 
 
+import exceptions.HorasException;
 import handler.Handler;
 
 public class Test {
@@ -9,7 +10,12 @@ public class Test {
 	public static void main(String[] args) {
 
 		Handler handler = new Handler();
-		handler.init();
+		try {
+			handler.init();
+		} catch (HorasException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}

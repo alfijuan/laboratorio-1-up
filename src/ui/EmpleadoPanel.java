@@ -16,9 +16,16 @@ import ui.containers.SalirListener;
 public class EmpleadoPanel extends JPanel {
 	 
     private Handler handler;
+    private Empleado current;
 
 	public EmpleadoPanel(Handler handler, String titulo) {
     	this.setHandler(handler);
+		initUI(titulo);
+    }
+	
+	public EmpleadoPanel(Handler handler, String titulo, Empleado emp) {
+    	this.setHandler(handler);
+    	this.setEmpleado(emp);
 		initUI(titulo);
     }
     
@@ -34,21 +41,39 @@ public class EmpleadoPanel extends JPanel {
     	InputContainer userField = new InputContainer("Nombre de usuario", 30);
     	InputContainer passField = new InputContainer("Password", 30);
     	
-        vertical.add(nameField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(lastNameField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(dniField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(legajoField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(direccionField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(honorariosField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(userField.createHelperBox(null, false));
-        vertical.add(Box.createVerticalStrut(20));
-        vertical.add(passField.createHelperBox(null, false));
+    	if(this.getEmpleado() != null) {
+    		vertical.add(nameField.createHelperBox(this.getEmpleado().getNombre(), false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(lastNameField.createHelperBox(this.getEmpleado().getApellido(), false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(dniField.createHelperBox(Integer.toString(this.getEmpleado().getDni()), true));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(legajoField.createHelperBox(Integer.toString(this.getEmpleado().getLegajo()), true));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(direccionField.createHelperBox(this.getEmpleado().getDireccion(), false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(honorariosField.createHelperBox(Float.toString(this.getEmpleado().getHonorarios()), false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(userField.createHelperBox(this.getEmpleado().getNombreUsuario(), false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(passField.createHelperBox(this.getEmpleado().getPassword(), false));
+    	} else {
+            vertical.add(nameField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(lastNameField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(dniField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(legajoField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(direccionField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(honorariosField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(userField.createHelperBox(null, false));
+            vertical.add(Box.createVerticalStrut(20));
+            vertical.add(passField.createHelperBox(null, false));
+    	}
         
         Box botonera = Box.createHorizontalBox();
         botonera.add(Box.createHorizontalGlue());
@@ -60,9 +85,6 @@ public class EmpleadoPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 	        	ArrayList<InputContainer> list = new ArrayList<InputContainer>();
-//	        	InputVerifier.verify(list.addAll(
-//	        			Arrays.asList(nameField.getField(), lastNameField.getField()
-//	        	)));
 				Empleado emp = new Empleado(
 					nameField.getField().getText(),
 					lastNameField.getField().getText(),
@@ -103,6 +125,14 @@ public class EmpleadoPanel extends JPanel {
 
 	public void setHandler(Handler handler) {
 		this.handler = handler;
+	}
+	
+	public Empleado getEmpleado() {
+		return current;
+	}
+
+	public void setEmpleado(Empleado emp) {
+		this.current = emp;
 	}
     
    

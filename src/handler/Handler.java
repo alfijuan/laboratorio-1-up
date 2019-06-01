@@ -2,6 +2,7 @@ package handler;
 
 import bo.EmpleadoBO;
 import dao.EmpleadoDaoImpl;
+import exceptions.HorasException;
 import ui.EmpleadoPanel;
 import ui.MiFrame;
 
@@ -15,8 +16,8 @@ public class Handler {
 //		empleadoBO.setDAO(new EmpleadoDaoImpl());
 	}
 	
-	public void init() {
-		frame.cambiarPanel(new EmpleadoPanel(this, "Panel"));
+	public void init() throws HorasException {
+		frame.cambiarPanel(new EmpleadoPanel(this, "Panel", this.getEmpleadoBO().obtenerEmpleado(123)));
         frame.setVisible(true);
 	}
 
