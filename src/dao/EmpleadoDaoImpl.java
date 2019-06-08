@@ -9,10 +9,12 @@ import java.sql.SQLException;
 import basico.jdbc.DBManager;
 import empresa.Empleado;
 import exceptions.HorasException;
+import exceptions.empleado.EmpleadoAlreadyExists;
+import exceptions.empleado.EmpleadoNotFoundException;
 
 public class EmpleadoDaoImpl implements EmpleadoDAO{
 	
-	public boolean crearEmpleado(Empleado empleado) throws HorasException{
+	public boolean crearEmpleado(Empleado empleado){
 		
 		Connection con = DBManager.getInstance().connect();
 		boolean returner = false;
@@ -50,8 +52,43 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		return returner;
 	}
 	
+	public boolean editarEmpleado(Empleado empleado) throws EmpleadoNotFoundException{
+		
+		Connection con = DBManager.getInstance().connect();
+		boolean returner = false;
+		
+		String sql = "UPDATE empleado SET nombre='" + empleado.getNombre() + "', " +
+				"apellido='" + empleado.getApellido() + "', " +
+				"direccion='" + empleado.getDireccion() + "', " +
+				"honorarios=" + empleado.getHonorarios() + ", " +
+				"nombreUsuario='" + empleado.getNombreUsuario() + "', " +
+				"password='" + empleado.getPassword() + "' " +
+				"WHERE legajo=" + empleado.getLegajo() + ";";
+		
+		try {
+			Statement s = con.createStatement();
+			s.executeUpdate(sql);
+			con.commit();
+			returner = true;
+		}catch (SQLException e) {
+			try {
+				con.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return returner;
+	}
 	
-	public boolean eliminarEmpleado(int legajo) throws HorasException{
+	
+	public boolean eliminarEmpleado(int legajo) throws EmpleadoNotFoundException{
 		
 		Connection con = DBManager.getInstance().connect();
 		boolean returner = false;
@@ -80,7 +117,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		
 	}
 
-	public Empleado obtenerEmpleado(int legajo) throws HorasException{
+	public Empleado obtenerEmpleado(int legajo) throws EmpleadoNotFoundException{
 	
 		Connection con = DBManager.getInstance().connect();
 		
@@ -122,7 +159,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		return empleado;
 	}
 	
-	public ArrayList<Empleado> obtenerEmpleados() {
+	public ArrayList<Empleado> obtenerEmpleados() throws EmpleadoNotFoundException {
 		String sql = "SELECT * FROM empleado";
 		ArrayList<Empleado> lista = new ArrayList<Empleado>();
 		Connection c = DBManager.getInstance().connect();

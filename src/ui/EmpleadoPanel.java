@@ -9,6 +9,8 @@ import javax.swing.*;
 
 import empresa.Empleado;
 import exceptions.HorasException;
+import exceptions.empleado.EmpleadoAlreadyExists;
+import exceptions.empleado.EmpleadoNotFoundException;
 import handler.Handler;
 import ui.containers.InputContainer;
 import ui.containers.SalirListener;
@@ -79,42 +81,66 @@ public class EmpleadoPanel extends JPanel {
         botonera.add(Box.createHorizontalGlue());
         JButton OKBtn = new JButton("OK");
         Handler handler = this.getHandler();
+        Empleado parentEmp = this.getEmpleado();
         OKBtn.addActionListener(new ActionListener() {
 //        	Validar desde el front los textos
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 	        	ArrayList<InputContainer> list = new ArrayList<InputContainer>();
-				Empleado emp = new Empleado(
-					nameField.getField().getText(),
-					lastNameField.getField().getText(),
-					Integer.parseInt(dniField.getField().getText()),
-					Integer.parseInt(legajoField.getField().getText()),
-					direccionField.getField().getText(),
-					Float.parseFloat(honorariosField.getField().getText()),
-					userField.getField().getText(),
-					passField.getField().getText()
-				);
-				try {
-					handler.getEmpleadoBO().agregarEmpleado(emp);
-				} catch (HorasException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+	        	if(parentEmp != null) {
+	        		parentEmp.setNombre(nameField.getField().getText());
+	        		parentEmp.setApellido(lastNameField.getField().getText());
+	        		parentEmp.setDireccion(direccionField.getField().getText());
+	        		parentEmp.setHonorarios(Float.parseFloat(honorariosField.getField().getText()));
+	        		parentEmp.setNombreUsuario(userField.getField().getText());
+	        		parentEmp.setPassword(passField.getField().getText());
+	        		try {
+    					handler.getEmpleadoBO().editarEmpleado(parentEmp);
+    					handler.mostrarModal("Empleado editado correctamente!");
+    					handler.mostrarTablaEmpleado();
+    				} catch (EmpleadoNotFoundException e1) {
+    					handler.mostrarModal("Ha ocurrido un error...");
+    				}
+	        	} else {
+	        		Empleado emp = new Empleado(
+    					nameField.getField().getText(),
+    					lastNameField.getField().getText(),
+    					Integer.parseInt(dniField.getField().getText()),
+    					Integer.parseInt(legajoField.getField().getText()),
+    					direccionField.getField().getText(),
+    					Float.parseFloat(honorariosField.getField().getText()),
+    					userField.getField().getText(),
+    					passField.getField().getText()
+    				);
+    				try {
+    					handler.getEmpleadoBO().agregarEmpleado(emp);
+    					handler.mostrarModal("Empleado agregado correctamente!");
+    					handler.mostrarTablaEmpleado();
+    				} catch (EmpleadoAlreadyExists e1) {
+    					handler.mostrarModal("El empleado ya existe!");
+    				} catch (EmpleadoNotFoundException e1) {
+    					handler.mostrarModal("Ha ocurrido un error...");
+    				}
+	        	}
 			}
 		});
         
-        JButton SalirBtn = new JButton("Salir");
-        SalirBtn.addActionListener(new SalirListener());
-        
+        JButton SalirBtn = new JButton("Volver");
+        SalirBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarTablaEmpleado();
+			}
+		});
         
         botonera.add(OKBtn);
         botonera.add(Box.createHorizontalGlue());
-        vertical.add(botonera);
-        vertical.add(Box.createVerticalStrut(30));
-       
+        
         botonera.add(SalirBtn);
         botonera.add(Box.createHorizontalGlue());
+        vertical.add(botonera);
+        vertical.add(Box.createVerticalStrut(30));
         
         add(vertical);
     }

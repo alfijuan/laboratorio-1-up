@@ -5,29 +5,39 @@ import java.util.ArrayList;
 import dao.EmpleadoDaoImpl;
 import empresa.Empleado;
 import exceptions.HorasException;
+import exceptions.empleado.EmpleadoAlreadyExists;
+import exceptions.empleado.EmpleadoNotFoundException;
 
 public class EmpleadoBO {
 	private EmpleadoDaoImpl empDao = new EmpleadoDaoImpl();
 	
 	public EmpleadoBO() {}
 	
-	public void agregarEmpleado(Empleado emp) throws HorasException {
+	public void agregarEmpleado(Empleado emp) throws EmpleadoNotFoundException, EmpleadoAlreadyExists{
 		if(empDao.obtenerEmpleado(emp.getLegajo()) == null) {
 			empDao.crearEmpleado(emp);
 		} else {
-			System.out.println("Existe");
+			throw new EmpleadoAlreadyExists();
 		}
 	}
 	
-	public ArrayList<Empleado> obtenerEmpleados() throws HorasException {
-		return obtenerEmpleados();
+	public void editarEmpleado(Empleado emp) throws EmpleadoNotFoundException {
+		if(empDao.obtenerEmpleado(emp.getLegajo()) != null) {
+			empDao.editarEmpleado(emp);
+		} else {
+			System.out.println("No existe el usuario");
+		}
 	}
 	
-	public void eliminarEmpleado(int legajo) throws HorasException {
+	public ArrayList<Empleado> obtenerEmpleados() throws EmpleadoNotFoundException {
+		return empDao.obtenerEmpleados();
+	}
+	
+	public void eliminarEmpleado(int legajo) throws EmpleadoNotFoundException {
 		empDao.eliminarEmpleado(legajo);
 	}
 	
-	public Empleado obtenerEmpleado(int legajo) throws HorasException {
+	public Empleado obtenerEmpleado(int legajo) throws EmpleadoNotFoundException {
 		return empDao.obtenerEmpleado(legajo);
 	}
 	
