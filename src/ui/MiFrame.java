@@ -15,8 +15,10 @@ public class MiFrame extends JFrame{
 	public MiFrame(String titulo, Handler handler) {
 		super(titulo);
 		JMenuBar mb = new JMenuBar();
-		JMenu menu = new JMenu("Menu");
+		JMenu menu = new JMenu("Empleados");
+		JMenu menut = new JMenu("Tareas");
 		mb.add(menu);
+		mb.add(menut);
 		JMenuItem item1 = new JMenuItem("Listar");
 		item1.addActionListener(new ActionListener() {
 			@Override
@@ -33,6 +35,22 @@ public class MiFrame extends JFrame{
 			}
 		});
         menu.add(item2);
+        JMenuItem item1t = new JMenuItem("Listar");
+		item1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarTablaEmpleado();
+			}
+		});
+        menut.add(item1t);
+        JMenuItem item2t = new JMenuItem("Agregar");
+        item2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarAgregarEmpleado();
+			}
+		});
+        menut.add(item2t);
         setJMenuBar(mb);
 		initUI();
 	}

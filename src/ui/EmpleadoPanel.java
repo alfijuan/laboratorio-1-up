@@ -3,17 +3,15 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import empresa.Empleado;
-import exceptions.HorasException;
-import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
 import handler.Handler;
 import ui.containers.InputContainer;
-import ui.containers.SalirListener;
 
 public class EmpleadoPanel extends JPanel {
 	 
@@ -60,50 +58,39 @@ public class EmpleadoPanel extends JPanel {
             vertical.add(Box.createVerticalStrut(20));
             vertical.add(passField.createHelperBox(this.getEmpleado().getPassword(), false));
     	} else {
-            vertical.add(nameField.createHelperBox(null, false));
+            vertical.add(nameField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(lastNameField.createHelperBox(null, false));
+            vertical.add(lastNameField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(dniField.createHelperBox(null, false));
+            vertical.add(dniField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(legajoField.createHelperBox(null, false));
+            vertical.add(legajoField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(direccionField.createHelperBox(null, false));
+            vertical.add(direccionField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(honorariosField.createHelperBox(null, false));
+            vertical.add(honorariosField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(userField.createHelperBox(null, false));
+            vertical.add(userField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(passField.createHelperBox(null, false));
+            vertical.add(passField.createHelperBox());
     	}
         
         Box botonera = Box.createHorizontalBox();
         botonera.add(Box.createHorizontalGlue());
         JButton OKBtn = new JButton("OK");
-        Handler handler = this.getHandler();
-        Empleado parentEmp = this.getEmpleado();
         OKBtn.addActionListener(new ActionListener() {
-//        	Validar desde el front los textos
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-	        	ArrayList<InputContainer> list = new ArrayList<InputContainer>();
-	        	if(parentEmp != null) {
-	        		parentEmp.setNombre(nameField.getField().getText());
-	        		parentEmp.setApellido(lastNameField.getField().getText());
-	        		parentEmp.setDireccion(direccionField.getField().getText());
-	        		parentEmp.setHonorarios(Float.parseFloat(honorariosField.getField().getText()));
-	        		parentEmp.setNombreUsuario(userField.getField().getText());
-	        		parentEmp.setPassword(passField.getField().getText());
-	        		try {
-    					handler.getEmpleadoBO().editarEmpleado(parentEmp);
-    					handler.mostrarModal("Empleado editado correctamente!");
-    					handler.mostrarTablaEmpleado();
-    				} catch (EmpleadoNotFoundException e1) {
-    					handler.mostrarModal("Ha ocurrido un error...");
-    				}
+	        	if(current != null) {
+	        		current.setNombre(nameField.getField().getText());
+	        		current.setApellido(lastNameField.getField().getText());
+	        		current.setDireccion(direccionField.getField().getText());
+	        		current.setHonorarios(Float.parseFloat(honorariosField.getField().getText()));
+	        		current.setNombreUsuario(userField.getField().getText());
+	        		current.setPassword(passField.getField().getText());
+	        		handler.editarEmpleado(current);
 	        	} else {
-	        		Empleado emp = new Empleado(
+	        		Empleado empleado = new Empleado(
     					nameField.getField().getText(),
     					lastNameField.getField().getText(),
     					Integer.parseInt(dniField.getField().getText()),
@@ -113,15 +100,7 @@ public class EmpleadoPanel extends JPanel {
     					userField.getField().getText(),
     					passField.getField().getText()
     				);
-    				try {
-    					handler.getEmpleadoBO().agregarEmpleado(emp);
-    					handler.mostrarModal("Empleado agregado correctamente!");
-    					handler.mostrarTablaEmpleado();
-    				} catch (EmpleadoAlreadyExists e1) {
-    					handler.mostrarModal("El empleado ya existe!");
-    				} catch (EmpleadoNotFoundException e1) {
-    					handler.mostrarModal("Ha ocurrido un error...");
-    				}
+    				handler.agregarEmpleado(empleado);
 	        	}
 			}
 		});

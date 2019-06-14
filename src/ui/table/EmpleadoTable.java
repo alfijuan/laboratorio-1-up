@@ -1,26 +1,24 @@
 package ui.table;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import empresa.Empleado;
-import exceptions.empleado.EmpleadoNotFoundException;
 import handler.Handler;
 
 public class EmpleadoTable extends JPanel {
 	private TableModel modelo = new TableModel();
 	private JTable tabla = new JTable(modelo);
 
-	public EmpleadoTable(ArrayList<Empleado> lista, Handler handler) {
+	public EmpleadoTable(List<Empleado> lista, Handler handler) {
 		this.modelo.addColumn("Nombre");
 		this.modelo.addColumn("Apellido");
 		this.modelo.addColumn("DNI");
@@ -66,7 +64,10 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					handler.mostrarBorrarEmpleado(lista.get(index).getLegajo());
+					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
+					if(input == 0) {
+						handler.mostrarBorrarEmpleado(lista.get(index).getLegajo());
+					}
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
