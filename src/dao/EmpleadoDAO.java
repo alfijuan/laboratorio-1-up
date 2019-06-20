@@ -1,11 +1,16 @@
 package dao;
 
+import java.util.List;
+
 import empresa.Empleado;
-import exceptions.HorasException;
+import exceptions.SystemException;
+import exceptions.empleado.EmpleadoNotFoundException;
 
 public interface EmpleadoDAO {
 	
-	boolean crearEmpleado(Empleado empleado) throws HorasException;
-	boolean eliminarEmpleado(int legajo) throws HorasException;
-	Empleado obtenerEmpleado(int legajo) throws HorasException;
+	void crearEmpleado(Empleado empleado) throws SystemException;
+	void editarEmpleado(Empleado empleado) throws SystemException, EmpleadoNotFoundException;
+	void eliminarEmpleado(int legajo) throws SystemException, EmpleadoNotFoundException;
+	Empleado obtenerEmpleado(int legajo) throws SystemException;
+	List<Empleado> obtenerEmpleados() throws SystemException;
 }

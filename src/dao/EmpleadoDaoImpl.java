@@ -1,38 +1,38 @@
 package dao;
 
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import basico.jdbc.DBManager;
 import empresa.Empleado;
-import exceptions.HorasException;
+import exceptions.SystemException;
+import exceptions.empleado.EmpleadoNotFoundException;
 
 public class EmpleadoDaoImpl implements EmpleadoDAO{
 	
-	public boolean crearEmpleado(Empleado empleado) throws HorasException{
+	public void crearEmpleado(Empleado empleado) throws SystemException{
 		
 		Connection con = DBManager.getInstance().connect();
-		boolean returner = false;
-		
-		String sql = "INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password) "
-				+ "VALUES (" + 
-				empleado.getLegajo() + ", '" +
-				empleado.getNombre() + "', '" +
-				empleado.getApellido() + "', " +
-				empleado.getDni() + ", '" +
-				empleado.getDireccion() + "', " +
-				empleado.getHonorarios() + ", '" +
-				empleado.getNombreUsuario() + "', '" +
-				empleado.getPassword() + "')";
 		
 		try {
-			Statement s = con.createStatement();
-			s.executeUpdate(sql);
+			PreparedStatement sql = con.prepareStatement("INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password)" +
+					"VALUES(?,?,?,?,?,?,?,?)");
+			sql.setInt(1, empleado.getLegajo());
+			sql.setString(2, empleado.getNombre());
+			sql.setString(3, empleado.getApellido());
+			sql.setInt(4, empleado.getDni());
+			sql.setString(5, empleado.getDireccion());
+			sql.setFloat(6, empleado.getHonorarios());
+			sql.setString(7, empleado.getNombreUsuario());
+			sql.setString(8, empleado.getPassword());
+			
+			sql.executeUpdate();
 			con.commit();
-			returner = true;
+			
 		}catch (SQLException e) {
 			try {
 				con.rollback();
@@ -40,6 +40,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			throw new SystemException("Error en la base de datos");
 		} finally {
 			try {
 				con.close();
@@ -47,21 +48,54 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				e.printStackTrace();
 			}
 		}
-		return returner;
+	}
+	
+	public void editarEmpleado(Empleado empleado) throws SystemException, EmpleadoNotFoundException{
+		
+		Connection con = DBManager.getInstance().connect();
+		
+		try {
+			PreparedStatement sql = con.prepareStatement("UPDATE empleado SET nombre=?, apellido=?, direccion=?, honorarios=?, nombreUsuario=?, password=? WHERE legajo=?");
+			
+			sql.setString(1, empleado.getNombre());
+			sql.setString(2, empleado.getApellido());
+			sql.setString(3, empleado.getDireccion());
+			sql.setFloat(4, empleado.getHonorarios());
+			sql.setString(5, empleado.getNombreUsuario());
+			sql.setString(6, empleado.getPassword());
+			sql.setInt(7, empleado.getLegajo());
+			
+			sql.executeUpdate();
+			con.commit();
+			
+		}catch (SQLException e) {
+			try {
+				con.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			throw new SystemException("Error en la base de datos");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
-	public boolean eliminarEmpleado(int legajo) throws HorasException{
+	public void eliminarEmpleado(int legajo) throws SystemException, EmpleadoNotFoundException{
 		
 		Connection con = DBManager.getInstance().connect();
-		boolean returner = false;
-		String sql = "DELETE FROM empleado where legajo = " + legajo ;
 		
 		try {
-			Statement s = con.createStatement();
-			s.executeUpdate(sql);
+			PreparedStatement sql = con.prepareStatement("DELETE FROM empleado where legajo =?");
+			sql.setInt(1, legajo);
+			
+			sql.executeUpdate();
 			con.commit();
-			returner = true;
 		}catch (SQLException e) {
 			try {
 				con.rollback();
@@ -69,6 +103,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			throw new SystemException("Error en la base de datos");
 		} finally {
 			try {
 				con.close();
@@ -76,21 +111,19 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				e.printStackTrace();
 			}
 		}
-		return returner;
 		
 	}
 
-	public Empleado obtenerEmpleado(int legajo) throws HorasException{
+	public Empleado obtenerEmpleado(int legajo) throws SystemException{
 	
 		Connection con = DBManager.getInstance().connect();
-		
 		Empleado empleado = null;
 		
-		String sql = "SELECT * FROM empleado where legajo = " + legajo;
-		
 		try {
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery(sql);		
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado where legajo =?");
+			sql.setInt(1, legajo);
+			
+			ResultSet rs = sql.executeQuery();
 			
 			if(rs.next()) { 
 				empleado = new Empleado(
@@ -111,6 +144,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			throw new SystemException("Error en la base de datos");
 		} finally {
 			try {
 				con.close();
@@ -122,13 +156,12 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		return empleado;
 	}
 	
-	public ArrayList<Empleado> obtenerEmpleados() {
-		String sql = "SELECT * FROM empleado";
-		ArrayList<Empleado> lista = new ArrayList<Empleado>();
-		Connection c = DBManager.getInstance().connect();
+	public List<Empleado> obtenerEmpleados() throws SystemException {
+		List<Empleado> lista = new ArrayList<Empleado>();
+		Connection con = DBManager.getInstance().connect();
 		try {
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery(sql);
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado");
+			ResultSet rs = sql.executeQuery();
 			
 			while(rs.next()) {
 				lista.add(new Empleado(
@@ -144,13 +177,14 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			}
 		} catch (SQLException e) {
 			try {
-				c.rollback();
+				con.rollback();
 			} catch (SQLException e1) {
 				//no hago nada
 			}
+			throw new SystemException("Error en la base de datos");
 		} finally {
 			try {
-				c.close();
+				con.close();
 			} catch (SQLException e1) {
 				//no hago nada
 			}

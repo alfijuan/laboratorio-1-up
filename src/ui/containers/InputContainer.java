@@ -1,8 +1,8 @@
 package ui.containers;
 
-import javax.swing.*;
-
-import verifiers.InputVerifier;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class InputContainer {
 	
@@ -13,11 +13,15 @@ public class InputContainer {
 		this.label = new JLabel(textoLabel);
 		this.field = new JTextField(length);
 	}
-	
-	public Box createHelperBox(String textoLabel, String textoInput) {
-		return this.createHelperBox(textoInput, false);
-	}
 
+	public Box createHelperBox() {
+		return createHelperBox(null, false);
+	}
+	
+	public Box createHelperBox(Boolean disable) {
+		return createHelperBox(null, disable);
+	}
+	
 	public Box createHelperBox(String textoInput, Boolean disable) {
 	    Box row = Box.createHorizontalBox();
 	    row.add(this.getLabel());
