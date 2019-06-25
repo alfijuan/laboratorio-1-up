@@ -3,23 +3,32 @@ package handler;
 import javax.swing.JOptionPane;
 
 import bo.EmpleadoBO;
+import bo.TareaBO;
 import dao.EmpleadoDaoImpl;
+import dao.TareaDaoImpl;
 import empresa.Empleado;
+import empresa.Tarea;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
 import ui.EmpleadoPanel;
 import ui.MiFrame;
+import ui.TareaPanel;
 import ui.table.EmpleadoTable;
+import ui.table.TareaTable;
 
 public class Handler {
 	
 	private MiFrame frame;
 	private EmpleadoBO empleadoBO;
-	
+	private TareaBO tareaBO;
+
 	public Handler() {
 		empleadoBO = new EmpleadoBO();
 		empleadoBO.setEmpDao(new EmpleadoDaoImpl());
+		
+		tareaBO = new TareaBO();
+		tareaBO.setTareaDAO(new TareaDaoImpl());
 		
 		frame = new MiFrame("v1.0", this);
 	}
@@ -86,12 +95,42 @@ public class Handler {
 		}
 	}
 	
+	
+	public void mostrarAgregarTarea() {
+		frame.cambiarPanel(new TareaPanel(this, "Panel"));
+	}
+	
+	public void mostrarTablaTarea() {
+		try {
+			frame.cambiarPanel(new TareaTable(this.getTareaBO().obtenerTareas(), this));
+		} catch (SystemException e1) {
+			this.mostrarModal(e1.getMessage());
+		}
+	}
+	public void agregarTarea(Tarea tarea) {
+		try {
+			tareaBO.agregarTarea(tarea);
+			mostrarModal("Tarea agregada correctamente!");
+			mostrarTablaTarea();
+		} catch (SystemException e1) {
+			mostrarModal(e1.getMessage());
+		}
+	}
+	
 	public EmpleadoBO getEmpleadoBO() {
 		return empleadoBO;
 	}
 
 	public void setEmpleadoBO(EmpleadoBO empleadoBO) {
 		this.empleadoBO = empleadoBO;
+	}
+	
+	public TareaBO getTareaBO() {
+		return tareaBO;
+	}
+
+	public void setTareaBO(TareaBO tareaBO) {
+		this.tareaBO = tareaBO;
 	}
 	
 	

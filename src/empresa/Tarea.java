@@ -5,14 +5,16 @@ public class Tarea {
 	private String nombre;
 	private String descripcion;
 	private int horas;
-	private Empleado empleado;
+	private int legajoEmpleado;
 	
-	public Tarea(int id, String nombre, String descripcion, int horas, Empleado empleado) {
-		this.setId(id);
+	public Tarea (){};
+	
+	public Tarea(int id, String nombre, String descripcion, int horas, int legajoEmpleado) {
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.horas = horas;
-		this.setEmpleado(empleado);
+		this.legajoEmpleado = legajoEmpleado;
 	}
 	
 	public int getHoras() {
@@ -33,11 +35,12 @@ public class Tarea {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Empleado getEmpleado() {
-		return empleado;
+	public int getLegajoEmpleado() {
+		return legajoEmpleado;
 	}
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
+
+	public void setLegajoEmpleado(int legajoEmpleado) {
+		this.legajoEmpleado = legajoEmpleado;
 	}
 	public int getId() {
 		return id;

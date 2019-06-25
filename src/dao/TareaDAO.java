@@ -1,11 +1,15 @@
 package dao;
 
+import java.util.List;
+
 import empresa.Tarea;
-import exceptions.HorasException;
+import exceptions.SystemException;
 
 public interface TareaDAO {
 	
-	void crearEmpleado(Tarea empleado) throws HorasException;
-	void eliminarEmpleado(int id) throws HorasException;
-	void mostrarEmpleado(int id) throws HorasException;
+	void crearTarea(Tarea tarea) throws SystemException;
+	void eliminarTarea(int id) throws SystemException;
+	void editarTarea(Tarea tarea) throws SystemException;
+	Tarea obtenerTarea(int id) throws SystemException;
+	List<Tarea> obtenerTareas() throws SystemException;
 }

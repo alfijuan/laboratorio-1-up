@@ -62,5 +62,35 @@ public class TableManager {
 		
 
 	}
+	
+	public void createTareaTable() {
+
+		Connection c = DBManager.getInstance().connect();
+		
+		System.out.println(c);
+		String sql = "CREATE TABLE tarea(id INTEGER, nombre VARCHAR(100), descripcion VARCHAR(200), horas INTEGER, legajoEmpleado INTEGER)";
+		
+		try {
+			Statement s = c.createStatement();
+			Boolean rs = s.execute(sql);
+			System.out.println(rs);
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+
+	}
 
 }
