@@ -11,6 +11,7 @@ import empresa.Tarea;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
+import exceptions.tarea.TareaAlreadyExists;
 import ui.EmpleadoPanel;
 import ui.MiFrame;
 import ui.TareaPanel;
@@ -111,6 +112,31 @@ public class Handler {
 		try {
 			tareaBO.agregarTarea(tarea);
 			mostrarModal("Tarea agregada correctamente!");
+			mostrarTablaTarea();
+		} catch (TareaAlreadyExists e1) {
+			mostrarModal(e1.getMessage());
+		} catch (SystemException e1) {
+			mostrarModal(e1.getMessage());
+		}
+	}
+	public void mostrarEditarTarea(Tarea tarea) {
+		frame.cambiarPanel(new TareaPanel(this, "Panel", tarea));
+	}
+	
+	public void editarTarea(Tarea tarea) {
+		try {
+			getTareaBO().editarTarea(tarea);
+			mostrarModal("Tarea editada correctamente!");
+			mostrarTablaTarea();
+		} catch (SystemException e1) {
+			mostrarModal(e1.getMessage());
+		}
+	}
+	
+	public void borrarTarea(int id) {
+		try {
+			getTareaBO().borrarTarea(id);
+			mostrarModal("Tarea borrada correctamente!");
 			mostrarTablaTarea();
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());

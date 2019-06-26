@@ -42,7 +42,7 @@ public class TareaPanel extends JPanel{
             vertical.add(Box.createVerticalStrut(20));
             vertical.add(descriptionField.createHelperBox(this.getTarea().getDescripcion(), false));
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(horasField.createHelperBox(Integer.toString(this.getTarea().getHoras()), true));
+            vertical.add(horasField.createHelperBox(Integer.toString(this.getTarea().getHoras()), false));
             vertical.add(Box.createVerticalStrut(20));
             vertical.add(legajoEmpleadoField.createHelperBox(Integer.toString(this.getTarea().getLegajoEmpleado()), true));
             vertical.add(Box.createVerticalStrut(20));
@@ -72,8 +72,7 @@ public class TareaPanel extends JPanel{
 	        		current.setHoras(Integer.parseInt(horasField.getField().getText()));
 	        		current.setLegajoEmpleado(Integer.parseInt(legajoEmpleadoField.getField().getText()));
 	        		
-	        		System.out.println("TODAVIA NO DESARROLLADO");
-//	        		handler.editarTarea(current);
+	        		handler.editarTarea(current);
 	        	} else {
 	        		Tarea tarea= new Tarea(
         				Integer.parseInt(idField.getField().getText()),

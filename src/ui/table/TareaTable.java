@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import empresa.Empleado;
 import empresa.Tarea;
 import handler.Handler;
 
@@ -42,8 +41,7 @@ public class TareaTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if (index != -1) {
-					System.out.println("FALTA DESARROLLAR");
-					//					handler.mostrarEditarTarea(lista.get(index));
+					handler.mostrarEditarTarea(lista.get(index));
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
@@ -58,8 +56,7 @@ public class TareaTable extends JPanel {
 					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (input == 0) {
-						System.out.println("FALTA DESARROLLAR");
-						//						handler.mostrarBorrarTarea(lista.get(index).getId());
+						handler.borrarTarea(lista.get(index).getId());
 					}
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");

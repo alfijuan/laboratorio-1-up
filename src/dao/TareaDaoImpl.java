@@ -52,12 +52,13 @@ public class TareaDaoImpl implements TareaDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("UPDATE tarea SET nombre=?, descripcion=?, horas=?, legajoEmpleado=?");
+			PreparedStatement sql = con.prepareStatement("UPDATE tarea SET nombre=?, descripcion=?, horas=?, legajoEmpleado=? where id =?");
 			
 			sql.setString(1, tarea.getNombre());
 			sql.setString(2, tarea.getDescripcion());
 			sql.setInt(3, tarea.getHoras());
 			sql.setInt(4, tarea.getLegajoEmpleado());
+			sql.setInt(5, tarea.getId());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -80,7 +81,7 @@ public class TareaDaoImpl implements TareaDAO{
 	}
 	
 	
-	public void eliminarTarea(int id) throws SystemException{
+	public void borrarTarea(int id) throws SystemException{
 		
 		Connection con = DBManager.getInstance().connect();
 		
