@@ -1,16 +1,8 @@
 package dao;
 
-import java.util.List;
-
-import empresa.Empleado;
 import exceptions.SystemException;
-import exceptions.empleado.EmpleadoNotFoundException;
+import exceptions.login.WrongDataException;
 
 public interface LoginDAO {
-	
-	void crearEmpleado(Empleado empleado) throws SystemException;
-	void editarEmpleado(Empleado empleado) throws SystemException, EmpleadoNotFoundException;
-	void eliminarEmpleado(int legajo) throws SystemException, EmpleadoNotFoundException;
-	Empleado obtenerEmpleado(int legajo) throws SystemException;
-	List<Empleado> obtenerEmpleados() throws SystemException;
+	void loguearUser(String username, String password) throws WrongDataException, SystemException;
 }

@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import handler.Handler;
+import ui.containers.SalirListener;
 
 public class MiFrame extends JFrame{
 	
@@ -20,42 +21,53 @@ public class MiFrame extends JFrame{
 	
 	public void initMenu(Handler handler) {
 		JMenuBar mb = new JMenuBar();
-		JMenu menu = new JMenu("Empleados");
-		JMenu menut = new JMenu("Tareas");
-		mb.add(menu);
-		mb.add(menut);
-		JMenuItem item1 = new JMenuItem("Listar");
-		item1.addActionListener(new ActionListener() {
+		JMenu menuEmpleados = new JMenu("Empleados");
+		JMenu menuTareas = new JMenu("Tareas");
+		JMenu menuArchivo = new JMenu("Archivo");
+		mb.add(menuArchivo);
+		mb.add(menuEmpleados);
+		mb.add(menuTareas);
+		
+		
+		JMenuItem item1Empleados = new JMenuItem("Listar");
+		item1Empleados.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				handler.mostrarTablaEmpleado();
 			}
 		});
-        menu.add(item1);
-        JMenuItem item2 = new JMenuItem("Agregar");
-        item2.addActionListener(new ActionListener() {
+        menuEmpleados.add(item1Empleados);
+        JMenuItem item2Empleados = new JMenuItem("Agregar");
+        item2Empleados.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				handler.mostrarAgregarEmpleado();
 			}
 		});
-        menu.add(item2);
-        JMenuItem item1t = new JMenuItem("Listar");
-		item1.addActionListener(new ActionListener() {
+        menuEmpleados.add(item2Empleados);
+        
+        JMenuItem item1Tareas = new JMenuItem("Listar");
+        item1Tareas.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				handler.mostrarTablaEmpleado();
+				handler.mostrarTablaTarea();
 			}
 		});
-        menut.add(item1t);
-        JMenuItem item2t = new JMenuItem("Agregar");
-        item2.addActionListener(new ActionListener() {
+        menuTareas.add(item1Tareas);
+        JMenuItem item2Tareas = new JMenuItem("Agregar");
+        item2Tareas.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				handler.mostrarAgregarEmpleado();
+				handler.mostrarAgregarTarea();
 			}
 		});
-        menut.add(item2t);
+        menuTareas.add(item2Tareas);
+        
+        JMenuItem salir = new JMenuItem("Salir");
+		salir.addActionListener(new SalirListener() {
+		});
+        menuArchivo.add(salir);
+		
         setJMenuBar(mb);
 	}
 	
