@@ -9,6 +9,7 @@ import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
 import ui.EmpleadoPanel;
+import ui.Login;
 import ui.MiFrame;
 import ui.table.EmpleadoTable;
 
@@ -21,11 +22,12 @@ public class Handler {
 		empleadoBO = new EmpleadoBO();
 		empleadoBO.setEmpDao(new EmpleadoDaoImpl());
 		
-		frame = new MiFrame("v1.0", this);
+		frame = new MiFrame("v1.0");
 	}
 	
 	public void init() {
         frame.setVisible(true);
+        frame.cambiarPanel(new Login(this, "Login"));      
 	}
 	
 	public void mostrarModal(String title) {
@@ -92,6 +94,10 @@ public class Handler {
 
 	public void setEmpleadoBO(EmpleadoBO empleadoBO) {
 		this.empleadoBO = empleadoBO;
+	}
+	
+	public MiFrame getFrame() {
+		return frame;
 	}
 	
 	

@@ -2,14 +2,12 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import empresa.Empleado;
-import exceptions.empleado.EmpleadoNotFoundException;
 import handler.Handler;
 import ui.containers.InputContainer;
 

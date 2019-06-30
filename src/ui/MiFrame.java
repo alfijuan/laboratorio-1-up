@@ -12,8 +12,13 @@ import javax.swing.JPanel;
 import handler.Handler;
 
 public class MiFrame extends JFrame{
-	public MiFrame(String titulo, Handler handler) {
+	
+	public MiFrame(String titulo) {
 		super(titulo);
+		initUI();
+	}
+	
+	public void initMenu(Handler handler) {
 		JMenuBar mb = new JMenuBar();
 		JMenu menu = new JMenu("Empleados");
 		JMenu menut = new JMenu("Tareas");
@@ -52,7 +57,6 @@ public class MiFrame extends JFrame{
 		});
         menut.add(item2t);
         setJMenuBar(mb);
-		initUI();
 	}
 	
 	private void initUI() {
