@@ -9,8 +9,6 @@ public class Empleado {
 	private float honorarios;
 	private String nombreUsuario;
 	private String password;
-
-	
 	
 	public Empleado() {}
 	
@@ -51,7 +49,7 @@ public class Empleado {
 	public int getLegajo() {
 		return legajo;
 	}
-	public void setLegajo(int legajo) {
+	private void setLegajo(int legajo) {
 		this.legajo = legajo;
 	}
 	public String getDireccion() {

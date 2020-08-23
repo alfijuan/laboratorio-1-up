@@ -19,13 +19,11 @@ public class TareaDaoImpl implements TareaDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("INSERT INTO tarea (id, nombre, descripcion, horas, legajoEmpleado)" +
-					"VALUES(?,?,?,?,?)");
+			PreparedStatement sql = con.prepareStatement("INSERT INTO tarea (id, nombre, descripcion)" +
+					"VALUES(?,?,?)");
 			sql.setInt(1, tarea.getId());
 			sql.setString(2, tarea.getNombre());
 			sql.setString(3, tarea.getDescripcion());
-			sql.setInt(4, tarea.getHoras());
-			sql.setInt(5, tarea.getLegajoEmpleado());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -52,13 +50,11 @@ public class TareaDaoImpl implements TareaDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("UPDATE tarea SET nombre=?, descripcion=?, horas=?, legajoEmpleado=? where id =?");
+			PreparedStatement sql = con.prepareStatement("UPDATE tarea SET nombre=?, descripcion=? where id =?");
 			
 			sql.setString(1, tarea.getNombre());
 			sql.setString(2, tarea.getDescripcion());
-			sql.setInt(3, tarea.getHoras());
-			sql.setInt(4, tarea.getLegajoEmpleado());
-			sql.setInt(5, tarea.getId());
+			sql.setInt(3, tarea.getId());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -124,9 +120,7 @@ public class TareaDaoImpl implements TareaDAO{
 				tarea = new Tarea(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("descripcion"),
-						rs.getInt("horas"),
-						rs.getInt("legajoEmpleado")
+						rs.getString("descripcion")
 				);
 			}
 		}catch (SQLException e) {
@@ -159,9 +153,7 @@ public class TareaDaoImpl implements TareaDAO{
 				lista.add(new Tarea(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("descripcion"),
-						rs.getInt("horas"),
-						rs.getInt("legajoEmpleado")
+						rs.getString("descripcion")
 				));
 			}
 		} catch (SQLException e) {

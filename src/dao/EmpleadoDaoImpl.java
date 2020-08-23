@@ -19,16 +19,15 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("INSERT INTO empleado (legajo, nombre, apellido, dni, direccion, honorarios, nombreUsuario, password)" +
-					"VALUES(?,?,?,?,?,?,?,?)");
-			sql.setInt(1, empleado.getLegajo());
-			sql.setString(2, empleado.getNombre());
-			sql.setString(3, empleado.getApellido());
-			sql.setInt(4, empleado.getDni());
-			sql.setString(5, empleado.getDireccion());
-			sql.setFloat(6, empleado.getHonorarios());
-			sql.setString(7, empleado.getNombreUsuario());
-			sql.setString(8, empleado.getPassword());
+			PreparedStatement sql = con.prepareStatement("INSERT INTO empleado (nombre, apellido, dni, direccion, honorarios, nombreUsuario, password)" +
+					"VALUES(?,?,?,?,?,?,?)");
+			sql.setString(1, empleado.getNombre());
+			sql.setString(2, empleado.getApellido());
+			sql.setInt(3, empleado.getDni());
+			sql.setString(4, empleado.getDireccion());
+			sql.setFloat(5, empleado.getHonorarios());
+			sql.setString(6, empleado.getNombreUsuario());
+			sql.setString(7, empleado.getPassword());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -191,6 +190,5 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		}
 		return lista;
 	}
-	
 	
 }

@@ -1,6 +1,5 @@
 package ui.table;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,48 +11,35 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
-
-import empresa.Empleado;
+import empresa.Hora;
 import handler.Handler;
 
-public class EmpleadoTable extends JPanel {
+public class HorasTable extends JPanel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5904454874696819147L;
+	private static final long serialVersionUID = -1104454874696883336L;
 	private TableModel modelo = new TableModel();
 	private JTable tabla = new JTable(modelo);
 	TableColumnModel columnModel = tabla.getColumnModel();
 	
-	public EmpleadoTable(List<Empleado> lista, Handler handler) {
+	public HorasTable(List<Hora> horas, Handler handler) {
 		this.modelo.addColumn("Legajo");
-		this.modelo.addColumn("Nombre");
-		this.modelo.addColumn("Apellido");
-		this.modelo.addColumn("DNI");
-		this.modelo.addColumn("Direccion");
-		this.modelo.addColumn("Honorarios");
-		this.modelo.addColumn("Username");
-		this.modelo.addColumn("Password");
+		this.modelo.addColumn("Tarea");
+		this.modelo.addColumn("Cantidad");
+		this.modelo.addColumn("Fecha");
 		
 		columnModel.getColumn(0).setPreferredWidth(500);
 		columnModel.getColumn(1).setPreferredWidth(500);
 		columnModel.getColumn(2).setPreferredWidth(500);
 		columnModel.getColumn(3).setPreferredWidth(500);
-		columnModel.getColumn(4).setPreferredWidth(500);
-		columnModel.getColumn(5).setPreferredWidth(500);
-		columnModel.getColumn(6).setPreferredWidth(500);
-		columnModel.getColumn(7).setPreferredWidth(500);
 		
-		for (int i = 0; i < lista.size(); i++) {
+		for (int i = 0; i < horas.size(); i++) {
 			this.modelo.addRow(new Object[] {
-				lista.get(i).getLegajo(),
-				lista.get(i).getNombre(),
-				lista.get(i).getApellido(),
-				lista.get(i).getDni(),
-				lista.get(i).getDireccion(),
-				lista.get(i).getHonorarios(),
-				lista.get(i).getNombreUsuario(),
-				lista.get(i).getPassword()
+				horas.get(i).getLegajoEmpleado(),
+				horas.get(i).getIdTarea(),
+				horas.get(i).getCantidad(),
+				horas.get(i).getFecha(),
 			});
 		}
 		
@@ -68,12 +54,14 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					handler.mostrarEditarEmpleado(lista.get(index));
+					System.out.println("implementar");
+					//handler.mostrarEditarHoras(horas.get(index));
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
 			}
 		});
+		
 		JButton deleteBtn = new JButton("Borrar");
 		deleteBtn.addActionListener(new ActionListener() {
 			@Override
@@ -82,7 +70,8 @@ public class EmpleadoTable extends JPanel {
 				if(index != -1) {
 					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
 					if(input == 0) {
-						handler.mostrarBorrarEmpleado(lista.get(index).getLegajo());
+						System.out.println("IMPLEMENTAR");
+						//handler.mostrarBorrarHoras(horas.get(index).getLegajo());
 					}
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");

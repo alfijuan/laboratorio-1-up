@@ -12,6 +12,10 @@ import ui.containers.InputContainer;
 
 public class TareaPanel extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2756342206651835302L;
 	private Handler handler;
 	private Tarea current;
 
@@ -28,34 +32,26 @@ public class TareaPanel extends JPanel{
 	
 	private void initUI(String titulo) {
     	Box vertical = Box.createVerticalBox();
-    	
+   
     	InputContainer idField = new InputContainer("ID", 30);
     	InputContainer nameField = new InputContainer("Nombre", 30);
     	InputContainer descriptionField = new InputContainer("Descripcion", 30);
-    	InputContainer horasField = new InputContainer("Horas", 30);
-    	InputContainer legajoEmpleadoField = new InputContainer("Legajo del Empleado", 30);
+    	
     	
     	if(this.getTarea() != null) {
-    		vertical.add(idField.createHelperBox(Integer.toString(this.getTarea().getId()), false));
+    		vertical.add(idField.createHelperBox(Integer.toString(this.getTarea().getId()), true));
             vertical.add(Box.createVerticalStrut(20));
     		vertical.add(nameField.createHelperBox(this.getTarea().getNombre(), false));
             vertical.add(Box.createVerticalStrut(20));
             vertical.add(descriptionField.createHelperBox(this.getTarea().getDescripcion(), false));
             vertical.add(Box.createVerticalStrut(20));
-            vertical.add(horasField.createHelperBox(Integer.toString(this.getTarea().getHoras()), false));
-            vertical.add(Box.createVerticalStrut(20));
-            vertical.add(legajoEmpleadoField.createHelperBox(Integer.toString(this.getTarea().getLegajoEmpleado()), true));
-            vertical.add(Box.createVerticalStrut(20));
     	} else {
+    		vertical.add(Box.createVerticalStrut(20));
             vertical.add(idField.createHelperBox());
-            vertical.add(Box.createVerticalStrut(20));
+    		vertical.add(Box.createVerticalStrut(20));
             vertical.add(nameField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
             vertical.add(descriptionField.createHelperBox());
-            vertical.add(Box.createVerticalStrut(20));
-            vertical.add(horasField.createHelperBox());
-            vertical.add(Box.createVerticalStrut(20));
-            vertical.add(legajoEmpleadoField.createHelperBox());
             vertical.add(Box.createVerticalStrut(20));
     	}
     	
@@ -66,20 +62,15 @@ public class TareaPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 	        	if(current != null) {
-	        		current.setId(Integer.parseInt(idField.getField().getText()));
 	        		current.setNombre(nameField.getField().getText());
 	        		current.setDescripcion(descriptionField.getField().getText());
-	        		current.setHoras(Integer.parseInt(horasField.getField().getText()));
-	        		current.setLegajoEmpleado(Integer.parseInt(legajoEmpleadoField.getField().getText()));
 	        		
 	        		handler.editarTarea(current);
 	        	} else {
 	        		Tarea tarea= new Tarea(
-        				Integer.parseInt(idField.getField().getText()),
+	        			Integer.parseInt(idField.getField().getText()),	
     	        		nameField.getField().getText(),
-    	        		descriptionField.getField().getText(),
-    	        		Integer.parseInt(horasField.getField().getText()),
-    	        		Integer.parseInt(legajoEmpleadoField.getField().getText())
+    	        		descriptionField.getField().getText()
     				);
     				handler.agregarTarea(tarea);
 	        	}

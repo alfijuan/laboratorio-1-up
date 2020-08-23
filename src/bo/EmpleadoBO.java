@@ -48,4 +48,5 @@ public class EmpleadoBO {
 	public void setEmpDao(EmpleadoDAO empDao) {
 		this.empDao = empDao;
 	}
+
 }

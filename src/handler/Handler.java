@@ -1,21 +1,26 @@
 package handler;
 
 import javax.swing.JOptionPane;
-
 import bo.EmpleadoBO;
+import bo.HorasBO;
 import bo.TareaBO;
 import dao.EmpleadoDaoImpl;
+import dao.HorasDaoImpl;
 import dao.TareaDaoImpl;
 import empresa.Empleado;
+import empresa.Hora;
 import empresa.Tarea;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
+import exceptions.horas.HoraNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
 import ui.EmpleadoPanel;
+import ui.HorasPanel;
 import ui.MiFrame;
 import ui.TareaPanel;
 import ui.table.EmpleadoTable;
+import ui.table.HorasTable;
 import ui.table.TareaTable;
 
 public class Handler {
@@ -23,6 +28,7 @@ public class Handler {
 	private MiFrame frame;
 	private EmpleadoBO empleadoBO;
 	private TareaBO tareaBO;
+	private HorasBO horasBO;
 
 	public Handler() {
 		empleadoBO = new EmpleadoBO();
@@ -30,6 +36,9 @@ public class Handler {
 		
 		tareaBO = new TareaBO();
 		tareaBO.setTareaDAO(new TareaDaoImpl());
+		
+		horasBO = new HorasBO();
+		horasBO.setHorasDao(new HorasDaoImpl());
 		
 		frame = new MiFrame("v1.0", this);
 	}
@@ -143,6 +152,18 @@ public class Handler {
 		}
 	}
 	
+	public void mostrarTablaHoras() {
+		try {
+			frame.cambiarPanel(new HorasTable(this.getHorasBO().obtenerHoras(), this));
+		} catch (SystemException e1) {
+			this.mostrarModal(e1.getMessage());
+		}
+	}
+	
+	public void mostrarCargarHoras() {
+		frame.cambiarPanel(new HorasPanel(this, "Panel"));
+	}
+	
 	public EmpleadoBO getEmpleadoBO() {
 		return empleadoBO;
 	}
@@ -157,6 +178,14 @@ public class Handler {
 
 	public void setTareaBO(TareaBO tareaBO) {
 		this.tareaBO = tareaBO;
+	}
+
+	public HorasBO getHorasBO() {
+		return horasBO;
+	}
+
+	public void setHorasBO(HorasBO horasBO) {
+		this.horasBO = horasBO;
 	}
 	
 	

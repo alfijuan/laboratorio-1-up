@@ -22,12 +22,10 @@ public class TareaTable extends JPanel {
 		this.modelo.addColumn("ID");
 		this.modelo.addColumn("Nombre");
 		this.modelo.addColumn("Descripcion");
-		this.modelo.addColumn("Horas");
-		this.modelo.addColumn("Legajo Empleado");
 
 		for (int i = 0; i < lista.size(); i++) {
 			this.modelo.addRow(new Object[] { lista.get(i).getId(), lista.get(i).getNombre(),
-					lista.get(i).getDescripcion(), lista.get(i).getHoras(), lista.get(i).getLegajoEmpleado() });
+					lista.get(i).getDescripcion() });
 		}
 
 		Box vertical = Box.createVerticalBox();

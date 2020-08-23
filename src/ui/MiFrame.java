@@ -13,15 +13,22 @@ import handler.Handler;
 import ui.containers.SalirListener;
 
 public class MiFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -221347292852008772L;
+
 	public MiFrame(String titulo, Handler handler) {
 		super(titulo);
-		JMenuBar mb = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		JMenu menuEmpleados = new JMenu("Empleados");
 		JMenu menuTareas = new JMenu("Tareas");
 		JMenu menuArchivo = new JMenu("Archivo");
-		mb.add(menuArchivo);
-		mb.add(menuEmpleados);
-		mb.add(menuTareas);
+		JMenu menuHoras = new JMenu("Horas");
+		menuBar.add(menuArchivo);
+		menuBar.add(menuEmpleados);
+		menuBar.add(menuTareas);
+		menuBar.add(menuHoras);
 		
 		
 		JMenuItem item1Empleados = new JMenuItem("Listar");
@@ -32,6 +39,7 @@ public class MiFrame extends JFrame{
 			}
 		});
         menuEmpleados.add(item1Empleados);
+        
         JMenuItem item2Empleados = new JMenuItem("Agregar");
         item2Empleados.addActionListener(new ActionListener() {
 			@Override
@@ -49,6 +57,7 @@ public class MiFrame extends JFrame{
 			}
 		});
         menuTareas.add(item1Tareas);
+        
         JMenuItem item2Tareas = new JMenuItem("Agregar");
         item2Tareas.addActionListener(new ActionListener() {
 			@Override
@@ -63,12 +72,30 @@ public class MiFrame extends JFrame{
 		});
         menuArchivo.add(salir);
 		
-        setJMenuBar(mb);
+        JMenuItem item1Horas = new JMenuItem("Listar todas las horas");
+        item1Horas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarTablaHoras();
+			}
+		});
+        menuHoras.add(item1Horas);
+        
+        JMenuItem item2Horas = new JMenuItem("Cargar horas");
+        item2Horas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarCargarHoras();
+			}
+		});
+        menuHoras.add(item2Horas);
+        
+        setJMenuBar(menuBar);
 		initUI();
 	}
 	
 	private void initUI() {
-		setSize(600, 600);
+		setSize(1200, 1000);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
