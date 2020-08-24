@@ -15,10 +15,12 @@ import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
 import exceptions.horas.HoraNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
-import ui.EmpleadoPanel;
+import ui.EmpleadoAlta;
+import ui.EmpleadoModificacion;
+import ui.TareaAlta;
+import ui.TareaModificacion;
 import ui.HorasPanel;
 import ui.MiFrame;
-import ui.TareaPanel;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
 import ui.table.TareaTable;
@@ -60,11 +62,11 @@ public class Handler {
 	}
 	
 	public void mostrarAgregarEmpleado() {
-		frame.cambiarPanel(new EmpleadoPanel(this, "Panel"));
+		frame.cambiarPanel(new EmpleadoAlta(this));
 	}
 	
 	public void mostrarEditarEmpleado(Empleado emp) {
-		frame.cambiarPanel(new EmpleadoPanel(this, "Panel", emp));
+		frame.cambiarPanel(new EmpleadoModificacion(this, emp));
 	}
 	
 	public void mostrarBorrarEmpleado(int legajo) {
@@ -107,7 +109,7 @@ public class Handler {
 	
 	
 	public void mostrarAgregarTarea() {
-		frame.cambiarPanel(new TareaPanel(this, "Panel"));
+		frame.cambiarPanel(new TareaAlta(this));
 	}
 	
 	public void mostrarTablaTarea() {
@@ -129,7 +131,7 @@ public class Handler {
 		}
 	}
 	public void mostrarEditarTarea(Tarea tarea) {
-		frame.cambiarPanel(new TareaPanel(this, "Panel", tarea));
+		frame.cambiarPanel(new TareaModificacion(this, tarea));
 	}
 	
 	public void editarTarea(Tarea tarea) {
