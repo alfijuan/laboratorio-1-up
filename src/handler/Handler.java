@@ -22,6 +22,7 @@ import ui.TareaModificacion;
 import ui.HorasPanel;
 import ui.MiFrame;
 import ui.table.EmpleadoTable;
+import ui.table.EmpleadoTable2;
 import ui.table.HorasTable;
 import ui.table.TareaTable;
 
@@ -55,7 +56,8 @@ public class Handler {
 	
 	public void mostrarTablaEmpleado() {
 		try {
-			frame.cambiarPanel(new EmpleadoTable(this.getEmpleadoBO().obtenerEmpleados(), this));
+//			frame.cambiarPanel(new EmpleadoTable(this.getEmpleadoBO().obtenerEmpleados(), this));
+			frame.cambiarPanel(new EmpleadoTable2(this, this.getEmpleadoBO().obtenerEmpleados()));
 		} catch (SystemException e1) {
 			this.mostrarModal(e1.getMessage());
 		}
