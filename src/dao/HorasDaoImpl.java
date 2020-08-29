@@ -48,13 +48,12 @@ public class HorasDaoImpl implements HorasDAO{
 	}
 
 	@Override
-	public void eliminarHoras(int idEmpleado, int idTarea) throws SystemException {
+	public void eliminarHoras(Integer idHora) throws SystemException {
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("DELETE FROM horas where empleado_legajo =? AND tarea_id=?");
-			sql.setInt(1, idEmpleado);
-			sql.setInt(2, idTarea);
+			PreparedStatement sql = con.prepareStatement("DELETE FROM horas where id_hora =?");
+			sql.setInt(1, idHora);
 			
 			sql.executeUpdate();
 			con.commit();
@@ -81,12 +80,11 @@ public class HorasDaoImpl implements HorasDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("UPDATE horas SET cantidad=?, fecha=? WHERE empleado_legajo=? AND tarea_id=?");
+			PreparedStatement sql = con.prepareStatement("UPDATE horas SET cantidad=?, fecha=? WHERE id_hora=?");
 			
 			sql.setInt(1, hora.getCantidad());
 			sql.setDate(2, convertUtilToSql(hora.getFecha()));
-			sql.setInt(3, hora.getLegajoEmpleado());
-			sql.setInt(4, hora.getIdTarea());
+			sql.setInt(3, hora.getIdHora());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -119,6 +117,7 @@ public class HorasDaoImpl implements HorasDAO{
 			
 			while(rs.next()) {
 				Hora hora = new Hora();
+				hora.setIdHora(rs.getInt("id_hora"));
 				hora.setLegajoEmpleado(rs.getInt("empleado_legajo"));
 				hora.setIdTarea(rs.getInt("tarea_id"));
 				hora.setCantidad(rs.getInt("cantidad"));

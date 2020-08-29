@@ -24,6 +24,7 @@ public class HorasTable extends JPanel {
 	TableColumnModel columnModel = tabla.getColumnModel();
 	
 	public HorasTable(List<Hora> horas, Handler handler) {
+		this.modelo.addColumn("ID");
 		this.modelo.addColumn("Legajo");
 		this.modelo.addColumn("Tarea");
 		this.modelo.addColumn("Cantidad");
@@ -33,9 +34,11 @@ public class HorasTable extends JPanel {
 		columnModel.getColumn(1).setPreferredWidth(500);
 		columnModel.getColumn(2).setPreferredWidth(500);
 		columnModel.getColumn(3).setPreferredWidth(500);
+		columnModel.getColumn(4).setPreferredWidth(500);
 		
 		for(Hora hora : horas) {
 			this.modelo.addRow(new Object[] {
+				hora.getIdHora(),
 				hora.getLegajoEmpleado(),
 				hora.getIdTarea(),
 				hora.getCantidad(),
@@ -69,7 +72,7 @@ public class HorasTable extends JPanel {
 				if(index != -1) {
 					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
 					if(input == 0) {
-						handler.borrarHora(horas.get(index).getLegajoEmpleado(), horas.get(index).getIdTarea());
+						handler.borrarHora(horas.get(index).getIdHora());
 					}
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");

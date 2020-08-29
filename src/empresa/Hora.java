@@ -8,6 +8,7 @@ public class Hora {
 	private int idTarea;
 	private int cantidad;
 	private Date fecha;
+	private Integer idHora;
 	
 	public Hora() {
 	}
@@ -44,6 +45,14 @@ public class Hora {
 		this.idTarea = idTarea;
 	}
 	
+	public Integer getIdHora() {
+		return idHora;
+	}
+
+	public void setIdHora(Integer idHora) {
+		this.idHora = idHora;
+	}
+
 	public String toString() {
 		return "Legajo: " + getLegajoEmpleado() 
 					+ "\nID Tarea: " + String.valueOf(getIdTarea()) 

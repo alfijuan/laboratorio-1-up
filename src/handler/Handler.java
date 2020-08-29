@@ -195,10 +195,10 @@ public class Handler {
 			}
 	}
 	
-	public void borrarHora(int idEmpleado, int idTarea) {
+	public void borrarHora(Integer idHora) {
 		
 			try {
-				getHorasBO().eliminarHoras(idEmpleado, idTarea);
+				getHorasBO().eliminarHoras(idHora);
 				mostrarModal("Registro borrado correctamente!");
 				mostrarTablaHoras();
 			} catch (SystemException e) {
