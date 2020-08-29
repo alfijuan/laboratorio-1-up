@@ -1,16 +1,18 @@
 package empresa;
 
 public class Tarea {
-	private int id;
+	private Integer id;
 	private String nombre;
 	private String descripcion;
+	private Integer idProyecto ;
 	
 	public Tarea (){};
 	
-	public Tarea(int id, String nombre, String descripcion) {
+	public Tarea(Integer id, String nombre, String descripcion, Integer idProyecto) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.idProyecto = idProyecto;
 	}
 	
 	public String getNombre() {
@@ -25,11 +27,17 @@ public class Tarea {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getIdProyecto() {
+		return idProyecto;
+	}
+	public void setIdProyecto(Integer idProyecto) {
+		this.idProyecto = idProyecto;
 	}
 	
 }

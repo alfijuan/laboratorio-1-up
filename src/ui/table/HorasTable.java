@@ -34,12 +34,12 @@ public class HorasTable extends JPanel {
 		columnModel.getColumn(2).setPreferredWidth(500);
 		columnModel.getColumn(3).setPreferredWidth(500);
 		
-		for (int i = 0; i < horas.size(); i++) {
+		for(Hora hora : horas) {
 			this.modelo.addRow(new Object[] {
-				horas.get(i).getLegajoEmpleado(),
-				horas.get(i).getIdTarea(),
-				horas.get(i).getCantidad(),
-				horas.get(i).getFecha(),
+				hora.getLegajoEmpleado(),
+				hora.getIdTarea(),
+				hora.getCantidad(),
+				hora.getFecha(),
 			});
 		}
 		
@@ -54,8 +54,7 @@ public class HorasTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					System.out.println("implementar");
-					//handler.mostrarEditarHoras(horas.get(index));
+					handler.mostrarEditarHora(horas.get(index));
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
@@ -70,8 +69,7 @@ public class HorasTable extends JPanel {
 				if(index != -1) {
 					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
 					if(input == 0) {
-						System.out.println("IMPLEMENTAR");
-						//handler.mostrarBorrarHoras(horas.get(index).getLegajo());
+						handler.borrarHora(horas.get(index).getLegajoEmpleado(), horas.get(index).getIdTarea());
 					}
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");

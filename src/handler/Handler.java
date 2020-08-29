@@ -17,9 +17,10 @@ import exceptions.horas.HoraNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
 import ui.EmpleadoAlta;
 import ui.EmpleadoModificacion;
+import ui.HoraAlta;
+import ui.HoraModificacion;
 import ui.TareaAlta;
 import ui.TareaModificacion;
-import ui.HorasPanel;
 import ui.MiFrame;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
@@ -163,7 +164,49 @@ public class Handler {
 	}
 	
 	public void mostrarCargarHoras() {
-		frame.cambiarPanel(new HorasPanel(this, "Panel"));
+		frame.cambiarPanel(new HoraAlta(this));
+	}
+	
+	public void agregarHora(Hora hora) {
+		
+		try {
+			horasBO.cargarHoras(hora);
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		}
+		mostrarModal("Hora cargada correctamente!");
+	}
+	
+	public void mostrarEditarHora(Hora hora) {
+		frame.cambiarPanel(new HoraModificacion(this, hora));
+	}
+	
+	public void editarHora(Hora hora) {
+		
+			try {
+				getHorasBO().editarHoras(hora);
+				mostrarModal("Registro editado correctamente!");
+				mostrarTablaHoras();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			} catch (HoraNotFoundException e) {
+				mostrarModal(e.getMessage());
+				e.printStackTrace();
+			}
+	}
+	
+	public void borrarHora(int idEmpleado, int idTarea) {
+		
+			try {
+				getHorasBO().eliminarHoras(idEmpleado, idTarea);
+				mostrarModal("Registro borrado correctamente!");
+				mostrarTablaHoras();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			} catch (HoraNotFoundException e) {
+				mostrarModal(e.getMessage());
+				e.printStackTrace();
+			}
 	}
 	
 	public EmpleadoBO getEmpleadoBO() {

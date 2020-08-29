@@ -38,7 +38,8 @@ public class TareaAlta extends TareaBase {
         		Tarea tarea = new Tarea(
         			Integer.parseInt(getId().getField().getText()),	
         			getNombre().getField().getText(),
-        			getDescription().getField().getText()
+        			getDescription().getField().getText(),
+        			Integer.parseInt(getIdProyecto().getField().getText())
 				);
         		getHandler().agregarTarea(tarea);
 			}

@@ -95,7 +95,7 @@ public class MiFrame extends JFrame{
 	}
 	
 	private void initUI() {
-		setSize(1200, 1000);
+		setSize(800, 700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

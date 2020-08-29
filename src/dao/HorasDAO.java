@@ -8,9 +8,9 @@ import exceptions.horas.HoraNotFoundException;
 
 public interface HorasDAO {
 	
-	void cargarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException;
+	void cargarHoras(Hora hora) throws SystemException;
 	void eliminarHoras(int idEmpleado, int idTarea) throws SystemException;
-	void editarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException, HoraNotFoundException;
+	void editarHoras(Hora hora) throws SystemException, HoraNotFoundException;
 	Hora obtenerHoraRegistrada(int idEmpleado, int idTarea)throws SystemException;
 	List<Hora> obtenerHoras() throws SystemException;
 	List<Hora> obtenerHorasMes(int idEmpleado, int idTarea, int mes) throws SystemException;

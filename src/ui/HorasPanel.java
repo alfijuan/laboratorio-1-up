@@ -17,7 +17,7 @@ import empresa.Hora;
 import exceptions.SystemException;
 import handler.Handler;
 import ui.containers.InputContainer;
-
+@Deprecated
 public class HorasPanel extends JPanel {
 	 
     /**

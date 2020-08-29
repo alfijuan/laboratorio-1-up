@@ -11,16 +11,16 @@ public class HorasBO {
 	
 	public HorasBO() {}
 	
-	public void cargarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException, HoraNotFoundException{
-		horasDao.cargarHoras(idEmpleado, idTarea, hora);
+	public void cargarHoras(Hora hora) throws SystemException{
+		horasDao.cargarHoras(hora);
 	}
 	
-	public void editarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException, HoraNotFoundException {
-		if(horasDao.obtenerHoraRegistrada(idEmpleado, idTarea) != null) {
-			horasDao.editarHoras(idEmpleado, idTarea, hora);
-		} else {
-			throw new HoraNotFoundException("No existe el registro!");
-		}
+	public void editarHoras(Hora hora) throws SystemException, HoraNotFoundException {
+//		if(horasDao.obtenerHoraRegistrada(hora.getLegajoEmpleado(), hora.getIdTarea()) != null) {
+			horasDao.editarHoras(hora);
+//		} else {
+//			throw new HoraNotFoundException("No existe el registro!");
+//		}
 	}
 	
 	public List<Hora> obtenerHoras() throws SystemException {
@@ -28,11 +28,7 @@ public class HorasBO {
 	}
 	
 	public void eliminarHoras(int idEmpleado, int idTarea) throws SystemException, HoraNotFoundException {
-		if(horasDao.obtenerHoraRegistrada(idEmpleado, idTarea) != null) {
-			horasDao.eliminarHoras(idEmpleado, idTarea);
-		} else {
-			throw new HoraNotFoundException("No existe el registro!");
-		}
+		horasDao.eliminarHoras(idEmpleado, idTarea);
 	}
 	
 	public void setHorasDao(HorasDAO horasDao) {

@@ -15,16 +15,16 @@ import exceptions.horas.HoraNotFoundException;
 public class HorasDaoImpl implements HorasDAO{
 	
 	@Override
-	public void cargarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException {
+	public void cargarHoras(Hora hora) throws SystemException {
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
 			PreparedStatement sql = con.prepareStatement("INSERT INTO horas (empleado_legajo, tarea_id, cantidad, fecha)" +
 					"VALUES(?,?,?,?)");
-			sql.setInt(1, idEmpleado);
-			sql.setInt(2, idTarea);
+			sql.setInt(1, hora.getLegajoEmpleado());
+			sql.setInt(2, hora.getIdTarea());
 			sql.setInt(3, hora.getCantidad());
-			sql.setDate(4, (Date) hora.getFecha());
+			sql.setDate(4, convertUtilToSql(hora.getFecha()));
 			
 			sql.executeUpdate();
 			con.commit();
@@ -77,16 +77,16 @@ public class HorasDaoImpl implements HorasDAO{
 	}
 
 	@Override
-	public void editarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException, HoraNotFoundException {
+	public void editarHoras(Hora hora) throws SystemException, HoraNotFoundException {
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
 			PreparedStatement sql = con.prepareStatement("UPDATE horas SET cantidad=?, fecha=? WHERE empleado_legajo=? AND tarea_id=?");
 			
 			sql.setInt(1, hora.getCantidad());
-			sql.setDate(2, (Date) hora.getFecha());
-			sql.setInt(3, idEmpleado);
-			sql.setFloat(4, idTarea);
+			sql.setDate(2, convertUtilToSql(hora.getFecha()));
+			sql.setInt(3, hora.getLegajoEmpleado());
+			sql.setInt(4, hora.getIdTarea());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -151,21 +151,22 @@ public class HorasDaoImpl implements HorasDAO{
 
 	@Override
 	public Hora obtenerHoraRegistrada(int idEmpleado, int idTarea) throws SystemException{
-		Hora registro = new Hora();
 		Connection con = DBManager.getInstance().connect();
+		Hora hora = null;
 		try {
 			PreparedStatement sql = con.prepareStatement("SELECT * FROM horas WHERE empleado_legajo=? AND tarea_id=?");
 			sql.setInt(1, idEmpleado);
-			sql.setFloat(2, idTarea);
+			sql.setInt(2, idTarea);
 			
 			ResultSet rs = sql.executeQuery();
 			
-			Hora hora = new Hora();
+			hora = new Hora();
+			System.out.println(rs);
+			hora.setCantidad(rs.getInt("cantidad"));
 			hora.setLegajoEmpleado(rs.getInt("empleado_legajo"));
 			hora.setIdTarea(rs.getInt("tarea_id"));
-			hora.setCantidad(rs.getInt("cantidad"));
-			hora.setFecha(rs.getDate("fecha"));
 			
+			hora.setFecha(rs.getDate("fecha"));
 		} catch (SQLException e) {
 			try {
 				con.rollback();
@@ -180,8 +181,12 @@ public class HorasDaoImpl implements HorasDAO{
 				//no hago nada
 			}
 		}
-		return registro;
+		return hora;
 	}
 	
+	private static Date convertUtilToSql(java.util.Date jDate) {
+        Date result = new Date(jDate.getTime());
+        return result;
+    }
 	
 }

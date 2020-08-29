@@ -40,6 +40,13 @@ public class TareaBO {
 		return tareaDAO.obtenerTareas();
 	}
 	
+	public Tarea obtenerTarea(int id) throws SystemException{
+		if(tareaDAO.obtenerTarea(id) != null) {
+			return tareaDAO.obtenerTarea(id);
+		} else {
+			throw new SystemException("La tarea no existe!");
+		}
+	}
 	
 	public void setTareaDAO(TareaDAO tareaDAO) {
 		this.tareaDAO = tareaDAO;

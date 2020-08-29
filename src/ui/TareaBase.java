@@ -15,6 +15,7 @@ public abstract class TareaBase extends JPanel{
 	private InputContainer id;
 	private InputContainer nombre;
 	private InputContainer description;
+	private InputContainer idProyecto;
 	
 	public TareaBase(Handler handler){
 		setHandler(handler);
@@ -34,12 +35,25 @@ public abstract class TareaBase extends JPanel{
 		
 		description = new InputContainer("Descripcion", 30);
 		vertical.add(description.createHelperBox());
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+		
+		idProyecto = new InputContainer("ID Proyecto", 30);
+		vertical.add(idProyecto.createHelperBox());
+		
 		
 		vertical.add(Box.createVerticalStrut(40));
 		vertical.add(agregarBotones());
         
         add(vertical);
 		
+	}
+
+	public InputContainer getIdProyecto() {
+		return idProyecto;
+	}
+
+	public void setIdProyecto(InputContainer idProyecto) {
+		this.idProyecto = idProyecto;
 	}
 
 	public Handler getHandler() {

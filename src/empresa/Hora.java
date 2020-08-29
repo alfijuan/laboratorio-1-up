@@ -44,5 +44,11 @@ public class Hora {
 		this.idTarea = idTarea;
 	}
 	
+	public String toString() {
+		return "Legajo: " + getLegajoEmpleado() 
+					+ "\nID Tarea: " + String.valueOf(getIdTarea()) 
+					+ "\nCantidad: " + String.valueOf(getCantidad())
+					+ "\nFecha: " + getFecha();  
+	}
 	
 }

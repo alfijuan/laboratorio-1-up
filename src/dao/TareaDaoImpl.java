@@ -120,7 +120,8 @@ public class TareaDaoImpl implements TareaDAO{
 				tarea = new Tarea(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("descripcion")
+						rs.getString("descripcion"),
+						rs.getInt("id_proyecto")
 				);
 			}
 		}catch (SQLException e) {
@@ -153,7 +154,8 @@ public class TareaDaoImpl implements TareaDAO{
 				lista.add(new Tarea(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("descripcion")
+						rs.getString("descripcion"),
+						rs.getInt("id_proyecto")
 				));
 			}
 		} catch (SQLException e) {
