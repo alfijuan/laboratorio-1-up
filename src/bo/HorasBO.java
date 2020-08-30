@@ -27,6 +27,10 @@ public class HorasBO {
 		return horasDao.obtenerHoras();
 	}
 	
+	public List<Integer> obtenerHoras(int legajo) throws SystemException {
+		return horasDao.obtenerHoras(legajo);
+	}
+	
 	public void eliminarHoras(int idEmpleado, int idTarea) throws SystemException, HoraNotFoundException {
 		if(horasDao.obtenerHoraRegistrada(idEmpleado, idTarea) != null) {
 			horasDao.eliminarHoras(idEmpleado, idTarea);

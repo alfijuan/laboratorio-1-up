@@ -74,6 +74,19 @@ public class EmpleadoTable extends JPanel {
 				}
 			}
 		});
+		JButton calculateBtn = new JButton("Cierre");
+		calculateBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index = tabla.getSelectedRow();
+				if(index != -1) {
+					// Get legajo
+					lista.get(index).getLegajo();
+				} else { 
+					handler.mostrarModal("Debe seleccionar una fila");
+				}
+			}
+		});
 		JButton deleteBtn = new JButton("Borrar");
 		deleteBtn.addActionListener(new ActionListener() {
 			@Override
@@ -90,6 +103,8 @@ public class EmpleadoTable extends JPanel {
 			}
 		});
 		botonera.add(editBtn);
+		botonera.add(Box.createHorizontalGlue());
+		botonera.add(calculateBtn);
 		botonera.add(Box.createHorizontalGlue());
 		botonera.add(deleteBtn);
 		vertical.add(botonera);

@@ -140,7 +140,35 @@ public class HorasDaoImpl implements HorasDAO{
 			}
 		}
 		return listaHoras;
-}
+	}
+	
+	@Override
+	public List<Integer> obtenerHoras(int legajo) throws SystemException {
+		List<Integer> lista = new ArrayList<>();
+		Connection con = DBManager.getInstance().connect();
+		try {
+			PreparedStatement sql = con.prepareStatement("select sum(cantidad) as horas_total, count(tarea_id) as tareas from horas where empleado_legajo=?");
+			sql.setInt(1, legajo);
+			ResultSet rs = sql.executeQuery();
+			
+			while(rs.next()) {
+			}
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+			throw new SystemException("Error en la base de datos");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+		}
+		return lista;
+	}
 
 	
 	@Override

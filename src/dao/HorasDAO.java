@@ -13,5 +13,6 @@ public interface HorasDAO {
 	void editarHoras(int idEmpleado, int idTarea, Hora hora) throws SystemException, HoraNotFoundException;
 	Hora obtenerHoraRegistrada(int idEmpleado, int idTarea)throws SystemException;
 	List<Hora> obtenerHoras() throws SystemException;
+	List<Integer> obtenerHoras(int legajo) throws SystemException;
 	List<Hora> obtenerHorasMes(int idEmpleado, int idTarea, int mes) throws SystemException;
 }
