@@ -159,7 +159,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		List<Empleado> lista = new ArrayList<Empleado>();
 		Connection con = DBManager.getInstance().connect();
 		try {
-			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado ORDER BY legajo");
 			ResultSet rs = sql.executeQuery();
 			
 			while(rs.next()) {

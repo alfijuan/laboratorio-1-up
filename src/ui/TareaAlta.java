@@ -35,10 +35,12 @@ public class TareaAlta extends TareaBase {
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String proyecto = (String)getComboProyecto().getSelectedItem();
         		Tarea tarea = new Tarea(
         			Integer.parseInt(getId().getField().getText()),	
         			getNombre().getField().getText(),
-        			getDescription().getField().getText()
+        			getDescription().getField().getText(),
+        			Integer.parseInt(proyecto.split("-")[0])
 				);
         		getHandler().agregarTarea(tarea);
 			}
@@ -52,6 +54,11 @@ public class TareaAlta extends TareaBase {
 		});
 		
 		return botonera;
+	}
+
+	@Override
+	protected String setTitulo() {
+		return "Carga de tareas";
 	}
 	
 }

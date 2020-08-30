@@ -19,11 +19,12 @@ public class TareaDaoImpl implements TareaDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("INSERT INTO tarea (id, nombre, descripcion)" +
-					"VALUES(?,?,?)");
+			PreparedStatement sql = con.prepareStatement("INSERT INTO tarea (id, nombre, descripcion, id_proyecto)" +
+					"VALUES(?,?,?,?)");
 			sql.setInt(1, tarea.getId());
 			sql.setString(2, tarea.getNombre());
 			sql.setString(3, tarea.getDescripcion());
+			sql.setInt(4, tarea.getIdProyecto());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -50,11 +51,12 @@ public class TareaDaoImpl implements TareaDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("UPDATE tarea SET nombre=?, descripcion=? where id =?");
+			PreparedStatement sql = con.prepareStatement("UPDATE tarea SET nombre=?, descripcion=?, id_proyecto=? where id =?");
 			
 			sql.setString(1, tarea.getNombre());
 			sql.setString(2, tarea.getDescripcion());
-			sql.setInt(3, tarea.getId());
+			sql.setInt(3, tarea.getIdProyecto());
+			sql.setInt(4, tarea.getId());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -120,7 +122,8 @@ public class TareaDaoImpl implements TareaDAO{
 				tarea = new Tarea(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("descripcion")
+						rs.getString("descripcion"),
+						rs.getInt("id_proyecto")
 				);
 			}
 		}catch (SQLException e) {
@@ -146,14 +149,15 @@ public class TareaDaoImpl implements TareaDAO{
 		List<Tarea> lista = new ArrayList<Tarea>();
 		Connection con = DBManager.getInstance().connect();
 		try {
-			PreparedStatement sql = con.prepareStatement("SELECT * FROM tarea");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM tarea ORDER BY id");
 			ResultSet rs = sql.executeQuery();
 			
 			while(rs.next()) {
 				lista.add(new Tarea(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("descripcion")
+						rs.getString("descripcion"),
+						rs.getInt("id_proyecto")
 				));
 			}
 		} catch (SQLException e) {

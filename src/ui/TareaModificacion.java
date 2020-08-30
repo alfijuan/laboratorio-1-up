@@ -13,7 +13,11 @@ import empresa.Tarea;
 
 public class TareaModificacion extends TareaBase {
 
-	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5535114194045009918L;
 	private Tarea current;
 	
 	public TareaModificacion(Handler handler, Tarea tarea){
@@ -29,6 +33,7 @@ public class TareaModificacion extends TareaBase {
 		getId().getField().setText(Integer.toString(getTarea().getId()));
 		getId().getField().setEnabled(false);
 		getDescription().getField().setText(getTarea().getDescripcion());
+		getComboProyecto().setSelectedItem(String.valueOf(getTarea().getIdProyecto()));
 		
 	}
 	
@@ -53,12 +58,19 @@ public class TareaModificacion extends TareaBase {
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String proyecto = (String)getComboProyecto().getSelectedItem();
         		current.setNombre(getNombre().getField().getText());
         		current.setDescripcion(getDescription().getField().getText());
+        		current.setIdProyecto(Integer.parseInt(proyecto.split("-")[0]));
 				getHandler().editarTarea(current);
 			}
 		});
 		return botonera;
+	}
+	
+	@Override
+	protected String setTitulo() {
+		return "Modificacion de tarea";
 	}
 	
 	public Tarea getTarea() {

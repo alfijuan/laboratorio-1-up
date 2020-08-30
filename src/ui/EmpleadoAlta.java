@@ -54,4 +54,9 @@ public class EmpleadoAlta extends EmpleadoBase {
 		return botonera;
 	}
 
+	@Override
+	protected String setTitulo() {
+		return "Alta de empleado";
+	}
+
 }

@@ -25,10 +25,12 @@ public class MiFrame extends JFrame{
 		JMenu menuTareas = new JMenu("Tareas");
 		JMenu menuArchivo = new JMenu("Archivo");
 		JMenu menuHoras = new JMenu("Horas");
+		JMenu menuProyecto = new JMenu("Proyecto");
 		menuBar.add(menuArchivo);
 		menuBar.add(menuEmpleados);
 		menuBar.add(menuTareas);
 		menuBar.add(menuHoras);
+		menuBar.add(menuProyecto);
 		
 		
 		JMenuItem item1Empleados = new JMenuItem("Listar");
@@ -90,12 +92,21 @@ public class MiFrame extends JFrame{
 		});
         menuHoras.add(item2Horas);
         
+        JMenuItem item1Proyecto = new JMenuItem("Calcular Costo");
+        item1Proyecto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarCostoProyecto();
+			}
+		});
+        menuProyecto.add(item1Proyecto);
+        
         setJMenuBar(menuBar);
 		initUI();
 	}
 	
 	private void initUI() {
-		setSize(1200, 1000);
+		setSize(800, 700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
