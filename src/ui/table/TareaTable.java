@@ -15,6 +15,10 @@ import empresa.Tarea;
 import handler.Handler;
 
 public class TareaTable extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9132454869629348612L;
 	private TableModel modelo = new TableModel();
 	private JTable tabla = new JTable(modelo);
 
@@ -22,11 +26,20 @@ public class TareaTable extends JPanel {
 		this.modelo.addColumn("ID");
 		this.modelo.addColumn("Nombre");
 		this.modelo.addColumn("Descripcion");
-
-		for (int i = 0; i < lista.size(); i++) {
-			this.modelo.addRow(new Object[] { lista.get(i).getId(), lista.get(i).getNombre(),
-					lista.get(i).getDescripcion() });
+		this.modelo.addColumn("Proyecto");
+		
+		for(Tarea tarea : lista) {
+			this.modelo.addRow(new Object[] {
+					tarea.getId(), 
+					tarea.getNombre(),
+					tarea.getDescripcion(),
+					tarea.getIdProyecto(),
+			});
 		}
+//		for (int i = 0; i < lista.size(); i++) {
+//			this.modelo.addRow(new Object[] { lista.get(i).getId(), lista.get(i).getNombre(),
+//					lista.get(i).getDescripcion() });
+//		}
 
 		Box vertical = Box.createVerticalBox();
 		JScrollPane tableContainer = new JScrollPane(this.tabla);

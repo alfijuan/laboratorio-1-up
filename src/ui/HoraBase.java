@@ -2,22 +2,13 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import org.jdatepicker.JDatePicker;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
 import bo.EmpleadoBO;
 import bo.TareaBO;
 import dao.EmpleadoDaoImpl;
@@ -43,13 +34,11 @@ public abstract class HoraBase extends JPanel{
 	private Handler handler;
 	private List<Empleado> empleados;
 	private List<Tarea> tareas;
-	
 	private JLabel comboTareaLabel;
 	private JComboBox<String> comboTarea;
 	private JLabel descripcionTareaLabel;
 	private JLabel descripcionTarea;
 	private JLabel proyectotareaLabel;
-	private JDatePicker dateField;
 	
 	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
@@ -61,7 +50,6 @@ public abstract class HoraBase extends JPanel{
 		createUI();
 	}
 	
-	
 	private void createUI() {
 		Box vertical = Box.createVerticalBox();
 		Box inLineName = Box.createHorizontalBox();
@@ -69,7 +57,7 @@ public abstract class HoraBase extends JPanel{
 		Box inLineTarea = Box.createHorizontalBox();
 		Box inLineDescripcion = Box.createHorizontalBox();
 		
-		titulo = new JLabel("Carga de Horas", JLabel.LEFT);
+		titulo = new JLabel("Horas", JLabel.LEFT);
 		vertical.add(titulo);
 		vertical.add(Box.createVerticalStrut(HEIGHT));
 		

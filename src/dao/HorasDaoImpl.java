@@ -112,7 +112,7 @@ public class HorasDaoImpl implements HorasDAO{
 		List<Hora> listaHoras = new ArrayList<Hora>();
 		Connection con = DBManager.getInstance().connect();
 		try {
-			PreparedStatement sql = con.prepareStatement("SELECT * FROM horas");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM horas ORDER BY empleado_legajo");
 			ResultSet rs = sql.executeQuery();
 			
 			while(rs.next()) {

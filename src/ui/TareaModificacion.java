@@ -29,6 +29,7 @@ public class TareaModificacion extends TareaBase {
 		getId().getField().setText(Integer.toString(getTarea().getId()));
 		getId().getField().setEnabled(false);
 		getDescription().getField().setText(getTarea().getDescripcion());
+		getComboProyecto().setSelectedItem(String.valueOf(getTarea().getIdProyecto()));
 		
 	}
 	
@@ -53,8 +54,10 @@ public class TareaModificacion extends TareaBase {
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String proyecto = (String)getComboProyecto().getSelectedItem();
         		current.setNombre(getNombre().getField().getText());
         		current.setDescripcion(getDescription().getField().getText());
+        		current.setIdProyecto(Integer.parseInt(proyecto.split("-")[0]));
 				getHandler().editarTarea(current);
 			}
 		});

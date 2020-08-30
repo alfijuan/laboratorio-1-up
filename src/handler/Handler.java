@@ -1,14 +1,20 @@
 package handler;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import bo.EmpleadoBO;
 import bo.HorasBO;
+import bo.ProyectoBO;
 import bo.TareaBO;
 import dao.EmpleadoDaoImpl;
 import dao.HorasDaoImpl;
+import dao.ProyectoDAO;
+import dao.ProyectoDaoImpl;
 import dao.TareaDaoImpl;
 import empresa.Empleado;
 import empresa.Hora;
+import empresa.Proyecto;
 import empresa.Tarea;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
@@ -22,6 +28,7 @@ import ui.HoraModificacion;
 import ui.TareaAlta;
 import ui.TareaModificacion;
 import ui.MiFrame;
+import ui.ProyectoCosto;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
 import ui.table.TareaTable;
@@ -32,6 +39,7 @@ public class Handler {
 	private EmpleadoBO empleadoBO;
 	private TareaBO tareaBO;
 	private HorasBO horasBO;
+	private ProyectoBO proyectoBO;
 
 	public Handler() {
 		empleadoBO = new EmpleadoBO();
@@ -42,6 +50,9 @@ public class Handler {
 		
 		horasBO = new HorasBO();
 		horasBO.setHorasDao(new HorasDaoImpl());
+		
+		proyectoBO = new ProyectoBO();
+		proyectoBO.setProyectoDao(new ProyectoDaoImpl());
 		
 		frame = new MiFrame("v1.0", this);
 	}
@@ -197,17 +208,22 @@ public class Handler {
 	
 	public void borrarHora(Integer idHora) {
 		
-			try {
-				getHorasBO().eliminarHoras(idHora);
-				mostrarModal("Registro borrado correctamente!");
-				mostrarTablaHoras();
-			} catch (SystemException e) {
-				e.printStackTrace();
-			} catch (HoraNotFoundException e) {
-				mostrarModal(e.getMessage());
-				e.printStackTrace();
-			}
+		try {
+			getHorasBO().eliminarHoras(idHora);
+			mostrarModal("Registro borrado correctamente!");
+			mostrarTablaHoras();
+		} catch (SystemException e) {
+			e.printStackTrace();
+		} catch (HoraNotFoundException e) {
+			mostrarModal(e.getMessage());
+			e.printStackTrace();
+		}
 	}
+	
+	public void mostrarCostoProyecto() {
+		frame.cambiarPanel(new ProyectoCosto(this));
+	}
+	
 	
 	public EmpleadoBO getEmpleadoBO() {
 		return empleadoBO;
@@ -231,6 +247,14 @@ public class Handler {
 
 	public void setHorasBO(HorasBO horasBO) {
 		this.horasBO = horasBO;
+	}
+
+	public ProyectoBO getProyectoBO() {
+		return proyectoBO;
+	}
+
+	public void setProyectoBO(ProyectoBO proyectoBO) {
+		this.proyectoBO = proyectoBO;
 	}
 	
 	
