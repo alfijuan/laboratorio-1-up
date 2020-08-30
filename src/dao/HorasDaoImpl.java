@@ -146,11 +146,13 @@ public class HorasDaoImpl implements HorasDAO{
 		List<Integer> lista = new ArrayList<>();
 		Connection con = DBManager.getInstance().connect();
 		try {
-			PreparedStatement sql = con.prepareStatement("select sum(cantidad) as horas_total, count(tarea_id) as tareas from horas where empleado_legajo=?");
+			PreparedStatement sql = con.prepareStatement("select sum(horas.cantidad) as horas_total, empleado.legajo, sum(horas.cantidad)*empleado.honorarios as total from horas inner join empleado on empleado.legajo = horas.empleado_legajo where empleado.legajo=? group by empleado.legajo");
 			sql.setInt(1, legajo);
 			ResultSet rs = sql.executeQuery();
 			
 			while(rs.next()) {
+				lista.add(rs.getInt("horas_total"));
+				lista.add(rs.getInt("total"));
 			}
 		} catch (SQLException e) {
 			try {

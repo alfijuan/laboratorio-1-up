@@ -224,6 +224,16 @@ public class Handler {
 		frame.cambiarPanel(new ProyectoCosto(this));
 	}
 	
+	public void calcularCostoEmpleado(int legajo) {
+		try {
+			List<Integer> resultados = getHorasBO().obtenerHoras(legajo);
+			mostrarModal("Al empleado se le deben " + Integer.toString(resultados.get(1)) + " correspondientes a " + Integer.toString(resultados.get(0)) + " horas.");
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public EmpleadoBO getEmpleadoBO() {
 		return empleadoBO;

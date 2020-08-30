@@ -80,7 +80,7 @@ public class EmpleadoTable extends JPanel {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
 					// Get legajo
-					lista.get(index).getLegajo();
+					handler.calcularCostoEmpleado(lista.get(index).getLegajo());
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
