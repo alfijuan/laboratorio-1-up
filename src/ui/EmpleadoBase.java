@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.Box;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import handler.Handler;
@@ -10,6 +11,7 @@ public abstract class EmpleadoBase extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private static final int HEIGHT = 20; 
+	private JLabel titulo;
 	private InputContainer nombre;
 	private InputContainer dni;
 	private InputContainer legajo;
@@ -26,31 +28,39 @@ public abstract class EmpleadoBase extends JPanel {
 	private void createUI(){
 		Box vertical = Box.createVerticalBox();
 		
+		titulo = new JLabel(setTitulo(), JLabel.LEFT);
 		nombre = new InputContainer("Nombre", 30);
-		vertical.add(nombre.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
-        
 		dni = new InputContainer("DNI", 8);
-		vertical.add(dni.createHelperBox());
+        honorarios = new InputContainer("Honorarios", 8);
+        user = new InputContainer("Nombre de usuario", 30);
+        pass = new InputContainer("Password", 30);
+        
+        vertical.add(titulo);
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
-        honorarios = new InputContainer("Honorarios", 8);
+        vertical.add(nombre.createHelperBox());
+        vertical.add(Box.createVerticalStrut(HEIGHT));
+        
+        vertical.add(dni.createHelperBox());
+        vertical.add(Box.createVerticalStrut(HEIGHT));
+        
         vertical.add(honorarios.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
-        user = new InputContainer("Nombre de usuario", 30);
         vertical.add(user.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
-        pass = new InputContainer("Password", 30);
         vertical.add(pass.createHelperBox());
-        
         
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());
         
         add(vertical);
 	}
+	
+	protected abstract Box agregarBotones();
+	
+	protected abstract String setTitulo();
 	
 	public Handler getHandler() {
 		return handler;
@@ -107,7 +117,5 @@ public abstract class EmpleadoBase extends JPanel {
 	public void setPass(InputContainer pass) {
 		this.pass = pass;
 	}
-
-	protected abstract Box agregarBotones();
 
 }

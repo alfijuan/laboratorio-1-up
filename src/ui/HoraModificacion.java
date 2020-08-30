@@ -76,4 +76,9 @@ public class HoraModificacion extends HoraBase{
 	public void setHoraSeleccionada(Hora horaSeleccionada) {
 		this.horaSeleccionada = horaSeleccionada;
 	}
+
+	@Override
+	protected String setTitulo() {
+		return "Modificacion de horas";
+	}
 }

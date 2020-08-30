@@ -13,7 +13,11 @@ import empresa.Tarea;
 
 public class TareaModificacion extends TareaBase {
 
-	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5535114194045009918L;
 	private Tarea current;
 	
 	public TareaModificacion(Handler handler, Tarea tarea){
@@ -62,6 +66,11 @@ public class TareaModificacion extends TareaBase {
 			}
 		});
 		return botonera;
+	}
+	
+	@Override
+	protected String setTitulo() {
+		return "Modificacion de tarea";
 	}
 	
 	public Tarea getTarea() {

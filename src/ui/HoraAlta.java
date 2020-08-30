@@ -58,6 +58,12 @@ public class HoraAlta extends HoraBase{
 		});
 		return botonera;
 	}
+
+
+	@Override
+	protected String setTitulo() {
+		return "Carga de Horas";
+	}
 	
 	
 }

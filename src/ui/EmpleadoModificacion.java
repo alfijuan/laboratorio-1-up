@@ -64,6 +64,11 @@ public class EmpleadoModificacion extends EmpleadoBase {
 		return botonera;
 	}
 	
+	@Override
+	protected String setTitulo() {
+		return "Modificacion de empleado";
+	}
+	
 	public Empleado getEmpleado() {
 		return current;
 	}

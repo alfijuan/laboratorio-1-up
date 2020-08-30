@@ -23,7 +23,7 @@ public abstract class TareaBase extends JPanel{
 	private static final long serialVersionUID = 2756342206651835302L;
 	private static final int HEIGHT = 20; 
 	private Handler handler;
-	
+	private JLabel titulo;
 	private InputContainer id;
 	private InputContainer nombre;
 	private InputContainer description;
@@ -32,22 +32,22 @@ public abstract class TareaBase extends JPanel{
 	private JComboBox<String> comboProyecto;
 	private List<Proyecto> proyectos;
 	
+	public TareaBase(Handler handler){
+		setHandler(handler);
+		createUI();
+	}
+	
 	private void createUI(){
 		Box vertical = Box.createVerticalBox();
 		Box inLineProyecto = Box.createHorizontalBox();
 		
+		titulo = new JLabel(setTitulo(), JLabel.LEFT);
+		
 		id = new InputContainer("ID", 30);
-		vertical.add(id.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
 		
 		nombre = new InputContainer("Nombre", 30);
-		vertical.add(nombre.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
 		
 		description = new InputContainer("Descripcion", 30);
-		vertical.add(description.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
-		
 		
 		proyectos = new ArrayList<Proyecto>();
 		setProyectos(ProyectoBase.obtenerProyectos());
@@ -59,6 +59,20 @@ public abstract class TareaBase extends JPanel{
     	}
 		
     	comboProyectoLabel = new JLabel("Proyectos", JLabel.LEFT);
+    	
+    	
+    	vertical.add(titulo);
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+    	
+    	vertical.add(id.createHelperBox());
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+    	
+    	vertical.add(nombre.createHelperBox());
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+    	
+    	vertical.add(description.createHelperBox());
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+    	
     	inLineProyecto.add(comboProyectoLabel);
     	inLineProyecto.add(comboProyecto);
     	vertical.add(inLineProyecto);
@@ -71,6 +85,8 @@ public abstract class TareaBase extends JPanel{
 	}
 	
 	protected abstract Box agregarBotones();
+	
+	protected abstract String setTitulo();
 	
 	public InputContainer getIdProyecto() {
 		return idProyecto;
@@ -135,9 +151,12 @@ public abstract class TareaBase extends JPanel{
 		this.proyectos = proyectos;
 	}
 
-	public TareaBase(Handler handler){
-		setHandler(handler);
-		createUI();
+	public JLabel getTitulo() {
+		return titulo;
 	}
-	
+
+	public void setTitulo(JLabel titulo) {
+		this.titulo = titulo;
+	}
+
 }

@@ -57,12 +57,10 @@ public abstract class HoraBase extends JPanel{
 		Box inLineTarea = Box.createHorizontalBox();
 		Box inLineDescripcion = Box.createHorizontalBox();
 		
-		titulo = new JLabel("Horas", JLabel.LEFT);
-		vertical.add(titulo);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		titulo = new JLabel(setTitulo(), JLabel.LEFT);
 		
 		empleados = new ArrayList<Empleado>();
-		setEmpleados(getEmpleados());
+		setEmpleados(obtenerEmpleados());
 		
     	comboLegajo = new JComboBox<String>();
     	comboLegajo.addItem("Seleccionar legajo");
@@ -71,10 +69,6 @@ public abstract class HoraBase extends JPanel{
     	}
 		
     	comboLegajoLabel = new JLabel("Legajo", JLabel.LEFT);
-    	inLineLegajo.add(comboLegajoLabel);
-    	inLineLegajo.add(comboLegajo);
-    	vertical.add(inLineLegajo);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
 		
         nombreEmpleadoLabel = new JLabel("Nombre: ",JLabel.LEFT);
         nombreEmpleado = new JLabel("");
@@ -86,11 +80,6 @@ public abstract class HoraBase extends JPanel{
 			}
 		});
         
-        inLineName.add(nombreEmpleadoLabel);
-        inLineName.add(nombreEmpleado);
-        vertical.add(inLineName);
-        vertical.add(Box.createVerticalStrut(HEIGHT));
-
 
         setTareas(obtenerTareas());
         comboTarea = new JComboBox<String>();
@@ -100,12 +89,7 @@ public abstract class HoraBase extends JPanel{
     	}
 		
     	comboTareaLabel = new JLabel("Tarea", JLabel.LEFT);
-    	inLineTarea.add(comboTareaLabel);
-    	inLineTarea.add(comboTarea);
-    	vertical.add(inLineTarea);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
-        
-        
+    	
 		descripcionTareaLabel = new JLabel("Descripcion: ",JLabel.LEFT);
 		descripcionTarea = new JLabel("");
 		comboTarea.addActionListener(new ActionListener() {
@@ -115,19 +99,39 @@ public abstract class HoraBase extends JPanel{
 				descripcionTarea.setText(getDescripcionTareaById(tareas, Integer.parseInt((String)comboTarea.getSelectedItem())));
 			}
 		});
-		inLineDescripcion.add(descripcionTareaLabel);
+        
+        cantidad = new InputContainer("Cantidad", 8);
+        
+        // TODO Ver las validaciones para ingreso de fecha.
+        fecha = new InputContainer("Fecha(yyyyMMdd)", 30);
+        
+        
+        vertical.add(titulo);
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+        
+        inLineLegajo.add(comboLegajoLabel);
+    	inLineLegajo.add(comboLegajo);
+    	vertical.add(inLineLegajo);
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+        
+        inLineName.add(nombreEmpleadoLabel);
+        inLineName.add(nombreEmpleado);
+        vertical.add(inLineName);
+        vertical.add(Box.createVerticalStrut(HEIGHT));
+        
+        inLineTarea.add(comboTareaLabel);
+    	inLineTarea.add(comboTarea);
+    	vertical.add(inLineTarea);
+		vertical.add(Box.createVerticalStrut(HEIGHT));
+        
+        inLineDescripcion.add(descripcionTareaLabel);
 		inLineDescripcion.add(descripcionTarea);
         vertical.add(inLineDescripcion);
         vertical.add(Box.createVerticalStrut(HEIGHT));
-		
         
-        cantidad = new InputContainer("Cantidad", 8);
         vertical.add(cantidad.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
-         
-        // TODO Ver las validaciones para ingreso de fecha.
-        fecha = new InputContainer("Fecha(yyyyMMdd)", 30);
         vertical.add(fecha.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
@@ -137,19 +141,11 @@ public abstract class HoraBase extends JPanel{
         add(vertical);
 	}
 	
-	public JLabel getTitulo() {
-		return titulo;
-	}
-
-
-	public void setTitulo(JLabel titulo) {
-		this.titulo = titulo;
-	}
-
-
 	protected abstract Box agregarBotones();
 	 
-	private List<Empleado> getEmpleados(){
+	protected abstract String setTitulo();
+	
+	private List<Empleado> obtenerEmpleados(){
 		
 		EmpleadoBO empleadoBO = new EmpleadoBO();
 		empleadoBO.setEmpDao(new EmpleadoDaoImpl());
@@ -198,7 +194,14 @@ public abstract class HoraBase extends JPanel{
 		return descripcion;
 	}
 	
-	
+	public JLabel getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(JLabel titulo) {
+		this.titulo = titulo;
+	}
+
 	public JLabel getNombreEmpleadoLabel() {
 		return nombreEmpleadoLabel;
 	}
@@ -211,11 +214,9 @@ public abstract class HoraBase extends JPanel{
 		return nombreEmpleado;
 	}
 
-
 	public void setNombreEmpleado(JLabel nombreEmpleado) {
 		this.nombreEmpleado = nombreEmpleado;
 	}
-
 
 	public InputContainer getIdTarea() {
 		return idTarea;
@@ -249,56 +250,45 @@ public abstract class HoraBase extends JPanel{
 		this.handler = handler;
 	}
 
-
 	public JLabel getComboLegajoLabel() {
 		return comboLegajoLabel;
 	}
-
 
 	public void setComboLegajoLabel(JLabel comboLegajoLabel) {
 		this.comboLegajoLabel = comboLegajoLabel;
 	}
 
-
 	public JComboBox<String> getComboLegajo() {
 		return comboLegajo;
 	}
-
 
 	public void setComboLegajo(JComboBox<String> comboLegajo) {
 		this.comboLegajo = comboLegajo;
 	}
 
-
 	public JLabel getComboTareaLabel() {
 		return comboTareaLabel;
 	}
-
 
 	public void setComboTareaLabel(JLabel comboTareaLabel) {
 		this.comboTareaLabel = comboTareaLabel;
 	}
 
-
 	public JComboBox<String> getComboTarea() {
 		return comboTarea;
 	}
-
 
 	public void setComboTarea(JComboBox<String> comboTarea) {
 		this.comboTarea = comboTarea;
 	}
 
-
 	public JLabel getDescripcionTareaLabel() {
 		return descripcionTareaLabel;
 	}
 
-
 	public void setDescripcionTareaLabel(JLabel descripcionTareaLabel) {
 		this.descripcionTareaLabel = descripcionTareaLabel;
 	}
-
 
 	public JLabel getProyectotareaLabel() {
 		return proyectotareaLabel;

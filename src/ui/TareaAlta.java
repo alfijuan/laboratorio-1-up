@@ -55,5 +55,10 @@ public class TareaAlta extends TareaBase {
 		
 		return botonera;
 	}
+
+	@Override
+	protected String setTitulo() {
+		return "Carga de tareas";
+	}
 	
 }
