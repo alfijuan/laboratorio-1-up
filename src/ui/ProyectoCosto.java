@@ -64,25 +64,12 @@ public class ProyectoCosto extends ProyectoBase {
 			public void actionPerformed(ActionEvent e) {
         		
 				String proyecto = (String)getComboProyecto().getSelectedItem();
-				costo.setText("$" + String.valueOf(obtenerCostos(Integer.parseInt(proyecto.split("-")[0]))));
+				costo.setText("$" + String.valueOf(getHandler().calcularCostoProyecto(Integer.parseInt(proyecto.split("-")[0]))));
 			}
 		});
 		return botonera;
 	}
 
-	private Double obtenerCostos(Integer idProyecto) {
-		ProyectoBO proyectoBO = new ProyectoBO();
-		proyectoBO.setProyectoDao(new ProyectoDaoImpl());
-		Double costo = null;
-		
-		try {
-			costo = proyectoBO.obtenerCostosById(idProyecto).getCosto();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		
-		return costo;
-	}
 	public Proyecto getProyecto() {
 		return proyecto;
 	}

@@ -224,6 +224,16 @@ public class Handler {
 		frame.cambiarPanel(new ProyectoCosto(this));
 	}
 	
+	public Double calcularCostoProyecto(int id) {
+		Double costo = null;
+		try {
+			costo = proyectoBO.obtenerCostosById(id).getCosto();
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return costo;
+	}
+	
 	public void calcularCostoEmpleado(int legajo) {
 		try {
 			List<Integer> resultados = getHorasBO().obtenerHoras(legajo);
