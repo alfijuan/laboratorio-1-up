@@ -29,19 +29,13 @@ public class EmpleadoTable extends JPanel {
 		this.modelo.addColumn("Nombre");
 		this.modelo.addColumn("Apellido");
 		this.modelo.addColumn("DNI");
-		this.modelo.addColumn("Direccion");
 		this.modelo.addColumn("Honorarios");
-		this.modelo.addColumn("Username");
-		this.modelo.addColumn("Password");
 		
 		columnModel.getColumn(0).setPreferredWidth(500);
 		columnModel.getColumn(1).setPreferredWidth(500);
 		columnModel.getColumn(2).setPreferredWidth(500);
 		columnModel.getColumn(3).setPreferredWidth(500);
 		columnModel.getColumn(4).setPreferredWidth(500);
-		columnModel.getColumn(5).setPreferredWidth(500);
-		columnModel.getColumn(6).setPreferredWidth(500);
-		columnModel.getColumn(7).setPreferredWidth(500);
 		
 		for (int i = 0; i < lista.size(); i++) {
 			this.modelo.addRow(new Object[] {
@@ -49,10 +43,7 @@ public class EmpleadoTable extends JPanel {
 				lista.get(i).getNombre(),
 				lista.get(i).getApellido(),
 				lista.get(i).getDni(),
-				lista.get(i).getDireccion(),
 				lista.get(i).getHonorarios(),
-				lista.get(i).getNombreUsuario(),
-				lista.get(i).getPassword()
 			});
 		}
 		

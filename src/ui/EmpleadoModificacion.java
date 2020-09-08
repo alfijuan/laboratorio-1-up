@@ -29,8 +29,6 @@ public class EmpleadoModificacion extends EmpleadoBase {
 		getDni().getField().setText(Integer.toString(getEmpleado().getDni()));
 		getDni().getField().setEnabled(false);
 		getHonorarios().getField().setText(Float.toString(getEmpleado().getHonorarios()));
-		getUser().getField().setText(getEmpleado().getNombreUsuario());
-		getPass().getField().setText(getEmpleado().getPassword());
 	}
 	
 	protected Box agregarBotones() {
@@ -56,8 +54,6 @@ public class EmpleadoModificacion extends EmpleadoBase {
 			public void actionPerformed(ActionEvent e) {
         		current.setNombre(getNombre().getField().getText());
         		current.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));
-        		current.setNombreUsuario(getUser().getField().getText());
-        		current.setPassword(getPass().getField().getText());
 				getHandler().editarEmpleado(current);
 			}
 		});

@@ -45,9 +45,8 @@ public class EmpleadoAlta extends EmpleadoBase {
         		Empleado empleado = new Empleado();
         		empleado.setDni(Integer.parseInt(getDni().getField().getText()));
 				empleado.setNombre(getNombre().getField().getText());
+				empleado.setApellido(getApellido().getField().getText());
 				empleado.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));
-				empleado.setNombreUsuario(getUser().getField().getText());
-				empleado.setPassword(getPass().getField().getText());
 				getHandler().agregarEmpleado(empleado);
 			}
 		});

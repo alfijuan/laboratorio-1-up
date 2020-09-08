@@ -19,15 +19,13 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("INSERT INTO empleado (nombre, apellido, dni, direccion, honorarios, nombreUsuario, password)" +
-					"VALUES(?,?,?,?,?,?,?)");
+			PreparedStatement sql = con.prepareStatement("INSERT INTO empleado (nombre, apellido, dni, direccion, honorarios)" +
+					"VALUES(?,?,?,?,?)");
 			sql.setString(1, empleado.getNombre());
 			sql.setString(2, empleado.getApellido());
 			sql.setInt(3, empleado.getDni());
 			sql.setString(4, empleado.getDireccion());
 			sql.setFloat(5, empleado.getHonorarios());
-			sql.setString(6, empleado.getNombreUsuario());
-			sql.setString(7, empleado.getPassword());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -54,15 +52,13 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("UPDATE empleado SET nombre=?, apellido=?, direccion=?, honorarios=?, nombreUsuario=?, password=? WHERE legajo=?");
+			PreparedStatement sql = con.prepareStatement("UPDATE empleado SET nombre=?, apellido=?, direccion=?, honorarios=? WHERE legajo=?");
 			
 			sql.setString(1, empleado.getNombre());
 			sql.setString(2, empleado.getApellido());
 			sql.setString(3, empleado.getDireccion());
 			sql.setFloat(4, empleado.getHonorarios());
-			sql.setString(5, empleado.getNombreUsuario());
-			sql.setString(6, empleado.getPassword());
-			sql.setInt(7, empleado.getLegajo());
+			sql.setInt(5, empleado.getLegajo());
 			
 			sql.executeUpdate();
 			con.commit();
@@ -131,9 +127,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 						rs.getInt("dni"),
 						rs.getInt("legajo"),
 						rs.getString("direccion"),
-						rs.getFloat("honorarios"),
-						rs.getString("nombreUsuario"),
-						rs.getString("password")
+						rs.getFloat("honorarios")
 				);
 			}
 		}catch (SQLException e) {
@@ -169,9 +163,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 						rs.getInt("dni"),
 						rs.getInt("legajo"),
 						rs.getString("direccion"),
-						rs.getFloat("honorarios"),
-						rs.getString("nombreUsuario"),
-						rs.getString("password")
+						rs.getFloat("honorarios")
 				));
 			}
 		} catch (SQLException e) {
