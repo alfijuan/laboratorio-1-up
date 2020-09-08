@@ -7,20 +7,29 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-
 import handler.Handler;
 import ui.containers.SalirListener;
 
-public class MiFrame extends JFrame{
+public class MiFrame extends FrameBase{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -221347292852008772L;
 
 	public MiFrame(String titulo, Handler handler) {
-		super(titulo);
-		JMenuBar menuBar = new JMenuBar();
+		super(titulo, handler);
+		
+		initUI();
+	}
+	
+	public void initUI() {
+		setSize(800, 700);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	@Override
+	public void agregarFuncionesMenu(JMenuBar menuBar) {
 		JMenu menuEmpleados = new JMenu("Empleados");
 		JMenu menuTareas = new JMenu("Tareas");
 		JMenu menuArchivo = new JMenu("Archivo");
@@ -100,21 +109,7 @@ public class MiFrame extends JFrame{
 			}
 		});
         menuProyecto.add(item1Proyecto);
-        
-        setJMenuBar(menuBar);
-		initUI();
-	}
-	
-	private void initUI() {
-		setSize(800, 700);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	public void cambiarPanel(JPanel panel){
-		getContentPane().removeAll();
-		getContentPane().add(panel);
-		getContentPane().validate();
+		
 	}
 
 }

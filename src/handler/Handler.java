@@ -7,24 +7,28 @@ import bo.EmpleadoBO;
 import bo.HorasBO;
 import bo.ProyectoBO;
 import bo.TareaBO;
+import bo.UserBO;
 import dao.EmpleadoDaoImpl;
 import dao.HorasDaoImpl;
-import dao.ProyectoDAO;
 import dao.ProyectoDaoImpl;
 import dao.TareaDaoImpl;
+import dao.UserDaoImpl;
 import empresa.Empleado;
 import empresa.Hora;
-import empresa.Proyecto;
 import empresa.Tarea;
+import empresa.User;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
 import exceptions.horas.HoraNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
+import exceptions.user.UserOrPassDontExistException;
 import ui.EmpleadoAlta;
 import ui.EmpleadoModificacion;
 import ui.HoraAlta;
 import ui.HoraModificacion;
+import ui.Login;
+import ui.LoginFrame;
 import ui.TareaAlta;
 import ui.TareaModificacion;
 import ui.MiFrame;
@@ -36,10 +40,12 @@ import ui.table.TareaTable;
 public class Handler {
 	
 	private MiFrame frame;
+	private LoginFrame loginFrame;
 	private EmpleadoBO empleadoBO;
 	private TareaBO tareaBO;
 	private HorasBO horasBO;
 	private ProyectoBO proyectoBO;
+	private UserBO userBO;
 
 	public Handler() {
 		empleadoBO = new EmpleadoBO();
@@ -54,11 +60,39 @@ public class Handler {
 		proyectoBO = new ProyectoBO();
 		proyectoBO.setProyectoDao(new ProyectoDaoImpl());
 		
+		userBO = new UserBO();
+		userBO.setUserDao(new UserDaoImpl());
+		
+		loginFrame = new LoginFrame("v1.0", this);
 		frame = new MiFrame("v1.0", this);
 	}
 	
 	public void init() {
+		loginFrame.setVisible(true);
+        frame.setVisible(false);
+        mostrarLogin();
+	}
+	
+	public void mostrarLogin() {
+		loginFrame.cambiarPanel(new Login(this));
+	}
+	
+	public void mostrarHoras() {
+		loginFrame.setVisible(false);
         frame.setVisible(true);
+	}
+
+		
+	public void loginUsuario(User user) {
+		try {
+			userBO.loginUser(user);
+			
+			mostrarHoras();
+		} catch (UserOrPassDontExistException e1) {
+			mostrarModal(e1.getMessage());
+		} catch (SystemException e1) {
+			mostrarModal(e1.getMessage());
+		}
 	}
 	
 	public void mostrarModal(String title) {
