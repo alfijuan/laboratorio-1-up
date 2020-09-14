@@ -16,11 +16,11 @@ public class ProyectoBO {
 		return proyectoDao.obtenerProyectos();
 	}
 	
-	public Proyecto obtenerProyectoById(Integer id) throws SystemException {
+	public Proyecto obtenerProyectoById(int id) throws SystemException {
 		return proyectoDao.obtenerProyectoById(id);
 	}
 	
-	public Proyecto obtenerCostosById(Integer id) throws SystemException {
+	public Proyecto obtenerCostosById(int id) throws SystemException {
 		return proyectoDao.obtenerCostosById(id);
 	}
 	

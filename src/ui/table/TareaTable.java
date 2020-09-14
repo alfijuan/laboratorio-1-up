@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import empresa.Tarea;
-import handler.Handler;
+import ui.Handler;
 
 public class TareaTable extends JPanel {
 	/**

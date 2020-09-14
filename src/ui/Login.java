@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import empresa.User;
-import handler.Handler;
 import ui.containers.InputContainer;
 import ui.containers.SalirListener;
 

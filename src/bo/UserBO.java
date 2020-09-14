@@ -10,14 +10,10 @@ public class UserBO {
 	
 	public UserBO() {}
 	
-	public void loginUser(User user) throws SystemException, UserOrPassDontExistException{
-		
-		if(userDao.loginUser(user)!= null && userDao.loginUser(user) != 0) {
-			
-		} else {
+	public void loginUser(User user) throws SystemException, UserOrPassDontExistException {
+		if(userDao.loginUser(user) == 0) {
 			throw new UserOrPassDontExistException("Usuario o password incorrectos");
 		}
-		
 	}
 	
 	

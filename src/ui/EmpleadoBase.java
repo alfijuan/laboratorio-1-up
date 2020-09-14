@@ -4,7 +4,6 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import handler.Handler;
 import ui.containers.InputContainer;
 
 public abstract class EmpleadoBase extends JPanel {

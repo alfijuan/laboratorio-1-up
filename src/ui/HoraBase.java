@@ -16,7 +16,6 @@ import dao.TareaDaoImpl;
 import empresa.Empleado;
 import empresa.Tarea;
 import exceptions.SystemException;
-import handler.Handler;
 import ui.containers.InputContainer;
 
 public abstract class HoraBase extends JPanel{

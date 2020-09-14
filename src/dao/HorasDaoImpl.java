@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import basico.jdbc.DBManager;
+import empresa.Empleado;
 import empresa.Hora;
 import exceptions.SystemException;
 import exceptions.horas.HoraNotFoundException;
@@ -48,7 +49,7 @@ public class HorasDaoImpl implements HorasDAO{
 	}
 
 	@Override
-	public void eliminarHoras(Integer idHora) throws SystemException {
+	public void eliminarHoras(int idHora) throws SystemException {
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
@@ -188,14 +189,48 @@ public class HorasDaoImpl implements HorasDAO{
 			sql.setInt(2, idTarea);
 			
 			ResultSet rs = sql.executeQuery();
+			if(rs.next()) {
+				hora = new Hora();
+				hora.setCantidad(rs.getInt("cantidad"));
+				hora.setLegajoEmpleado(rs.getInt("empleado_legajo"));
+				hora.setIdTarea(rs.getInt("tarea_id"));
+				hora.setFecha(rs.getDate("fecha"));
+			}
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+			throw new SystemException("Error en la base de datos");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+		}
+		return hora;
+	}
+	
+	public Hora obtenerHora(int id) throws SystemException {
+		Connection con = DBManager.getInstance().connect();
+		Hora hora = null;
+		
+		try {
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM horas where id_hora=?");
+			sql.setInt(1, id);
 			
-			hora = new Hora();
-			System.out.println(rs);
-			hora.setCantidad(rs.getInt("cantidad"));
-			hora.setLegajoEmpleado(rs.getInt("empleado_legajo"));
-			hora.setIdTarea(rs.getInt("tarea_id"));
 			
-			hora.setFecha(rs.getDate("fecha"));
+			ResultSet rs = sql.executeQuery();
+			if(rs.next()) {
+				hora = new Hora();
+				hora.setIdHora(rs.getInt("id_hora"));
+				hora.setLegajoEmpleado(rs.getInt("empleado_legajo"));
+				hora.setIdTarea(rs.getInt("tarea_id"));
+				hora.setCantidad(rs.getInt("cantidad"));
+				hora.setFecha(rs.getDate("fecha"));
+			}
 		} catch (SQLException e) {
 			try {
 				con.rollback();

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
 import empresa.Hora;
-import handler.Handler;
 import utils.formatUtils;
 
 public class HoraAlta extends HoraBase{

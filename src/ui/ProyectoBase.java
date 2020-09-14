@@ -12,7 +12,6 @@ import bo.ProyectoBO;
 import dao.ProyectoDaoImpl;
 import empresa.Proyecto;
 import exceptions.SystemException;
-import handler.Handler;
 
 public abstract class ProyectoBase extends JPanel {
 	

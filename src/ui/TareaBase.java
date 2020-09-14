@@ -15,7 +15,6 @@ import dao.ProyectoDaoImpl;
 import empresa.Empleado;
 import empresa.Proyecto;
 import exceptions.SystemException;
-import handler.Handler;
 import ui.containers.InputContainer;
 
 public abstract class TareaBase extends JPanel{

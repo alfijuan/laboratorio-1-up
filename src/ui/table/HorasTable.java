@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
 import empresa.Hora;
-import handler.Handler;
+import ui.Handler;
 
 public class HorasTable extends JPanel {
 	/**

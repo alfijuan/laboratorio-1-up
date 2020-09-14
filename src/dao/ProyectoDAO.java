@@ -8,6 +8,6 @@ import exceptions.SystemException;
 public interface ProyectoDAO {
 	
 	List<Proyecto> obtenerProyectos() throws SystemException;
-	Proyecto obtenerProyectoById(Integer id) throws SystemException;
-	Proyecto obtenerCostosById(Integer id) throws SystemException;
+	Proyecto obtenerProyectoById(int id) throws SystemException;
+	Proyecto obtenerCostosById(int id) throws SystemException;
 }

@@ -1,6 +1,5 @@
 package ui;
 
-import handler.Handler;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import bo.ProyectoBO;

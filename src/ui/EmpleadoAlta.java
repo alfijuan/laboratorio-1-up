@@ -1,7 +1,5 @@
 package ui;
 
-import handler.Handler;
-
 import javax.swing.JButton;
 
 import java.awt.event.ActionEvent;

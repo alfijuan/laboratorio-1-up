@@ -1,4 +1,4 @@
-package handler;
+package ui;
 
 import java.util.List;
 
@@ -23,16 +23,6 @@ import exceptions.empleado.EmpleadoNotFoundException;
 import exceptions.horas.HoraNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
 import exceptions.user.UserOrPassDontExistException;
-import ui.EmpleadoAlta;
-import ui.EmpleadoModificacion;
-import ui.HoraAlta;
-import ui.HoraModificacion;
-import ui.Login;
-import ui.LoginFrame;
-import ui.TareaAlta;
-import ui.TareaModificacion;
-import ui.MiFrame;
-import ui.ProyectoCosto;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
 import ui.table.TareaTable;
@@ -86,10 +76,9 @@ public class Handler {
 	public void loginUsuario(User user) {
 		try {
 			userBO.loginUser(user);
-			
 			mostrarHoras();
 		} catch (UserOrPassDontExistException e1) {
-			mostrarModal(e1.getMessage());
+			mostrarModal("Los datos ingresados son incorrectos");
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());
 		}
@@ -160,7 +149,7 @@ public class Handler {
 	
 	public void mostrarTablaTarea() {
 		try {
-			frame.cambiarPanel(new TareaTable(this.getTareaBO().obtenerTareas(), this));
+			frame.cambiarPanel(new TareaTable(this.getTareaBO().obtenerTareas(), this));			
 		} catch (SystemException e1) {
 			this.mostrarModal(e1.getMessage());
 		}
@@ -216,10 +205,10 @@ public class Handler {
 		
 		try {
 			horasBO.cargarHoras(hora);
+			mostrarModal("Hora cargada correctamente!");
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
 		}
-		mostrarModal("Hora cargada correctamente!");
 	}
 	
 	public void mostrarEditarHora(Hora hora) {
@@ -227,30 +216,26 @@ public class Handler {
 	}
 	
 	public void editarHora(Hora hora) {
-		
-			try {
-				getHorasBO().editarHoras(hora);
-				mostrarModal("Registro editado correctamente!");
-				mostrarTablaHoras();
-			} catch (SystemException e) {
-				e.printStackTrace();
-			} catch (HoraNotFoundException e) {
-				mostrarModal(e.getMessage());
-				e.printStackTrace();
-			}
+		try {
+			getHorasBO().editarHoras(hora);
+			mostrarModal("Registro editado correctamente!");
+			mostrarTablaHoras();
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		} catch (HoraNotFoundException e) {
+			mostrarModal(e.getMessage());
+		}
 	}
 	
 	public void borrarHora(Integer idHora) {
-		
 		try {
 			getHorasBO().eliminarHoras(idHora);
 			mostrarModal("Registro borrado correctamente!");
 			mostrarTablaHoras();
 		} catch (SystemException e) {
-			e.printStackTrace();
+			mostrarModal(e.getMessage());
 		} catch (HoraNotFoundException e) {
 			mostrarModal(e.getMessage());
-			e.printStackTrace();
 		}
 	}
 	
@@ -263,7 +248,7 @@ public class Handler {
 		try {
 			costo = proyectoBO.obtenerCostosById(id).getCosto();
 		} catch (SystemException e) {
-			e.printStackTrace();
+			mostrarModal(e.getMessage());
 		}
 		return costo;
 	}
@@ -274,7 +259,6 @@ public class Handler {
 			mostrarModal("Al empleado se le deben " + Integer.toString(resultados.get(1)) + " correspondientes a " + Integer.toString(resultados.get(0)) + " horas.");
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
-			e.printStackTrace();
 		}
 	}
 	

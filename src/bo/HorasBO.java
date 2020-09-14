@@ -4,6 +4,7 @@ import java.util.List;
 import dao.HorasDAO;
 import empresa.Hora;
 import exceptions.SystemException;
+import exceptions.empleado.EmpleadoNotFoundException;
 import exceptions.horas.HoraNotFoundException;
 
 public class HorasBO {
@@ -16,23 +17,27 @@ public class HorasBO {
 	}
 	
 	public void editarHoras(Hora hora) throws SystemException, HoraNotFoundException {
-//		if(horasDao.obtenerHoraRegistrada(hora.getLegajoEmpleado(), hora.getIdTarea()) != null) {
+		if(horasDao.obtenerHora(hora.getIdHora()) != null) {
 			horasDao.editarHoras(hora);
-//		} else {
-//			throw new HoraNotFoundException("No existe el registro!");
-//		}
+		} else {
+			throw new HoraNotFoundException("La hora no existe!");
+		}
 	}
 	
 	public List<Hora> obtenerHoras() throws SystemException {
 		return horasDao.obtenerHoras();
 	}
 	
-	public List<Integer> obtenerHoras(int legajo) throws SystemException {
+	public List<Integer> obtenerHoras(int legajo) throws SystemException{
 		return horasDao.obtenerHoras(legajo);
 	}
 	
-	public void eliminarHoras(Integer idHora) throws SystemException, HoraNotFoundException {
-		horasDao.eliminarHoras(idHora);
+	public void eliminarHoras(int idHora) throws SystemException, HoraNotFoundException {
+		if(horasDao.obtenerHora(idHora) != null) {
+			horasDao.eliminarHoras(idHora);
+		} else {
+			throw new HoraNotFoundException("La hora no existe!");
+		}
 	}
 	
 	public void setHorasDao(HorasDAO horasDao) {

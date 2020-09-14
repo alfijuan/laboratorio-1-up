@@ -7,7 +7,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 
 import empresa.Hora;
-import handler.Handler;
 import utils.formatUtils;
 
 public class HoraModificacion extends HoraBase{
@@ -62,8 +61,6 @@ public class HoraModificacion extends HoraBase{
         		horaSeleccionada.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
         		horaSeleccionada.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
 				getHandler().editarHora(horaSeleccionada);
-        		
-        		System.out.println(horaSeleccionada);
 			}
 		});
 		return botonera;

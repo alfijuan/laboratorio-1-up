@@ -6,17 +6,18 @@ import dao.TareaDAO;
 import empresa.Tarea;
 import exceptions.SystemException;
 import exceptions.tarea.TareaAlreadyExists;
+import exceptions.tarea.TareaNotFoundException;
 
 public class TareaBO {
 	private TareaDAO tareaDAO;
 	
 	public TareaBO() {};
 	
-	public void agregarTarea(Tarea tarea) throws SystemException, TareaAlreadyExists{
+	public void agregarTarea(Tarea tarea) throws TareaAlreadyExists, SystemException{
 		if(tareaDAO.obtenerTarea(tarea.getId()) == null) {
 			tareaDAO.crearTarea(tarea);
 		}else {
-			throw new SystemException("Ya existe una tarea con este ID");
+			throw new TareaAlreadyExists("Ya existe una tarea con este ID");
 		}
 	}
 	
@@ -40,11 +41,11 @@ public class TareaBO {
 		return tareaDAO.obtenerTareas();
 	}
 	
-	public Tarea obtenerTarea(int id) throws SystemException{
+	public Tarea obtenerTarea(int id) throws SystemException, TareaNotFoundException{
 		if(tareaDAO.obtenerTarea(id) != null) {
 			return tareaDAO.obtenerTarea(id);
 		} else {
-			throw new SystemException("La tarea no existe!");
+			throw new TareaNotFoundException("La tarea no existe!");
 		}
 	}
 	

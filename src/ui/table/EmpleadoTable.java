@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
 
 import empresa.Empleado;
-import handler.Handler;
+import ui.Handler;
 
 public class EmpleadoTable extends JPanel {
 	/**

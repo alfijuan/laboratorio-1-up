@@ -45,7 +45,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 	}
 
 	@Override
-	public Proyecto obtenerProyectoById(Integer id) throws SystemException {
+	public Proyecto obtenerProyectoById(int id) throws SystemException {
 		Connection con = DBManager.getInstance().connect();
 		Proyecto proyecto = null;
 		
@@ -81,7 +81,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 	}
 
 	@Override
-	public Proyecto obtenerCostosById(Integer id) throws SystemException {
+	public Proyecto obtenerCostosById(int id) throws SystemException {
 		Connection con = DBManager.getInstance().connect();
 		Proyecto proyecto = null;
 		
