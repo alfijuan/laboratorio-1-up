@@ -56,11 +56,16 @@ public class TareaModificacion extends TareaBase {
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String proyecto = (String)getComboProyecto().getSelectedItem();
-        		current.setNombre(getNombre().getField().getText());
-        		current.setDescripcion(getDescription().getField().getText());
-        		current.setIdProyecto(Integer.parseInt(proyecto.split("-")[0]));
-				getHandler().editarTarea(current);
+				if(getComboProyecto().getSelectedIndex() != 0) {
+					String proyecto = (String)getComboProyecto().getSelectedItem();
+	        		current.setNombre(getNombre().getField().getText());
+	        		current.setDescripcion(getDescription().getField().getText());
+	        		current.setIdProyecto(Integer.parseInt(proyecto.split("-")[0]));
+					getHandler().editarTarea(current);
+				} else {
+					getHandler().mostrarModal("Debe seleccionar un proyecto");
+				}
+				
 			}
 		});
 		return botonera;

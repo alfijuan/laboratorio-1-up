@@ -80,11 +80,13 @@ public class HorasDaoImpl implements HorasDAO{
 		Connection con = DBManager.getInstance().connect();
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("UPDATE horas SET cantidad=?, fecha=? WHERE id_hora=?");
+			PreparedStatement sql = con.prepareStatement("UPDATE horas SET cantidad=?, fecha=?, tarea_id=?, empleado_legajo=? WHERE id_hora=?");
 			
 			sql.setInt(1, hora.getCantidad());
 			sql.setDate(2, convertUtilToSql(hora.getFecha()));
-			sql.setInt(3, hora.getIdHora());
+			sql.setInt(3, hora.getIdTarea());
+			sql.setInt(4, hora.getLegajoEmpleado());
+			sql.setInt(5, hora.getIdHora());
 			
 			sql.executeUpdate();
 			con.commit();

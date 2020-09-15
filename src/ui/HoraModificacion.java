@@ -56,11 +56,20 @@ public class HoraModificacion extends HoraBase{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-        		horaSeleccionada.setLegajoEmpleado(Integer.parseInt((String)getComboLegajo().getSelectedItem()));
-        		horaSeleccionada.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
-        		horaSeleccionada.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
-        		horaSeleccionada.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
-				getHandler().editarHora(horaSeleccionada);
+				if(getComboLegajo().getSelectedIndex() != 0) {
+					if(getComboTarea().getSelectedIndex() != 0) {
+		        		horaSeleccionada.setLegajoEmpleado(Integer.parseInt((String)getComboLegajo().getSelectedItem()));
+		        		horaSeleccionada.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
+		        		horaSeleccionada.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
+		        		horaSeleccionada.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
+						getHandler().editarHora(horaSeleccionada);						
+					}else {
+						getHandler().mostrarModal("Debe seleccionar una tarea");
+					}
+				} else {
+					getHandler().mostrarModal("Debe seleccionar un legajo");
+				}
+
 			}
 		});
 		return botonera;
