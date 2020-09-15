@@ -128,7 +128,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 		List<Proyecto> proyectos = new ArrayList<Proyecto>();
 		Connection con = DBManager.getInstance().connect();
 		try {
-			PreparedStatement sql = con.prepareStatement("select su(horas.cantidad * empleado.honorarios) as costo, empleado.legajo, empleado.honorarios, tarea.id_proyecto, proyecto.nombre from tarea inner join horas on tarea.id = horas.tarea_id inner join empleado on empleado.legajo = horas.empleado_legajo inner join proyecto on proyecto.id_proyecto = tarea.id_proyecto group by empleado.legajo, tarea.id_proyecto, proyecto.nombre order by tarea.id_proyecto;");
+			PreparedStatement sql = con.prepareStatement("select sum(horas.cantidad * empleado.honorarios) as costo, empleado.legajo, empleado.honorarios, tarea.id_proyecto, proyecto.nombre from tarea inner join horas on tarea.id = horas.tarea_id inner join empleado on empleado.legajo = horas.empleado_legajo inner join proyecto on proyecto.id_proyecto = tarea.id_proyecto group by empleado.legajo, tarea.id_proyecto, proyecto.nombre order by tarea.id_proyecto;");
 			ResultSet rs = sql.executeQuery();
 			
 			Proyecto proyecto = null;

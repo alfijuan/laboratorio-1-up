@@ -291,7 +291,12 @@ public class Handler {
 	public void calcularCostoEmpleado(int legajo) {
 		try {
 			List<Integer> resultados = getHorasBO().obtenerHoras(legajo);
-			mostrarModal("Al empleado se le deben " + Integer.toString(resultados.get(1)) + " correspondientes a " + Integer.toString(resultados.get(0)) + " horas.");
+			if(resultados.size() > 0 ) {
+				mostrarModal("Al empleado se le deben $ " + Integer.toString(resultados.get(1)) + " correspondientes a " + Integer.toString(resultados.get(0)) + " horas.");
+			}else {
+				mostrarModal("El empleado no registra horas cargadas");
+			}
+			
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
 		}
