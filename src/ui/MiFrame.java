@@ -109,6 +109,15 @@ public class MiFrame extends FrameBase{
 			}
 		});
         menuProyecto.add(item1Proyecto);
+        
+        JMenuItem item2Proyecto = new JMenuItem("Calcular Costo Detallado");
+        item2Proyecto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarCostoProyectoDetallado();
+			}
+		});
+        menuProyecto.add(item2Proyecto);
 		
 	}
 

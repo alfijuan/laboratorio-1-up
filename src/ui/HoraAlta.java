@@ -49,8 +49,6 @@ public class HoraAlta extends HoraBase{
         		hora.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
         		hora.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
         		hora.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
-        		System.out.println(hora);
-        		
 				getHandler().agregarHora(hora);
 				
 			}

@@ -13,7 +13,7 @@ public class EmpleadoBO {
 	
 	public EmpleadoBO() {}
 	
-	public void agregarEmpleado(Empleado emp) throws SystemException, EmpleadoNotFoundException, EmpleadoAlreadyExists{
+	public void agregarEmpleado(Empleado emp) throws SystemException, EmpleadoAlreadyExists{
 		if(empDao.obtenerEmpleado(emp.getLegajo()) == null) {
 			empDao.crearEmpleado(emp);
 		} else {
@@ -29,10 +29,6 @@ public class EmpleadoBO {
 		}
 	}
 	
-	public List<Empleado> obtenerEmpleados() throws SystemException {
-		return empDao.obtenerEmpleados();
-	}
-	
 	public void eliminarEmpleado(int legajo) throws SystemException, EmpleadoNotFoundException {
 		if(empDao.obtenerEmpleado(legajo) != null) {
 			empDao.eliminarEmpleado(legajo);
@@ -41,7 +37,11 @@ public class EmpleadoBO {
 		}
 	}
 	
-	public Empleado obtenerEmpleado(int legajo) throws SystemException, EmpleadoNotFoundException {
+	public List<Empleado> obtenerEmpleados() throws SystemException {
+		return empDao.obtenerEmpleados();
+	}
+	
+	public Empleado obtenerEmpleado(int legajo) throws SystemException {
 		return empDao.obtenerEmpleado(legajo);
 	}
 	

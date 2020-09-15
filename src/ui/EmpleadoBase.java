@@ -12,11 +12,11 @@ public abstract class EmpleadoBase extends JPanel {
 	private static final int HEIGHT = 20; 
 	private JLabel titulo;
 	private InputContainer nombre;
+	private InputContainer apellido;
+	private InputContainer direccion;
 	private InputContainer dni;
 	private InputContainer legajo;
 	private InputContainer honorarios;
-	private InputContainer user;
-	private InputContainer pass;
 	private Handler handler;
 	
 	public EmpleadoBase(Handler handler){
@@ -29,10 +29,10 @@ public abstract class EmpleadoBase extends JPanel {
 		
 		titulo = new JLabel(setTitulo(), JLabel.LEFT);
 		nombre = new InputContainer("Nombre", 30);
+		apellido = new InputContainer("Apellido", 30);
+		direccion = new InputContainer("Direccion", 30);
 		dni = new InputContainer("DNI", 8);
         honorarios = new InputContainer("Honorarios", 8);
-        user = new InputContainer("Nombre de usuario", 30);
-        pass = new InputContainer("Password", 30);
         
         vertical.add(titulo);
         vertical.add(Box.createVerticalStrut(HEIGHT));
@@ -40,16 +40,17 @@ public abstract class EmpleadoBase extends JPanel {
         vertical.add(nombre.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
+        vertical.add(apellido.createHelperBox());
+        vertical.add(Box.createVerticalStrut(HEIGHT));
+        
         vertical.add(dni.createHelperBox());
+        vertical.add(Box.createVerticalStrut(HEIGHT));
+        
+        vertical.add(direccion.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
         vertical.add(honorarios.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
-        
-        vertical.add(user.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
-        
-        vertical.add(pass.createHelperBox());
         
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());
@@ -101,20 +102,19 @@ public abstract class EmpleadoBase extends JPanel {
 		this.honorarios = honorarios;
 	}
 
-	public InputContainer getUser() {
-		return user;
+	public InputContainer getApellido() {
+		return apellido;
 	}
 
-	public void setUser(InputContainer user) {
-		this.user = user;
+	public void setApellido(InputContainer apellido) {
+		this.apellido = apellido;
+	}
+	
+	public InputContainer getDireccion() {
+		return direccion;
 	}
 
-	public InputContainer getPass() {
-		return pass;
+	public void setDireccion(InputContainer direccion) {
+		this.direccion = direccion;
 	}
-
-	public void setPass(InputContainer pass) {
-		this.pass = pass;
-	}
-
 }

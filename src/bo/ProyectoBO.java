@@ -5,6 +5,7 @@ import java.util.List;
 import dao.ProyectoDAO;
 import empresa.Proyecto;
 import exceptions.SystemException;
+import exceptions.proyecto.ProyectoNotFoundException;
 
 public class ProyectoBO {
 	private ProyectoDAO proyectoDao;
@@ -20,8 +21,16 @@ public class ProyectoBO {
 		return proyectoDao.obtenerProyectoById(id);
 	}
 	
-	public Proyecto obtenerCostosById(int id) throws SystemException {
-		return proyectoDao.obtenerCostosById(id);
+	public Proyecto obtenerCostosById(int id) throws SystemException, ProyectoNotFoundException {
+		if(proyectoDao.obtenerProyectoById(id) != null) {
+			return proyectoDao.obtenerCostosById(id);
+		} else {
+			throw new ProyectoNotFoundException("El proyecto no existe!");
+		}
+	}
+	
+	public List<Proyecto> obtenerCostosProyectos() throws SystemException{
+		return proyectoDao.obtenerCostosProyectos();
 	}
 	
 	public void setProyectoDao(ProyectoDAO proyectoDao) {

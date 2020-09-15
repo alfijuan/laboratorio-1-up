@@ -24,11 +24,11 @@ public class EmpleadoModificacion extends EmpleadoBase {
 	
 	private void agregarDatosEmpleado(){
 		getNombre().getField().setText(getEmpleado().getNombre());
+		getApellido().getField().setText(getEmpleado().getApellido());
 		getDni().getField().setText(Integer.toString(getEmpleado().getDni()));
 		getDni().getField().setEnabled(false);
+		getDireccion().getField().setText(getEmpleado().getDireccion());
 		getHonorarios().getField().setText(Float.toString(getEmpleado().getHonorarios()));
-		getUser().getField().setText(getEmpleado().getNombreUsuario());
-		getPass().getField().setText(getEmpleado().getPassword());
 	}
 	
 	protected Box agregarBotones() {
@@ -53,9 +53,9 @@ public class EmpleadoModificacion extends EmpleadoBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
         		current.setNombre(getNombre().getField().getText());
+        		current.setApellido(getApellido().getField().getText());
+        		current.setDireccion(getDireccion().getField().getText());
         		current.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));
-        		current.setNombreUsuario(getUser().getField().getText());
-        		current.setPassword(getPass().getField().getText());
 				getHandler().editarEmpleado(current);
 			}
 		});

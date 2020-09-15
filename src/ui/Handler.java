@@ -22,11 +22,15 @@ import empresa.User;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
+import exceptions.horas.HoraAlreadyExists;
 import exceptions.horas.HoraNotFoundException;
+import exceptions.proyecto.ProyectoNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
+import exceptions.tarea.TareaNotFoundException;
 import exceptions.user.UserOrPassDontExistException;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
+import ui.table.ProyectoCostoDetalladoTable;
 import ui.table.TareaTable;
 
 public class Handler {
@@ -126,8 +130,6 @@ public class Handler {
 			mostrarModal(e1.getMessage());
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());
-		} catch (EmpleadoNotFoundException e1) {
-			mostrarModal(e1.getMessage());
 		}
 	}
 	
@@ -175,6 +177,8 @@ public class Handler {
 			getTareaBO().editarTarea(tarea);
 			mostrarModal("Tarea editada correctamente!");
 			mostrarTablaTarea();
+		} catch (TareaNotFoundException e1) {
+			mostrarModal(e1.getMessage());
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());
 		}
@@ -185,6 +189,8 @@ public class Handler {
 			getTareaBO().borrarTarea(id);
 			mostrarModal("Tarea borrada correctamente!");
 			mostrarTablaTarea();
+		} catch (TareaNotFoundException e1) {
+			mostrarModal(e1.getMessage());
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());
 		}
@@ -203,10 +209,11 @@ public class Handler {
 	}
 	
 	public void agregarHora(Hora hora) {
-		
 		try {
 			horasBO.cargarHoras(hora);
 			mostrarModal("Hora cargada correctamente!");
+		} catch (HoraAlreadyExists e) {
+			mostrarModal(e.getMessage());
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
 		}
@@ -244,11 +251,22 @@ public class Handler {
 		frame.cambiarPanel(new ProyectoCosto(this));
 	}
 	
+	public void mostrarCostoProyectoDetallado() {
+		try {
+			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectos(),this));
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		}
+	}
+	
+	
 	public Double calcularCostoProyecto(int id) {
 		Double costo = null;
 		try {
 			costo = proyectoBO.obtenerCostosById(id).getCosto();
 		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		} catch (ProyectoNotFoundException e) {
 			mostrarModal(e.getMessage());
 		}
 		return costo;

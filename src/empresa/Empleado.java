@@ -7,20 +7,16 @@ public class Empleado {
 	private int legajo;
 	private String direccion;
 	private float honorarios;
-	private String nombreUsuario;
-	private String password;
 	
 	public Empleado() {}
 	
-	public Empleado(String nombre, String apellido, int dni, int legajo, String direccion, float honorarios, String nombreUsuario, String password) {
+	public Empleado(String nombre, String apellido, int dni, int legajo, String direccion, float honorarios) {
 		setNombre(nombre);
 		setApellido(apellido);
 		setDni(dni);
 		setLegajo(legajo);
 		setDireccion(direccion);
 		setHonorarios(honorarios);
-		setNombreUsuario(nombreUsuario);
-		setPassword(password);
 	}
 	
 	public String toString() {
@@ -49,7 +45,7 @@ public class Empleado {
 	public int getLegajo() {
 		return legajo;
 	}
-	private void setLegajo(int legajo) {
+	public void setLegajo(int legajo) {
 		this.legajo = legajo;
 	}
 	public String getDireccion() {
@@ -63,18 +59,6 @@ public class Empleado {
 	}
 	public void setHonorarios(float honorarios) {
 		this.honorarios = honorarios;
-	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 }

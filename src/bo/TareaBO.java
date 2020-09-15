@@ -13,7 +13,7 @@ public class TareaBO {
 	
 	public TareaBO() {};
 	
-	public void agregarTarea(Tarea tarea) throws TareaAlreadyExists, SystemException{
+	public void agregarTarea(Tarea tarea) throws SystemException, TareaAlreadyExists{
 		if(tareaDAO.obtenerTarea(tarea.getId()) == null) {
 			tareaDAO.crearTarea(tarea);
 		}else {
@@ -21,19 +21,19 @@ public class TareaBO {
 		}
 	}
 	
-	public void editarTarea(Tarea tarea) throws SystemException{
+	public void editarTarea(Tarea tarea) throws SystemException, TareaNotFoundException{
 		if(tareaDAO.obtenerTarea(tarea.getId()) != null) {
 			tareaDAO.editarTarea(tarea);
 		} else {
-			throw new SystemException("La tarea no existe!");
+			throw new TareaNotFoundException("La tarea no existe!");
 		}
 	}
 	
-	public void borrarTarea(int id) throws SystemException{
+	public void borrarTarea(int id) throws SystemException, TareaNotFoundException{
 		if(tareaDAO.obtenerTarea(id) != null) {
 			tareaDAO.borrarTarea(id);
 		} else {
-			throw new SystemException("La tarea no existe!");
+			throw new TareaNotFoundException("La tarea no existe!");
 		}
 	}
 	
@@ -41,12 +41,8 @@ public class TareaBO {
 		return tareaDAO.obtenerTareas();
 	}
 	
-	public Tarea obtenerTarea(int id) throws SystemException, TareaNotFoundException{
-		if(tareaDAO.obtenerTarea(id) != null) {
-			return tareaDAO.obtenerTarea(id);
-		} else {
-			throw new TareaNotFoundException("La tarea no existe!");
-		}
+	public Tarea obtenerTarea(int id) throws SystemException{
+		return tareaDAO.obtenerTarea(id);
 	}
 	
 	public void setTareaDAO(TareaDAO tareaDAO) {
