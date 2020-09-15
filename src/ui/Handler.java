@@ -118,7 +118,17 @@ public class Handler {
 			this.mostrarModal(e1.getMessage());
 		}
 	}
-
+	
+	public Boolean verificarBorradoDeEmpleado (int legajo) {
+		Boolean resultado = false;
+		try {
+			resultado = empleadoBO.validarEliminacionDeEmpleado(legajo);
+		} catch (SystemException e1) {
+			mostrarModal(e1.getMessage());
+		}
+		return resultado;
+	}
+	
 	public void agregarEmpleado(Empleado empleado) {
 		try {
 			empleadoBO.agregarEmpleado(empleado);
@@ -203,6 +213,7 @@ public class Handler {
 		}
 		return resultado;
 	}
+	
 	public void mostrarTablaHoras() {
 		try {
 			frame.cambiarPanel(new HorasTable(this.getHorasBO().obtenerHoras(), this));

@@ -181,4 +181,29 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		return lista;
 	}
 	
+	public Boolean verificarEliminacionEmpleado(int legajo) throws SystemException {
+		Boolean resultado= false;
+		Connection con = DBManager.getInstance().connect();
+		try {
+			PreparedStatement sql = con.prepareStatement("SELECT count(*) FROM horas WHERE empleado_legajo =?");
+			sql.setInt(1, legajo);
+			
+			ResultSet rs = sql.executeQuery();
+			rs.next();
+			resultado = rs.getInt("count") == 0;
+			
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+			}
+			throw new SystemException("Error en la base de datos");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e1) {
+			}
+		}
+		return resultado;
+	}
 }

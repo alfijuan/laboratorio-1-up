@@ -74,7 +74,6 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					// Get legajo
 					handler.calcularCostoEmpleado(lista.get(index).getLegajo());
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");
@@ -87,9 +86,13 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
-					if(input == 0) {
-						handler.mostrarBorrarEmpleado(lista.get(index).getLegajo());
+					if (handler.verificarBorradoDeEmpleado(lista.get(index).getLegajo())) {
+						int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
+						if(input == 0) {
+							handler.mostrarBorrarEmpleado(lista.get(index).getLegajo());
+						}
+					} else {
+						handler.mostrarModal("No se puede eliminar el empleado porque tiene horas cargadas en el sistema. Por favor esperar al cierre de liquidación.");
 					}
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");

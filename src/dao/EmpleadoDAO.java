@@ -13,4 +13,5 @@ public interface EmpleadoDAO {
 	void eliminarEmpleado(int legajo) throws SystemException, EmpleadoNotFoundException;
 	Empleado obtenerEmpleado(int legajo) throws SystemException;
 	List<Empleado> obtenerEmpleados() throws SystemException;
+	Boolean verificarEliminacionEmpleado (int legajo) throws SystemException;
 }

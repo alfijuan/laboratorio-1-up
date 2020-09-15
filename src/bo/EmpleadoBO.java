@@ -78,6 +78,17 @@ public class EmpleadoBO {
 		return empleado;
 	}
 	
+	public Boolean validarEliminacionDeEmpleado(int legajo) throws SystemException {
+		Boolean resultado = false;
+		try {
+			resultado = empDao.verificarEliminacionEmpleado(legajo);
+		} catch (SystemException e) {
+			e.printStackTrace();
+			throw new SystemException(GENERIC_ERROR_BD);
+		}
+		return resultado;
+	}
+	
 	public void setEmpDao(EmpleadoDAO empDao) {
 		this.empDao = empDao;
 	}
