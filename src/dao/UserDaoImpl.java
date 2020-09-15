@@ -20,8 +20,6 @@ public class UserDaoImpl implements UserDAO{
 			sql.setString(1, user.getUser());
 			sql.setString(2, user.getPassword());
 			
-			
-			
 			ResultSet rs = sql.executeQuery();
 			if(rs.next()) { 
 				resultado = rs.getInt("count");

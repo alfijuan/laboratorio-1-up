@@ -170,14 +170,12 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				//no hago nada
 			}
 			throw new SystemException("Error en la base de datos");
 		} finally {
 			try {
 				con.close();
 			} catch (SQLException e1) {
-				//no hago nada
 			}
 		}
 		return lista;

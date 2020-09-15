@@ -16,7 +16,6 @@ public class UserBO {
 		}
 	}
 	
-	
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
 	}

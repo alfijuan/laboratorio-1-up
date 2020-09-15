@@ -6,11 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import basico.jdbc.DBManager;
 import empresa.Tarea;
 import exceptions.SystemException;
-import exceptions.tarea.TareaNotFoundException;
 
 
 public class TareaDaoImpl implements TareaDAO{
@@ -165,14 +163,12 @@ public class TareaDaoImpl implements TareaDAO{
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				//no hago nada
 			}
 			throw new SystemException("Error en la base de datos");
 		} finally {
 			try {
 				con.close();
 			} catch (SQLException e1) {
-				//no hago nada
 			}
 		}
 		return lista;

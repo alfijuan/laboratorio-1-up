@@ -17,6 +17,7 @@ public class HorasBO {
 			try {
 				horasDao.cargarHoras(hora);
 			} catch (SystemException e) {
+				e.printStackTrace();
 				throw new SystemException(GENERIC_ERROR_BD);
 			}
 	}
@@ -26,6 +27,7 @@ public class HorasBO {
 			try {
 				horasDao.editarHoras(hora);
 			} catch (SystemException e){
+				e.printStackTrace();
 				throw new SystemException(GENERIC_ERROR_BD);
 			}
 		} else {
@@ -38,6 +40,7 @@ public class HorasBO {
 			try {
 				horasDao.eliminarHoras(idHora);
 			}catch(SystemException e) {
+				e.printStackTrace();
 				throw new SystemException(GENERIC_ERROR_BD);
 			}
 		} else {

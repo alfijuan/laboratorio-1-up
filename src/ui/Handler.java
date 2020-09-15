@@ -153,8 +153,6 @@ public class Handler {
 			frame.cambiarPanel(new TareaTable(this.getTareaBO().obtenerTareas(), this));			
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());
-		} catch (TareaNotFoundException e) {
-			mostrarModal(e.getMessage());
 		}
 	}
 	public void agregarTarea(Tarea tarea) {
@@ -282,11 +280,9 @@ public class Handler {
 	public List<Tarea> obtenerTareas(){
 		List<Tarea> tareas = new ArrayList<Tarea>();
 	
-		 try {
+		try {
 			tareas = getTareaBO().obtenerTareas();
 		} catch (SystemException e) {
-			mostrarModal(e.getMessage());
-		} catch (TareaNotFoundException e) {
 			mostrarModal(e.getMessage());
 		}
 	
