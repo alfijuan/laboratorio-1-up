@@ -49,7 +49,7 @@ public class Empleado {
 	public int getLegajo() {
 		return legajo;
 	}
-	private void setLegajo(int legajo) {
+	public void setLegajo(int legajo) {
 		this.legajo = legajo;
 	}
 	public String getDireccion() {

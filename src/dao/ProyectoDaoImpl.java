@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import basico.jdbc.DBManager;
+import empresa.Empleado;
 import empresa.Proyecto;
 import exceptions.SystemException;
 
@@ -127,5 +128,52 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 		
 		return proyecto;
 	}
+
+	@Override
+	public List<Proyecto> obtenerCostosProyectos() throws SystemException {
+		List<Proyecto> lista = new ArrayList<Proyecto>();
+		Connection con = DBManager.getInstance().connect();
+		try {
+			PreparedStatement sql = con.prepareStatement("select sum(horas.cantidad * empleado.honorarios) as costo, empleado.legajo, empleado.honorarios, tarea.id_proyecto, proyecto.nombre from tarea inner join horas on tarea.id = horas.tarea_id inner join empleado on empleado.legajo = horas.empleado_legajo inner join proyecto on proyecto.id_proyecto = tarea.id_proyecto group by empleado.legajo, tarea.id_proyecto, proyecto.nombre;");
+			ResultSet rs = sql.executeQuery();
+			int current = 0;
+			
+			Proyecto p = new Proyecto();
+			List<Empleado> l = new ArrayList<Empleado>();
+			
+			while(rs.next()) {
+				current = rs.getInt("id_proyecto");
+				if(rs.getInt("id_proyecto") != current) {
+					lista.add(p);
+					p = new Proyecto();
+					l = new ArrayList<Empleado>();	
+				}
+				
+				current = rs.getInt("id_proyecto");
+				p.setIdProyecto(rs.getInt("id_proyecto"));
+				p.setNombre(rs.getString("nombre"));
+				Empleado e = new Empleado();
+				e.setLegajo(rs.getInt("legajo"));
+				e.setHonorarios(rs.getInt("costo"));
+				l.add(e);
+			}
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+			throw new SystemException("Error en la base de datos");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e1) {
+				//no hago nada
+			}
+		}
+		return lista;
+	}
+	
+	
 	
 }
