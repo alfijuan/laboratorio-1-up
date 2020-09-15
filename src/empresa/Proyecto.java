@@ -1,21 +1,21 @@
 package empresa;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Proyecto {
 	private Integer idProyecto;
 	private String nombre;
 	private Double costo;
-	private ArrayList<Empleado> empleados;
+	private List<Empleado> empleados;
 	
 	public Proyecto() {
 	}
 	
-	public ArrayList<Empleado> getEmpleados() {
+	public List<Empleado> getEmpleados() {
 		return empleados;
 	}
 
-	public void setEmpleados(ArrayList<Empleado> empleados) {
+	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 

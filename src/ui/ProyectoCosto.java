@@ -2,13 +2,10 @@ package ui;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import bo.ProyectoBO;
-import dao.ProyectoDaoImpl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import empresa.Proyecto;
-import exceptions.SystemException;
 
 public class ProyectoCosto extends ProyectoBase {
 	

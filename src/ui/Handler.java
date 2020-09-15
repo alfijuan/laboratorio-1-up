@@ -28,6 +28,7 @@ import exceptions.tarea.TareaNotFoundException;
 import exceptions.user.UserOrPassDontExistException;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
+import ui.table.ProyectoCostoDetalladoTable;
 import ui.table.TareaTable;
 
 public class Handler {
@@ -248,6 +249,15 @@ public class Handler {
 	public void mostrarCostoProyecto() {
 		frame.cambiarPanel(new ProyectoCosto(this));
 	}
+	
+	public void mostrarCostoProyectoDetallado() {
+		try {
+			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectos(),this));
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		}
+	}
+	
 	
 	public Double calcularCostoProyecto(int id) {
 		Double costo = null;

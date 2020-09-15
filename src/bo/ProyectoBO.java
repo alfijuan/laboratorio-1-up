@@ -29,6 +29,10 @@ public class ProyectoBO {
 		}
 	}
 	
+	public List<Proyecto> obtenerCostosProyectos() throws SystemException{
+		return proyectoDao.obtenerCostosProyectos();
+	}
+	
 	public void setProyectoDao(ProyectoDAO proyectoDao) {
 		this.proyectoDao = proyectoDao;
 	}
