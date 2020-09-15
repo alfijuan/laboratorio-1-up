@@ -135,7 +135,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 			List<Empleado> empleados = null;
 			int proyectoActual = 0;
 			rs.next();
-			while(!rs.isLast() && !rs.isAfterLast()) {
+			while(!rs.isAfterLast()) {
 				proyecto = new Proyecto();
 				proyectoActual = rs.getInt("id_proyecto");
 				proyecto.setIdProyecto(rs.getInt("id_proyecto"));
