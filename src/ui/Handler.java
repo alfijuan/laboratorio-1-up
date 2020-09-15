@@ -194,6 +194,15 @@ public class Handler {
 		}
 	}
 	
+	public Boolean verificarBorradoDeTarea (int id) {
+		Boolean resultado = false;
+		try {
+			resultado = getTareaBO().validarEliminacionDeTarea(id);
+		} catch (SystemException e1) {
+			mostrarModal(e1.getMessage());
+		}
+		return resultado;
+	}
 	public void mostrarTablaHoras() {
 		try {
 			frame.cambiarPanel(new HorasTable(this.getHorasBO().obtenerHoras(), this));

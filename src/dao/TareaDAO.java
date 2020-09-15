@@ -14,4 +14,5 @@ public interface TareaDAO {
 	void editarTarea(Tarea tarea) throws SystemException, TareaNotFoundException;
 	Tarea obtenerTarea(int id) throws SystemException;
 	List<Tarea> obtenerTareas() throws SystemException;
+	Boolean verificarEliminacionTarea(int id) throws SystemException;
 }

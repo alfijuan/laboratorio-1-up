@@ -79,5 +79,15 @@ public class TareaBO {
 		this.tareaDAO = tareaDAO;
 	};
 	
+	public Boolean validarEliminacionDeTarea(int id) throws SystemException {
+		Boolean resultado = false;
+		try {
+			resultado = tareaDAO.verificarEliminacionTarea(id);
+		} catch (SystemException e) {
+			e.printStackTrace();
+			throw new SystemException(GENERIC_ERROR_BD);
+		}
+		return resultado;
+	}
 	
 }

@@ -36,10 +36,6 @@ public class TareaTable extends JPanel {
 					tarea.getIdProyecto(),
 			});
 		}
-//		for (int i = 0; i < lista.size(); i++) {
-//			this.modelo.addRow(new Object[] { lista.get(i).getId(), lista.get(i).getNombre(),
-//					lista.get(i).getDescripcion() });
-//		}
 
 		Box vertical = Box.createVerticalBox();
 		JScrollPane tableContainer = new JScrollPane(this.tabla);
@@ -64,10 +60,14 @@ public class TareaTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if (index != -1) {
-					int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "",
-							JOptionPane.OK_CANCEL_OPTION);
-					if (input == 0) {
-						handler.borrarTarea(lista.get(index).getId());
+					if (handler.verificarBorradoDeTarea(lista.get(index).getId())) {
+						int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "",
+								JOptionPane.OK_CANCEL_OPTION);
+						if (input == 0) {
+							handler.borrarTarea(lista.get(index).getId());
+						}
+					} else {
+						handler.mostrarModal("No se puede eliminar la tarea porque tiene horas asociadas");
 					}
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");
