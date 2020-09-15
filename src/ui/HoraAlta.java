@@ -17,7 +17,6 @@ public class HoraAlta extends HoraBase{
 	
 	public HoraAlta(Handler handler) {
 		super(handler);
-		setHandler(handler);
 		agregarBotones();
 	}
 	

@@ -35,7 +35,7 @@ public class TareaDaoImpl implements TareaDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al crear la tarea");
 		} finally {
 			try {
 				con.close();
@@ -67,7 +67,7 @@ public class TareaDaoImpl implements TareaDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al modificar la tarea");
 		} finally {
 			try {
 				con.close();
@@ -95,7 +95,7 @@ public class TareaDaoImpl implements TareaDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al borrar la tarea");
 		} finally {
 			try {
 				con.close();
@@ -132,7 +132,7 @@ public class TareaDaoImpl implements TareaDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener la tarea");
 		} finally {
 			try {
 				con.close();
@@ -164,7 +164,7 @@ public class TareaDaoImpl implements TareaDAO{
 				con.rollback();
 			} catch (SQLException e1) {
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener las tareas");
 		} finally {
 			try {
 				con.close();
@@ -190,7 +190,7 @@ public class TareaDaoImpl implements TareaDAO{
 				con.rollback();
 			} catch (SQLException e1) {
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al verificar la eliminacion de la tarea");
 		} finally {
 			try {
 				con.close();

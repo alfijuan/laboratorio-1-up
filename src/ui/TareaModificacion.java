@@ -20,7 +20,6 @@ public class TareaModificacion extends TareaBase {
 	
 	public TareaModificacion(Handler handler, Tarea tarea){
 		super(handler);
-		setHandler(handler);
 		setTarea(tarea);
 		agregarDatosTarea();
 		agregarBotones();
