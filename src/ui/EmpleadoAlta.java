@@ -15,7 +15,6 @@ public class EmpleadoAlta extends EmpleadoBase {
 	
 	public EmpleadoAlta(Handler handler) {
 		super(handler);
-		setHandler(handler);
 		agregarBotones();
 	}
 	

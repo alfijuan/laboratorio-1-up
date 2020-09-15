@@ -112,10 +112,8 @@ public class Handler {
 			this.empleadoBO.eliminarEmpleado(legajo);
 			mostrarModal("Empleado borrado correctamente!");
 			this.mostrarTablaEmpleado();
-		} catch (EmpleadoNotFoundException e1) {
-			this.mostrarModal(e1.getMessage());
-		} catch (SystemException e1) {
-			this.mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -123,8 +121,8 @@ public class Handler {
 		Boolean resultado = false;
 		try {
 			resultado = empleadoBO.validarEliminacionDeEmpleado(legajo);
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 		return resultado;
 	}
@@ -134,10 +132,8 @@ public class Handler {
 			empleadoBO.agregarEmpleado(empleado);
 			mostrarModal("Empleado agregado correctamente!");
 			mostrarTablaEmpleado();
-		} catch (EmpleadoAlreadyExists e1) {
-			mostrarModal(e1.getMessage());
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -146,10 +142,8 @@ public class Handler {
 			getEmpleadoBO().editarEmpleado(empleado);
 			mostrarModal("Empleado editado correctamente!");
 			mostrarTablaEmpleado();
-		} catch (EmpleadoNotFoundException e1) {
-			mostrarModal(e1.getMessage());
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -170,10 +164,8 @@ public class Handler {
 			tareaBO.agregarTarea(tarea);
 			mostrarModal("Tarea agregada correctamente!");
 			mostrarTablaTarea();
-		} catch (TareaAlreadyExists e1) {
-			mostrarModal(e1.getMessage());
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	public void mostrarEditarTarea(Tarea tarea) {
@@ -185,10 +177,8 @@ public class Handler {
 			getTareaBO().editarTarea(tarea);
 			mostrarModal("Tarea editada correctamente!");
 			mostrarTablaTarea();
-		} catch (TareaNotFoundException e1) {
-			mostrarModal(e1.getMessage());
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -197,10 +187,8 @@ public class Handler {
 			getTareaBO().borrarTarea(id);
 			mostrarModal("Tarea borrada correctamente!");
 			mostrarTablaTarea();
-		} catch (TareaNotFoundException e1) {
-			mostrarModal(e1.getMessage());
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -244,10 +232,8 @@ public class Handler {
 			getHorasBO().editarHoras(hora);
 			mostrarModal("Registro editado correctamente!");
 			mostrarTablaHoras();
-		} catch (SystemException e) {
-			mostrarModal(e.getMessage());
-		} catch (HoraNotFoundException e) {
-			mostrarModal(e.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -256,10 +242,8 @@ public class Handler {
 			getHorasBO().eliminarHoras(idHora);
 			mostrarModal("Registro borrado correctamente!");
 			mostrarTablaHoras();
-		} catch (SystemException e) {
-			mostrarModal(e.getMessage());
-		} catch (HoraNotFoundException e) {
-			mostrarModal(e.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	
@@ -280,10 +264,8 @@ public class Handler {
 		Double costo = null;
 		try {
 			costo = proyectoBO.obtenerCostosById(id).getCosto();
-		} catch (SystemException e) {
-			mostrarModal(e.getMessage());
-		} catch (ProyectoNotFoundException e) {
-			mostrarModal(e.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 		return costo;
 	}
@@ -293,12 +275,11 @@ public class Handler {
 			List<Integer> resultados = getHorasBO().obtenerHoras(legajo);
 			if(resultados.size() > 0 ) {
 				mostrarModal("Al empleado se le deben $ " + Integer.toString(resultados.get(1)) + " correspondientes a " + Integer.toString(resultados.get(0)) + " horas.");
-			}else {
+			} else {
 				mostrarModal("El empleado no registra horas cargadas");
 			}
-			
-		} catch (SystemException e) {
-			mostrarModal(e.getMessage());
+		} catch (Exception e) {
+			this.mostrarModal(e.getMessage());
 		}
 	}
 	

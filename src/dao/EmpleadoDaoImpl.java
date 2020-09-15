@@ -37,7 +37,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos insertar el empleado");
 		} finally {
 			try {
 				con.close();
@@ -70,7 +70,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al modificar el usuario.");
 		} finally {
 			try {
 				con.close();
@@ -98,7 +98,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al borrar el usuario");
 		} finally {
 			try {
 				con.close();
@@ -137,7 +137,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al intentar obtener los empleados.");
 		} finally {
 			try {
 				con.close();
@@ -171,7 +171,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				con.rollback();
 			} catch (SQLException e1) {
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al intentar obtener los empleados.");
 		} finally {
 			try {
 				con.close();
@@ -197,7 +197,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 				con.rollback();
 			} catch (SQLException e1) {
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al verificar la eliminacion del empleado.");
 		} finally {
 			try {
 				con.close();

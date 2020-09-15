@@ -17,7 +17,6 @@ public class ProyectoCosto extends ProyectoBase {
 	
 	public ProyectoCosto(Handler handler) {
 		super(handler);
-		setHandler(handler);
 		agregarDatosProyecto();
 		agregarBotones();
 	}

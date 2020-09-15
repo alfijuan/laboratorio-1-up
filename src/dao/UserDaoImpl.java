@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new UserOrPassDontExistException("Error en la base de datos");
+			throw new UserOrPassDontExistException("Error en la base de datos al loguear un usuario.");
 		} finally {
 			try {
 				con.close();

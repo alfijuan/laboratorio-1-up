@@ -33,7 +33,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 				con.rollback();
 			} catch (SQLException e1) {
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener los proyectos");
 		} finally {
 			try {
 				con.close();
@@ -67,7 +67,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener el proyecto");
 		} finally {
 			try {
 				con.close();
@@ -111,7 +111,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al intentar calcular el costo del proyecto");
 		} finally {
 			try {
 				con.close();
@@ -161,7 +161,7 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 				con.rollback();
 			} catch (SQLException e1) {
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al intentar calcular el costo de los proyectos.");
 		} finally {
 			try {
 				con.close();

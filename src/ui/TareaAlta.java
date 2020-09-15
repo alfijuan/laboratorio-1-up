@@ -15,7 +15,6 @@ public class TareaAlta extends TareaBase {
 	
 	public TareaAlta(Handler handler) {
 		super(handler);
-		setHandler(handler);
 		agregarBotones();
 	}
 	

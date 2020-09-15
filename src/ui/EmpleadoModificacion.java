@@ -16,7 +16,6 @@ public class EmpleadoModificacion extends EmpleadoBase {
 	
 	public EmpleadoModificacion(Handler handler, Empleado emp){
 		super(handler);
-		setHandler(handler);
 		setEmpleado(emp);
 		agregarDatosEmpleado();
 		agregarBotones();

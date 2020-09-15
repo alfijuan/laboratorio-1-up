@@ -36,7 +36,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al insertar la hora.");
 		} finally {
 			try {
 				con.close();
@@ -64,7 +64,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al borrar la hora");
 		} finally {
 			try {
 				con.close();
@@ -98,7 +98,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al modificar la hora");
 		} finally {
 			try {
 				con.close();
@@ -132,7 +132,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				//no hago nada
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener las horas");
 		} finally {
 			try {
 				con.close();
@@ -162,7 +162,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				//no hago nada
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener las horas");
 		} finally {
 			try {
 				con.close();
@@ -203,7 +203,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				//no hago nada
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener las horas");
 		} finally {
 			try {
 				con.close();
@@ -238,7 +238,7 @@ public class HorasDaoImpl implements HorasDAO{
 			} catch (SQLException e1) {
 				//no hago nada
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new SystemException("Error en la base de datos al obtener las horas");
 		} finally {
 			try {
 				con.close();

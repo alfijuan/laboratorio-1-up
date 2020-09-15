@@ -19,7 +19,6 @@ public class HoraModificacion extends HoraBase{
 	
 	public HoraModificacion(Handler handler, Hora hora){
 		super(handler);
-		setHandler(handler);
 		setHoraSeleccionada(hora);
 		agregarDatosHora();
 		agregarBotones();
