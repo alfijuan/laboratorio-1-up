@@ -31,8 +31,6 @@ public class EmpleadoTable extends JPanel {
 		this.modelo.addColumn("DNI");
 		this.modelo.addColumn("Direccion");
 		this.modelo.addColumn("Honorarios");
-		this.modelo.addColumn("Username");
-		this.modelo.addColumn("Password");
 		
 		columnModel.getColumn(0).setPreferredWidth(500);
 		columnModel.getColumn(1).setPreferredWidth(500);
@@ -40,20 +38,17 @@ public class EmpleadoTable extends JPanel {
 		columnModel.getColumn(3).setPreferredWidth(500);
 		columnModel.getColumn(4).setPreferredWidth(500);
 		columnModel.getColumn(5).setPreferredWidth(500);
-		columnModel.getColumn(6).setPreferredWidth(500);
-		columnModel.getColumn(7).setPreferredWidth(500);
 		
-		for (int i = 0; i < lista.size(); i++) {
+		for(Empleado empleado : lista) {
 			this.modelo.addRow(new Object[] {
-				lista.get(i).getLegajo(),
-				lista.get(i).getNombre(),
-				lista.get(i).getApellido(),
-				lista.get(i).getDni(),
-				lista.get(i).getDireccion(),
-				lista.get(i).getHonorarios(),
-				lista.get(i).getNombreUsuario(),
-				lista.get(i).getPassword()
+				empleado.getLegajo(),
+				empleado.getNombre(),
+				empleado.getApellido(),
+				empleado.getDni(),
+				empleado.getDireccion(),
+				empleado.getHonorarios(),
 			});
+			
 		}
 		
 		Box vertical = Box.createVerticalBox();
