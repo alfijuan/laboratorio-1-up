@@ -37,12 +37,16 @@ public class TareaBO {
 		}
 	}
 	
-	public List<Tarea> obtenerTareas() throws SystemException {
-		return tareaDAO.obtenerTareas();
+	public List<Tarea> obtenerTareas()  throws SystemException, TareaNotFoundException{
+		try {
+			return tareaDAO.obtenerTareas();
+		} catch (SystemException e) {
+			throw new TareaNotFoundException("No existen registros de tareas");
+		}
 	}
 	
 	public Tarea obtenerTarea(int id) throws SystemException{
-		return tareaDAO.obtenerTarea(id);
+			return tareaDAO.obtenerTarea(id);
 	}
 	
 	public void setTareaDAO(TareaDAO tareaDAO) {

@@ -10,6 +10,7 @@ import java.util.List;
 import basico.jdbc.DBManager;
 import empresa.Tarea;
 import exceptions.SystemException;
+import exceptions.tarea.TareaNotFoundException;
 
 
 public class TareaDaoImpl implements TareaDAO{

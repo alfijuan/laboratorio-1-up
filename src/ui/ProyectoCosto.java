@@ -40,27 +40,23 @@ public class ProyectoCosto extends ProyectoBase {
 	protected Box agregarBotones() {
 		Box botonera = Box.createHorizontalBox();
 		JButton CalcularBtn = new JButton("Calcular");
-        JButton SalirBtn = new JButton("Volver");
         
         botonera.add(CalcularBtn);
         botonera.add(Box.createHorizontalGlue());
         
-        botonera.add(SalirBtn);
         botonera.add(Box.createHorizontalGlue());
         
-        SalirBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//TODO pendiente
-			}
-		});
-		
         CalcularBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-        		
-				String proyecto = (String)getComboProyecto().getSelectedItem();
-				costo.setText("$" + String.valueOf(getHandler().calcularCostoProyecto(Integer.parseInt(proyecto.split("-")[0]))));
+				if(getComboProyecto().getSelectedIndex() != 0) {
+					String proyecto = (String)getComboProyecto().getSelectedItem();
+					costo.setText("$" + String.valueOf(getHandler().calcularCostoProyecto(Integer.parseInt(proyecto.split("-")[0]))));
+				}
+				else {
+					getHandler().mostrarModal("Debe seleccionar una proyecto");
+				}
+				
 			}
 		});
 		return botonera;

@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import basico.jdbc.DBManager;
 import empresa.User;
-import exceptions.SystemException;
+import exceptions.user.UserOrPassDontExistException;
 
 public class UserDaoImpl implements UserDAO{
 	
 
 	@Override
-	public Integer loginUser(User user) throws SystemException {
+	public Integer loginUser(User user) throws UserOrPassDontExistException {
 		Connection con = DBManager.getInstance().connect();
 		Integer resultado = 0;
 		try {
@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos");
+			throw new UserOrPassDontExistException("Error en la base de datos");
 		} finally {
 			try {
 				con.close();

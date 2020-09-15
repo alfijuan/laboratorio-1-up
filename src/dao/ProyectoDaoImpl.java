@@ -102,7 +102,6 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 				costo += rs.getDouble("costo");
 			}
 			
-			System.out.println("COSTO: " + costo);
 			proyecto = new Proyecto();
 			proyecto.setIdProyecto(id);
 			proyecto.setCosto(costo);

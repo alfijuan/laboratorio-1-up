@@ -44,13 +44,21 @@ public class HoraAlta extends HoraBase{
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Hora hora= new Hora();
-        		hora.setLegajoEmpleado((Integer.parseInt((String)getComboLegajo().getSelectedItem())));
-        		hora.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
-        		hora.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
-        		hora.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
-				getHandler().agregarHora(hora);
-				
+				if(getComboLegajo().getSelectedIndex() != 0) {
+					if(getComboTarea().getSelectedIndex() != 0) {
+						Hora hora= new Hora();
+		        		hora.setLegajoEmpleado((Integer.parseInt((String)getComboLegajo().getSelectedItem())));
+		        		hora.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
+		        		hora.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
+		        		hora.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
+						getHandler().agregarHora(hora);
+					} else {
+						getHandler().mostrarModal("Debe seleccionar una tarea");
+					}
+				} else {
+					getHandler().mostrarModal("Debe seleccionar un legajo");
+				}
+					
 			}
 		});
 		return botonera;

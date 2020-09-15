@@ -29,7 +29,7 @@ public class HoraModificacion extends HoraBase{
 		getComboLegajo().setSelectedItem(String.valueOf(horaSeleccionada.getLegajoEmpleado()));
 		getComboTarea().setSelectedItem((String.valueOf(horaSeleccionada.getIdTarea())));
 		getCantidad().getField().setText(String.valueOf((horaSeleccionada.getCantidad())));
-		getFecha().getField().setText(String.valueOf(horaSeleccionada.getFecha()));
+		getFecha().getField().setText(String.valueOf(horaSeleccionada.getFecha()).replace("-", ""));
 		
 	}
 	

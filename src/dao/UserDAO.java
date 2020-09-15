@@ -1,9 +1,9 @@
 package dao;
 
 import empresa.User;
-import exceptions.SystemException;
+import exceptions.user.UserOrPassDontExistException;
 
 public interface UserDAO {
 	
-	Integer loginUser(User user) throws SystemException;
+	Integer loginUser(User user) throws UserOrPassDontExistException;
 }

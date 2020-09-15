@@ -2,7 +2,6 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import bo.EmpleadoBO;
 import bo.HorasBO;
@@ -22,7 +21,6 @@ import empresa.User;
 import exceptions.SystemException;
 import exceptions.empleado.EmpleadoAlreadyExists;
 import exceptions.empleado.EmpleadoNotFoundException;
-import exceptions.horas.HoraAlreadyExists;
 import exceptions.horas.HoraNotFoundException;
 import exceptions.proyecto.ProyectoNotFoundException;
 import exceptions.tarea.TareaAlreadyExists;
@@ -154,7 +152,9 @@ public class Handler {
 		try {
 			frame.cambiarPanel(new TareaTable(this.getTareaBO().obtenerTareas(), this));			
 		} catch (SystemException e1) {
-			this.mostrarModal(e1.getMessage());
+			mostrarModal(e1.getMessage());
+		} catch (TareaNotFoundException e) {
+			mostrarModal(e.getMessage());
 		}
 	}
 	public void agregarTarea(Tarea tarea) {
@@ -212,8 +212,6 @@ public class Handler {
 		try {
 			horasBO.cargarHoras(hora);
 			mostrarModal("Hora cargada correctamente!");
-		} catch (HoraAlreadyExists e) {
-			mostrarModal(e.getMessage());
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
 		}
@@ -283,11 +281,15 @@ public class Handler {
 	
 	public List<Tarea> obtenerTareas(){
 		List<Tarea> tareas = new ArrayList<Tarea>();
-		try {
-			 tareas = getTareaBO().obtenerTareas();
+	
+		 try {
+			tareas = getTareaBO().obtenerTareas();
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
+		} catch (TareaNotFoundException e) {
+			mostrarModal(e.getMessage());
 		}
+	
 		return tareas;
 	}
 	
