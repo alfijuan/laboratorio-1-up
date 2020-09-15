@@ -9,13 +9,8 @@ import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import bo.EmpleadoBO;
-import bo.TareaBO;
-import dao.EmpleadoDaoImpl;
-import dao.TareaDaoImpl;
 import empresa.Empleado;
 import empresa.Tarea;
-import exceptions.SystemException;
 import ui.containers.InputContainer;
 
 public abstract class HoraBase extends JPanel{
@@ -43,7 +38,6 @@ public abstract class HoraBase extends JPanel{
 		this.empleados = empleados;
 	}
 
-
 	public HoraBase(Handler handler){
 		setHandler(handler);
 		createUI();
@@ -59,7 +53,7 @@ public abstract class HoraBase extends JPanel{
 		titulo = new JLabel(setTitulo(), JLabel.LEFT);
 		
 		empleados = new ArrayList<Empleado>();
-		setEmpleados(obtenerEmpleados());
+		setEmpleados(getHandler().obtenerEmpleados());
 		
     	comboLegajo = new JComboBox<String>();
     	comboLegajo.addItem("Seleccionar legajo");
@@ -80,7 +74,7 @@ public abstract class HoraBase extends JPanel{
 		});
         
 
-        setTareas(obtenerTareas());
+        setTareas(getHandler().obtenerTareas());
         comboTarea = new JComboBox<String>();
         comboTarea.addItem("Seleccionar una tarea");
     	for(Tarea tarea : tareas) {
@@ -144,33 +138,6 @@ public abstract class HoraBase extends JPanel{
 	 
 	protected abstract String setTitulo();
 	
-	private List<Empleado> obtenerEmpleados(){
-		
-		EmpleadoBO empleadoBO = new EmpleadoBO();
-		empleadoBO.setEmpDao(new EmpleadoDaoImpl());
-		List<Empleado> empleados = new ArrayList<Empleado>();
-		try {
-			 empleados = empleadoBO.obtenerEmpleados();
-		} catch (SystemException e1) {
-			e1.printStackTrace();
-		}
-		
-		return empleados;
-	}
-	
-	private List<Tarea> obtenerTareas(){
-		
-		TareaBO tareaBO = new TareaBO();
-		tareaBO.setTareaDAO(new TareaDaoImpl());
-		List<Tarea> tareas = new ArrayList<Tarea>();
-		try {
-			 tareas = tareaBO.obtenerTareas();
-		} catch (SystemException e1) {
-			e1.printStackTrace();
-		}
-		
-		return tareas;
-	}
 	
 	private String getNombreEmpleadoByLegajo(List<Empleado> empleados, Integer legajo) {
 		String nombre = "";

@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import dao.TareaDaoImpl;
 import dao.UserDaoImpl;
 import empresa.Empleado;
 import empresa.Hora;
+import empresa.Proyecto;
 import empresa.Tarea;
 import empresa.User;
 import exceptions.SystemException;
@@ -71,7 +73,6 @@ public class Handler {
 		loginFrame.setVisible(false);
         frame.setVisible(true);
 	}
-
 		
 	public void loginUsuario(User user) {
 		try {
@@ -260,6 +261,37 @@ public class Handler {
 		} catch (SystemException e) {
 			mostrarModal(e.getMessage());
 		}
+	}
+	
+	public List<Tarea> obtenerTareas(){
+		List<Tarea> tareas = new ArrayList<Tarea>();
+		try {
+			 tareas = getTareaBO().obtenerTareas();
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		}
+		return tareas;
+	}
+	
+	public List<Empleado> obtenerEmpleados(){
+		List<Empleado> empleados = new ArrayList<Empleado>();
+		try {
+			 empleados = getEmpleadoBO().obtenerEmpleados();
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		}
+		
+		return empleados;
+	}
+	
+	public List<Proyecto> obtenerProyectos(){
+		List<Proyecto> proyectos = new ArrayList<Proyecto>();
+		try {
+			 proyectos = getProyectoBO().obtenerProyectos();
+		} catch (SystemException e) {
+			mostrarModal(e.getMessage());
+		}
+		return proyectos;
 	}
 	
 	

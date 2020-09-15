@@ -1,12 +1,5 @@
 package ui.containers;
 
-import java.util.List;
-
-import javax.swing.Box;
-import javax.swing.JComboBox;
-
-import empresa.Empleado;
-
 public class SelectCointainer<E> {
 	/*
 	private JComboBox jCombo;

@@ -8,10 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import bo.ProyectoBO;
-import dao.ProyectoDaoImpl;
 import empresa.Proyecto;
-import exceptions.SystemException;
 
 public abstract class ProyectoBase extends JPanel {
 	
@@ -38,7 +35,7 @@ public abstract class ProyectoBase extends JPanel {
 		Box inLineProyecto = Box.createHorizontalBox();
         
 		proyectos = new ArrayList<Proyecto>();
-		setProyectos(obtenerProyectos());
+		setProyectos(getHandler().obtenerProyectos());
 		
 		comboProyecto = new JComboBox<String>();
 		comboProyecto.addItem("Seleccionar proyecto");
@@ -58,21 +55,6 @@ public abstract class ProyectoBase extends JPanel {
         add(vertical);
 	}
 	
-	
-	
-	protected static List<Proyecto> obtenerProyectos(){
-		
-		ProyectoBO proyectoBO = new ProyectoBO();
-		proyectoBO.setProyectoDao(new ProyectoDaoImpl());
-		List<Proyecto> proyectos = new ArrayList<Proyecto>();
-		try {
-			 proyectos = proyectoBO.obtenerProyectos();
-		} catch (SystemException e1) {
-			e1.printStackTrace();
-		}
-		
-		return proyectos;
-	}
 
 	public Handler getHandler() {
 		return handler;

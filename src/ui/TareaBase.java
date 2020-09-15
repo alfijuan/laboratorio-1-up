@@ -8,13 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import bo.EmpleadoBO;
-import bo.ProyectoBO;
-import dao.EmpleadoDaoImpl;
-import dao.ProyectoDaoImpl;
-import empresa.Empleado;
 import empresa.Proyecto;
-import exceptions.SystemException;
 import ui.containers.InputContainer;
 
 public abstract class TareaBase extends JPanel{
@@ -49,7 +43,7 @@ public abstract class TareaBase extends JPanel{
 		description = new InputContainer("Descripcion", 30);
 		
 		proyectos = new ArrayList<Proyecto>();
-		setProyectos(ProyectoBase.obtenerProyectos());
+		setProyectos(getHandler().obtenerProyectos());
 		
 		comboProyecto = new JComboBox<String>();
 		comboProyecto.addItem("Seleccionar proyecto");
