@@ -6,31 +6,23 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import empresa.Proyecto;
 
-public abstract class ProyectoBase extends JPanel {
+public abstract class ProyectoBase extends Base {
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8254079957857169917L;
-	private static final int HEIGHT = 20; 
 	
 	private JLabel comboProyectoLabel;
 	private JComboBox<String> comboProyecto;
 	private List<Proyecto> proyectos;
 	
-	private Handler handler;
-	
 	public ProyectoBase(Handler handler){
-		setHandler(handler);
-		createUI();
+		super(handler);
 	}
 	
-	private void createUI(){
+	@Override
+	public void initUI(){
 		Box vertical = Box.createVerticalBox();
 		Box inLineProyecto = Box.createHorizontalBox();
         
@@ -47,21 +39,12 @@ public abstract class ProyectoBase extends JPanel {
     	inLineProyecto.add(comboProyectoLabel);
     	inLineProyecto.add(comboProyecto);
     	vertical.add(inLineProyecto);
-    	vertical.add(Box.createVerticalStrut(HEIGHT));
+    	vertical.add(Box.createVerticalStrut(getHeight()));
     	
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());
         
         add(vertical);
-	}
-	
-
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
 	}
 	
 
@@ -80,7 +63,5 @@ public abstract class ProyectoBase extends JPanel {
 	public void setProyectos(List<Proyecto> proyectos) {
 		this.proyectos = proyectos;
 	}
-
-	protected abstract Box agregarBotones();
 
 }

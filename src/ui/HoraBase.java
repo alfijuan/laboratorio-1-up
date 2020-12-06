@@ -8,12 +8,13 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import empresa.Empleado;
+import empresa.Hora;
 import empresa.Tarea;
 import ui.containers.InputContainer;
+import utils.formatUtils;
 
-public abstract class HoraBase extends JPanel{
+public abstract class HoraBase extends Base {
 	
 	private static final long serialVersionUID = 1L;
 	private static final int HEIGHT = 20; 
@@ -25,7 +26,6 @@ public abstract class HoraBase extends JPanel{
 	private InputContainer idTarea;
 	private InputContainer cantidad;
 	private InputContainer fecha;
-	private Handler handler;
 	private List<Empleado> empleados;
 	private List<Tarea> tareas;
 	private JLabel comboTareaLabel;
@@ -34,16 +34,12 @@ public abstract class HoraBase extends JPanel{
 	private JLabel descripcionTarea;
 	private JLabel proyectotareaLabel;
 	
-	public void setEmpleados(List<Empleado> empleados) {
-		this.empleados = empleados;
-	}
 
 	public HoraBase(Handler handler){
-		setHandler(handler);
-		createUI();
+		super(handler);
 	}
 	
-	private void createUI() {
+	public void initUI(){
 		Box vertical = Box.createVerticalBox();
 		Box inLineName = Box.createHorizontalBox();
 		Box inLineLegajo = Box.createHorizontalBox();
@@ -134,10 +130,24 @@ public abstract class HoraBase extends JPanel{
         add(vertical);
 	}
 	
-	protected abstract Box agregarBotones();
-	 
-	protected abstract String setTitulo();
+	@Override
+	public Hora panelToObject() {
+		Hora hora = new Hora();
+		hora.setLegajoEmpleado((Integer.parseInt((String)getComboLegajo().getSelectedItem())));
+		hora.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
+		hora.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
+		hora.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
+		return hora;
+	}
 	
+	@Override
+	public void objectToPanel(Object data) { 
+		Hora hora = (Hora) data;
+		getComboLegajo().setSelectedItem(String.valueOf(hora.getLegajoEmpleado()));
+		getComboTarea().setSelectedItem((String.valueOf(hora.getIdTarea())));
+		getCantidad().getField().setText(String.valueOf(hora.getCantidad()));
+		getFecha().getField().setText(String.valueOf(hora.getFecha()).replace("-", ""));
+	}
 	
 	private String getNombreEmpleadoByLegajo(List<Empleado> empleados, Integer legajo) {
 		String nombre = "";
@@ -158,6 +168,10 @@ public abstract class HoraBase extends JPanel{
 			}
 		
 		return descripcion;
+	}
+	
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
 	}
 	
 	public JLabel getTitulo() {
@@ -206,14 +220,6 @@ public abstract class HoraBase extends JPanel{
 
 	public void setFecha(InputContainer fecha) {
 		this.fecha = fecha;
-	}
-
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
 	}
 
 	public JLabel getComboLegajoLabel() {

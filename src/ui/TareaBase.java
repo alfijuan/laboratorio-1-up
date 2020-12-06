@@ -6,16 +6,16 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import empresa.Proyecto;
+import empresa.Tarea;
 import ui.containers.InputContainer;
 
-public abstract class TareaBase extends JPanel{
+public abstract class TareaBase extends Base {
 	
 	private static final long serialVersionUID = 2756342206651835302L;
 	private static final int HEIGHT = 20; 
-	private Handler handler;
+	private String project;
 	private JLabel titulo;
 	private InputContainer id;
 	private InputContainer nombre;
@@ -26,11 +26,11 @@ public abstract class TareaBase extends JPanel{
 	private List<Proyecto> proyectos;
 	
 	public TareaBase(Handler handler){
-		setHandler(handler);
-		createUI();
+		super(handler);
 	}
 	
-	private void createUI(){
+	@Override
+	public void initUI(){
 		Box vertical = Box.createVerticalBox();
 		Box inLineProyecto = Box.createHorizontalBox();
 		
@@ -77,9 +77,26 @@ public abstract class TareaBase extends JPanel{
 		
 	}
 	
-	protected abstract Box agregarBotones();
+	@Override
+	public Tarea panelToObject() {
+		Tarea tarea = new Tarea(
+			Integer.parseInt(getId().getField().getText()),	
+			getNombre().getField().getText(),
+			getDescription().getField().getText(),
+			Integer.parseInt(getProject().split("-")[0])
+		);
+		return tarea;
+	}
 	
-	protected abstract String setTitulo();
+	@Override
+	public void objectToPanel(Object data) {
+		Tarea tarea = (Tarea) data;
+		getNombre().getField().setText(tarea.getNombre());
+		getId().getField().setText(Integer.toString(tarea.getId()));
+		getId().getField().setEnabled(false);
+		getDescription().getField().setText(tarea.getDescripcion());
+		getComboProyecto().setSelectedItem(String.valueOf(tarea.getIdProyecto()));
+	}
 	
 	public InputContainer getIdProyecto() {
 		return idProyecto;
@@ -87,14 +104,6 @@ public abstract class TareaBase extends JPanel{
 
 	public void setIdProyecto(InputContainer idProyecto) {
 		this.idProyecto = idProyecto;
-	}
-
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
 	}
 
 	public InputContainer getId() {
@@ -150,6 +159,14 @@ public abstract class TareaBase extends JPanel{
 
 	public void setTitulo(JLabel titulo) {
 		this.titulo = titulo;
+	}
+	
+	public String getProject() {
+		return project;
+	}
+	
+	public void setProject(String project) {
+		this.project = project;
 	}
 
 }

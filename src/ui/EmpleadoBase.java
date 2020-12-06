@@ -2,14 +2,13 @@ package ui;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import empresa.Empleado;
 import ui.containers.InputContainer;
 
-public abstract class EmpleadoBase extends JPanel {
+public abstract class EmpleadoBase extends Base {
 	
 	private static final long serialVersionUID = 1L;
-	private static final int HEIGHT = 20; 
 	private JLabel titulo;
 	private InputContainer nombre;
 	private InputContainer apellido;
@@ -17,14 +16,14 @@ public abstract class EmpleadoBase extends JPanel {
 	private InputContainer dni;
 	private InputContainer legajo;
 	private InputContainer honorarios;
-	private Handler handler;
 	
-	public EmpleadoBase(Handler handler){
-		setHandler(handler);
-		createUI();
+	public EmpleadoBase(Handler handler) {
+		super(handler);
+		initUI();
 	}
 	
-	private void createUI(){
+	@Override
+	protected void initUI(){
 		Box vertical = Box.createVerticalBox();
 		
 		titulo = new JLabel(setTitulo(), JLabel.LEFT);
@@ -35,22 +34,22 @@ public abstract class EmpleadoBase extends JPanel {
         honorarios = new InputContainer("Honorarios", 8);
         
         vertical.add(titulo);
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeight()));
         
         vertical.add(nombre.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeight()));
         
         vertical.add(apellido.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeight()));
         
         vertical.add(dni.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeight()));
         
         vertical.add(direccion.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeight()));
         
         vertical.add(honorarios.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeight()));
         
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());
@@ -58,17 +57,28 @@ public abstract class EmpleadoBase extends JPanel {
         add(vertical);
 	}
 	
-	protected abstract Box agregarBotones();
-	
-	protected abstract String setTitulo();
-	
-	public Handler getHandler() {
-		return handler;
+	@Override
+	public Empleado panelToObject() {
+		Empleado empleado = new Empleado();
+		empleado.setDni(Integer.parseInt(getDni().getField().getText()));
+		empleado.setNombre(getNombre().getField().getText());
+		empleado.setApellido(getApellido().getField().getText());
+		empleado.setDireccion(getDireccion().getField().getText());
+		empleado.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));
+		return empleado;
 	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
+	
+	@Override
+	public void objectToPanel(Object data) { 
+		Empleado empleado = (Empleado) data;
+		getNombre().getField().setText(empleado.getNombre());
+		getApellido().getField().setText(empleado.getApellido());
+		getDni().getField().setText(Integer.toString(empleado.getDni()));
+		getDni().getField().setEnabled(false);
+		getDireccion().getField().setText(empleado.getDireccion());
+		getHonorarios().getField().setText(Float.toString(empleado.getHonorarios()));
 	}
+	
 	
 	public InputContainer getNombre() {
 		return nombre;

@@ -11,26 +11,15 @@ import utils.formatUtils;
 
 public class HoraModificacion extends HoraBase{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 623742814211179061L;
 	private Hora horaSeleccionada;
 	
 	public HoraModificacion(Handler handler, Hora hora){
 		super(handler);
 		setHoraSeleccionada(hora);
-		agregarDatosHora();
-		agregarBotones();
+		objectToPanel(hora);
 	}
 	
-	private void agregarDatosHora(){
-		getComboLegajo().setSelectedItem(String.valueOf(horaSeleccionada.getLegajoEmpleado()));
-		getComboTarea().setSelectedItem((String.valueOf(horaSeleccionada.getIdTarea())));
-		getCantidad().getField().setText(String.valueOf((horaSeleccionada.getCantidad())));
-		getFecha().getField().setText(String.valueOf(horaSeleccionada.getFecha()).replace("-", ""));
-		
-	}
 	
 	@Override
 	protected Box agregarBotones() {

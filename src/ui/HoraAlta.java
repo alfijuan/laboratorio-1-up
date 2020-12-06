@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import empresa.Hora;
-import utils.formatUtils;
 
 public class HoraAlta extends HoraBase{
 
@@ -17,7 +15,6 @@ public class HoraAlta extends HoraBase{
 	
 	public HoraAlta(Handler handler) {
 		super(handler);
-		agregarBotones();
 	}
 	
 	
@@ -45,12 +42,7 @@ public class HoraAlta extends HoraBase{
 			public void actionPerformed(ActionEvent e) {
 				if(getComboLegajo().getSelectedIndex() != 0) {
 					if(getComboTarea().getSelectedIndex() != 0) {
-						Hora hora= new Hora();
-		        		hora.setLegajoEmpleado((Integer.parseInt((String)getComboLegajo().getSelectedItem())));
-		        		hora.setIdTarea((Integer.parseInt((String)getComboTarea().getSelectedItem())));
-		        		hora.setCantidad(Integer.parseInt(getCantidad().getField().getText()));
-		        		hora.setFecha(formatUtils.formatDate(getFecha().getField().getText()));
-						getHandler().agregarHora(hora);
+						getHandler().agregarHora(panelToObject());
 					} else {
 						getHandler().mostrarModal("Debe seleccionar una tarea");
 					}

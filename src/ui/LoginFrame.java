@@ -7,16 +7,16 @@ import javax.swing.JMenuItem;
 
 import ui.containers.SalirListener;
 
-public class LoginFrame extends FrameBase{
+public class LoginFrame extends FrameBase {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5551627370502464343L;
 
-	public LoginFrame(String titulo, Handler handler) {
-		super(titulo, handler);
+	public LoginFrame(Handler handler) {
+		super(handler);
 		initUI();
+		JMenuBar menuBar = new JMenuBar();
+		agregarFuncionesMenu(menuBar);
+		setJMenuBar(menuBar);
 	}
 
 	public void initUI() {
@@ -34,5 +34,10 @@ public class LoginFrame extends FrameBase{
 		});
         menuArchivo.add(salir);
 		
+	}
+	
+	@Override
+	protected String setTitulo() {
+		return "Login";
 	}
 }

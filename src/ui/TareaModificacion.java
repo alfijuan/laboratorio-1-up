@@ -11,27 +11,13 @@ import empresa.Tarea;
 
 public class TareaModificacion extends TareaBase {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5535114194045009918L;
 	private Tarea current;
 	
 	public TareaModificacion(Handler handler, Tarea tarea){
 		super(handler);
 		setTarea(tarea);
-		agregarDatosTarea();
-		agregarBotones();
-	}
-	
-	private void agregarDatosTarea(){
-		getNombre().getField().setText(getTarea().getNombre());
-		getId().getField().setText(Integer.toString(getTarea().getId()));
-		getId().getField().setEnabled(false);
-		getDescription().getField().setText(getTarea().getDescripcion());
-		getComboProyecto().setSelectedItem(String.valueOf(getTarea().getIdProyecto()));
-		
+		objectToPanel(tarea);
 	}
 	
 	protected Box agregarBotones() {

@@ -10,16 +10,16 @@ import javax.swing.JMenuItem;
 
 import ui.containers.SalirListener;
 
-public class MiFrame extends FrameBase{
-	/**
-	 * 
-	 */
+public class MiFrame extends FrameBase {
+
 	private static final long serialVersionUID = -221347292852008772L;
 
-	public MiFrame(String titulo, Handler handler) {
-		super(titulo, handler);
-		
+	public MiFrame(Handler handler) {
+		super(handler);
 		initUI();
+		JMenuBar menuBar = new JMenuBar();
+		agregarFuncionesMenu(menuBar);
+		setJMenuBar(menuBar);
 	}
 	
 	public void initUI() {
@@ -28,7 +28,6 @@ public class MiFrame extends FrameBase{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	@Override
 	public void agregarFuncionesMenu(JMenuBar menuBar) {
 		JMenu menuEmpleados = new JMenu("Empleados");
 		JMenu menuTareas = new JMenu("Tareas");
@@ -119,6 +118,11 @@ public class MiFrame extends FrameBase{
 		});
         menuProyecto.add(item2Proyecto);
 		
+	}
+	
+	@Override
+	protected String setTitulo() {
+		return "Mi frame";
 	}
 
 }

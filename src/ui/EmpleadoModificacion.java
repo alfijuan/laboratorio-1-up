@@ -17,19 +17,10 @@ public class EmpleadoModificacion extends EmpleadoBase {
 	public EmpleadoModificacion(Handler handler, Empleado emp){
 		super(handler);
 		setEmpleado(emp);
-		agregarDatosEmpleado();
-		agregarBotones();
+		objectToPanel(emp);
 	}
 	
-	private void agregarDatosEmpleado(){
-		getNombre().getField().setText(getEmpleado().getNombre());
-		getApellido().getField().setText(getEmpleado().getApellido());
-		getDni().getField().setText(Integer.toString(getEmpleado().getDni()));
-		getDni().getField().setEnabled(false);
-		getDireccion().getField().setText(getEmpleado().getDireccion());
-		getHonorarios().getField().setText(Float.toString(getEmpleado().getHonorarios()));
-	}
-	
+	@Override
 	protected Box agregarBotones() {
 		Box botonera = Box.createHorizontalBox();
 		JButton OKBtn = new JButton("OK");

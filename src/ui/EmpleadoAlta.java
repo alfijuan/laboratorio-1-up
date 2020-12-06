@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 
-import empresa.Empleado;
-
 public class EmpleadoAlta extends EmpleadoBase {
 	
 	private static final long serialVersionUID = 1L;
@@ -18,6 +16,7 @@ public class EmpleadoAlta extends EmpleadoBase {
 		agregarBotones();
 	}
 	
+	@Override
 	protected Box agregarBotones() {
 		Box botonera = Box.createHorizontalBox();
 		JButton OKBtn = new JButton("OK");
@@ -39,13 +38,7 @@ public class EmpleadoAlta extends EmpleadoBase {
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-        		Empleado empleado = new Empleado();
-        		empleado.setDni(Integer.parseInt(getDni().getField().getText()));
-				empleado.setNombre(getNombre().getField().getText());
-				empleado.setApellido(getApellido().getField().getText());
-				empleado.setDireccion(getDireccion().getField().getText());
-				empleado.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));
-				getHandler().agregarEmpleado(empleado);
+				getHandler().agregarEmpleado(panelToObject());
 			}
 		});
 		return botonera;

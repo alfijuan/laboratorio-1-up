@@ -19,12 +19,6 @@ import empresa.Proyecto;
 import empresa.Tarea;
 import empresa.User;
 import exceptions.SystemException;
-import exceptions.empleado.EmpleadoAlreadyExists;
-import exceptions.empleado.EmpleadoNotFoundException;
-import exceptions.horas.HoraNotFoundException;
-import exceptions.proyecto.ProyectoNotFoundException;
-import exceptions.tarea.TareaAlreadyExists;
-import exceptions.tarea.TareaNotFoundException;
 import exceptions.user.UserOrPassDontExistException;
 import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
@@ -57,8 +51,8 @@ public class Handler {
 		userBO = new UserBO();
 		userBO.setUserDao(new UserDaoImpl());
 		
-		loginFrame = new LoginFrame("v1.0", this);
-		frame = new MiFrame("v1.0", this);
+		loginFrame = new LoginFrame(this);
+		frame = new MiFrame(this);
 	}
 	
 	public void init() {

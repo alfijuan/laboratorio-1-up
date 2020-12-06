@@ -52,10 +52,10 @@ public class Login extends JPanel {
 		JButton OKBtn = new JButton("Login");
         JButton SalirBtn = new JButton("Salir");
         
-        botonera.add(OKBtn);
+        botonera.add(SalirBtn);
         botonera.add(Box.createHorizontalGlue());
         
-        botonera.add(SalirBtn);
+        botonera.add(OKBtn);
         botonera.add(Box.createHorizontalGlue());
         
         SalirBtn.addActionListener(new SalirListener() {
