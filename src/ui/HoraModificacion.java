@@ -75,4 +75,9 @@ public class HoraModificacion extends HoraBase{
 	protected String setTitulo() {
 		return "Modificacion de horas";
 	}
+
+
+	@Override
+	protected void limpiarCampos() {
+	}
 }

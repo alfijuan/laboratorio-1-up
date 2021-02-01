@@ -95,19 +95,20 @@ public class ProyectoCosto extends ProyectoBase {
 
 	@Override
 	public Object panelToObject() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void objectToPanel(Object data) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	protected String setTitulo() {
 		return "Calculo de costo";
+	}
+
+	@Override
+	protected void limpiarCampos() {
 	}
 
 	

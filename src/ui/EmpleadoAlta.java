@@ -20,11 +20,15 @@ public class EmpleadoAlta extends EmpleadoBase {
 		Box botonera = Box.createHorizontalBox();
 		JButton OKBtn = new JButton("OK");
         JButton SalirBtn = new JButton("Volver");
+        JButton limpiarCamposBtn = new JButton("Limpiar campos");
         
         botonera.add(OKBtn);
         botonera.add(Box.createHorizontalGlue());
         
         botonera.add(SalirBtn);
+        botonera.add(Box.createHorizontalGlue());
+        
+        botonera.add(limpiarCamposBtn);
         botonera.add(Box.createHorizontalGlue());
         
         SalirBtn.addActionListener(new ActionListener() {
@@ -38,6 +42,14 @@ public class EmpleadoAlta extends EmpleadoBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				getHandler().agregarEmpleado(panelToObject());
+				limpiarCampos();
+			}
+		});
+		
+		limpiarCamposBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				limpiarCampos();
 			}
 		});
 		return botonera;
@@ -46,6 +58,15 @@ public class EmpleadoAlta extends EmpleadoBase {
 	@Override
 	protected String setTitulo() {
 		return "Alta de empleado";
+	}
+
+	@Override
+	protected void limpiarCampos() {
+		getNombre().cleanTextField();
+		getApellido().cleanTextField();
+		getDni().cleanTextField();
+		getDireccion().cleanTextField();
+		getHonorarios().cleanTextField();
 	}
 
 }

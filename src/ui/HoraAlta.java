@@ -43,6 +43,7 @@ public class HoraAlta extends HoraBase{
 				if(getComboLegajo().getSelectedIndex() != 0) {
 					if(getComboTarea().getSelectedIndex() != 0) {
 						getHandler().agregarHora(panelToObject());
+						limpiarCampos();
 					} else {
 						getHandler().mostrarModal("Debe seleccionar una tarea");
 					}
@@ -60,6 +61,12 @@ public class HoraAlta extends HoraBase{
 	protected String setTitulo() {
 		return "Carga de Horas";
 	}
-	
-	
+
+
+	@Override
+	protected void limpiarCampos() {
+		getCantidad().cleanTextField();
+		getFecha().cleanTextField();
+	}
+
 }

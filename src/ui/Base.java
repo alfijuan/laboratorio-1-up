@@ -24,6 +24,8 @@ public abstract class Base extends JPanel {
 	
 	protected abstract String setTitulo();
 	
+	protected abstract void limpiarCampos();
+	
 	public Handler getHandler() {
 		return handler;
 	}

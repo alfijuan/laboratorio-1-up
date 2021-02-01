@@ -34,6 +34,11 @@ public class InputContainer {
 	    return row;
 	}
 
+	public void cleanTextField() {
+		this.getField().setText("");
+		this.getField().setEditable(true);
+	}
+	
 	public JLabel getLabel() {
 		return label;
 	}

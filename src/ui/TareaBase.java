@@ -14,7 +14,6 @@ import ui.containers.InputContainer;
 public abstract class TareaBase extends Base {
 	
 	private static final long serialVersionUID = 2756342206651835302L;
-	private static final int HEIGHT = 20; 
 	private String project;
 	private JLabel titulo;
 	private InputContainer id;
@@ -27,6 +26,7 @@ public abstract class TareaBase extends Base {
 	
 	public TareaBase(Handler handler){
 		super(handler);
+		initUI();
 	}
 	
 	@Override
@@ -55,16 +55,16 @@ public abstract class TareaBase extends Base {
     	
     	
     	vertical.add(titulo);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
     	
     	vertical.add(id.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
     	
     	vertical.add(nombre.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
     	
     	vertical.add(description.createHelperBox());
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
     	
     	inLineProyecto.add(comboProyectoLabel);
     	inLineProyecto.add(comboProyecto);

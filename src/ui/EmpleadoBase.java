@@ -79,7 +79,6 @@ public abstract class EmpleadoBase extends Base {
 		getHonorarios().getField().setText(Float.toString(empleado.getHonorarios()));
 	}
 	
-	
 	public InputContainer getNombre() {
 		return nombre;
 	}

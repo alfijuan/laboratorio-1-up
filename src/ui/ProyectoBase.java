@@ -19,6 +19,7 @@ public abstract class ProyectoBase extends Base {
 	
 	public ProyectoBase(Handler handler){
 		super(handler);
+		initUI();
 	}
 	
 	@Override

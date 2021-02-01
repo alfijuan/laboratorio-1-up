@@ -68,4 +68,8 @@ public class TareaModificacion extends TareaBase {
 	public void setTarea(Tarea tarea) {
 		this.current = tarea;
 	}
+
+	@Override
+	protected void limpiarCampos() {
+	}
 }

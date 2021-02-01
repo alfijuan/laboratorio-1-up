@@ -17,7 +17,6 @@ import utils.formatUtils;
 public abstract class HoraBase extends Base {
 	
 	private static final long serialVersionUID = 1L;
-	private static final int HEIGHT = 20; 
 	private JLabel titulo;
 	private JLabel comboLegajoLabel;
 	private JComboBox<String> comboLegajo;
@@ -37,6 +36,7 @@ public abstract class HoraBase extends Base {
 
 	public HoraBase(Handler handler){
 		super(handler);
+		initUI();
 	}
 	
 	public void initUI(){
@@ -96,33 +96,33 @@ public abstract class HoraBase extends Base {
         
         
         vertical.add(titulo);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         inLineLegajo.add(comboLegajoLabel);
     	inLineLegajo.add(comboLegajo);
     	vertical.add(inLineLegajo);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         inLineName.add(nombreEmpleadoLabel);
         inLineName.add(nombreEmpleado);
         vertical.add(inLineName);
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         inLineTarea.add(comboTareaLabel);
     	inLineTarea.add(comboTarea);
     	vertical.add(inLineTarea);
-		vertical.add(Box.createVerticalStrut(HEIGHT));
+		vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         inLineDescripcion.add(descripcionTareaLabel);
 		inLineDescripcion.add(descripcionTarea);
         vertical.add(inLineDescripcion);
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(cantidad.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(fecha.createHelperBox());
-        vertical.add(Box.createVerticalStrut(HEIGHT));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());

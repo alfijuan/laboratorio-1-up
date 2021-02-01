@@ -13,7 +13,6 @@ public class TareaAlta extends TareaBase {
 	
 	public TareaAlta(Handler handler) {
 		super(handler);
-		agregarBotones();
 	}
 	
 	protected Box agregarBotones() {
@@ -33,6 +32,7 @@ public class TareaAlta extends TareaBase {
 				String proyecto = (String)getComboProyecto().getSelectedItem();
 				setProject(proyecto);
         		getHandler().agregarTarea(panelToObject());
+        		limpiarCampos();
 			}
 		});
         
@@ -49,6 +49,13 @@ public class TareaAlta extends TareaBase {
 	@Override
 	protected String setTitulo() {
 		return "Carga de tareas";
+	}
+
+	@Override
+	protected void limpiarCampos() {
+		getId().cleanTextField();
+		getNombre().cleanTextField();
+		getDescription().cleanTextField();
 	}
 	
 }

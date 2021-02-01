@@ -65,4 +65,8 @@ public class EmpleadoModificacion extends EmpleadoBase {
 		this.current = emp;
 	}
 
+	@Override
+	protected void limpiarCampos() {
+	}
+
 }

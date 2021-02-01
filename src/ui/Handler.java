@@ -125,7 +125,6 @@ public class Handler {
 		try {
 			empleadoBO.agregarEmpleado(empleado);
 			mostrarModal("Empleado agregado correctamente!");
-			mostrarTablaEmpleado();
 		} catch (Exception e) {
 			this.mostrarModal(e.getMessage());
 		}
@@ -157,7 +156,6 @@ public class Handler {
 		try {
 			tareaBO.agregarTarea(tarea);
 			mostrarModal("Tarea agregada correctamente!");
-			mostrarTablaTarea();
 		} catch (Exception e) {
 			this.mostrarModal(e.getMessage());
 		}
