@@ -34,22 +34,22 @@ public abstract class EmpleadoBase extends Base {
         honorarios = new InputContainer("Honorarios", 8);
         
         vertical.add(titulo);
-        vertical.add(Box.createVerticalStrut(getHeight()));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(nombre.createHelperBox());
-        vertical.add(Box.createVerticalStrut(getHeight()));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(apellido.createHelperBox());
-        vertical.add(Box.createVerticalStrut(getHeight()));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(dni.createHelperBox());
-        vertical.add(Box.createVerticalStrut(getHeight()));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(direccion.createHelperBox());
-        vertical.add(Box.createVerticalStrut(getHeight()));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(honorarios.createHelperBox());
-        vertical.add(Box.createVerticalStrut(getHeight()));
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
         
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());

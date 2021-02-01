@@ -39,7 +39,7 @@ public abstract class ProyectoBase extends Base {
     	inLineProyecto.add(comboProyectoLabel);
     	inLineProyecto.add(comboProyecto);
     	vertical.add(inLineProyecto);
-    	vertical.add(Box.createVerticalStrut(getHeight()));
+    	vertical.add(Box.createVerticalStrut(getHeightSpace()));
     	
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());

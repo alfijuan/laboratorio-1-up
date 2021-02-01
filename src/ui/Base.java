@@ -32,7 +32,7 @@ public abstract class Base extends JPanel {
 		this.handler = handler;
 	}
 	
-	public int getHeight() {
+	public int getHeightSpace() {
 		return HEIGHT;
 	}
 }
