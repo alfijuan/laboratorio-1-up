@@ -1,35 +1,16 @@
 package ui;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 
-public class ProyectoCosto extends ProyectoBase {
+public class ProyectoCostoDetallado extends ProyectoBase {
 	
 	private static final long serialVersionUID = 1L;
-	private JLabel costo;
-	private JLabel nombreCostoLabel;
 	
-	public ProyectoCosto(Handler handler) {
+	public ProyectoCostoDetallado(Handler handler) {
 		super(handler);
-		agregarDatosProyecto();
-	}
-	
-	private void agregarDatosProyecto(){
-		Box vertical = Box.createVerticalBox();
-		Box inLineName = Box.createHorizontalBox();
-		
-		nombreCostoLabel = new JLabel("Costo total: ",JLabel.LEFT);
-		costo = new JLabel("",JLabel.LEFT);
-		
-		inLineName.add(nombreCostoLabel);
-		inLineName.add(costo);
-		vertical.add(inLineName);
-		
-		add(vertical);
-		
 	}
 	
 	protected Box agregarBotones() {
@@ -46,7 +27,7 @@ public class ProyectoCosto extends ProyectoBase {
 			public void actionPerformed(ActionEvent e) {
 				if(getComboProyecto().getSelectedIndex() != 0) {
 					String proyecto = (String)getComboProyecto().getSelectedItem();
-					costo.setText("$" + String.valueOf(getHandler().calcularCostoProyecto(Integer.parseInt(proyecto.split("-")[0]))));
+					getHandler().mostrarCostoProyectoDetallado(Integer.parseInt(proyecto.split("-")[0]));
 				}
 				else {
 					getHandler().mostrarModal("Debe seleccionar una proyecto");
@@ -55,22 +36,6 @@ public class ProyectoCosto extends ProyectoBase {
 			}
 		});
 		return botonera;
-	}
-
-	public JLabel getCosto() {
-		return costo;
-	}
-
-	public void setCosto(JLabel costo) {
-		this.costo = costo;
-	}
-
-	public JLabel getNombreCostoLabel() {
-		return nombreCostoLabel;
-	}
-
-	public void setNombreCostoLabel(JLabel nombreCostoLabel) {
-		this.nombreCostoLabel = nombreCostoLabel;
 	}
 
 	@Override
@@ -84,12 +49,11 @@ public class ProyectoCosto extends ProyectoBase {
 
 	@Override
 	protected String setTitulo() {
-		return "Calculo del costo del proyecto";
+		return "Calculo de costo detallado por proyecto";
 	}
 
 	@Override
 	protected void limpiarCampos() {
 	}
 
-	
 }

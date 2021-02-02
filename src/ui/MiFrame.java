@@ -113,7 +113,7 @@ public class MiFrame extends FrameBase {
         item2Proyecto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				handler.mostrarCostoProyectoDetallado();
+				handler.mostrarCostosDetallados();
 			}
 		});
         menuProyecto.add(item2Proyecto);

@@ -10,5 +10,5 @@ public interface ProyectoDAO {
 	List<Proyecto> obtenerProyectos() throws SystemException;
 	Proyecto obtenerProyectoById(int id) throws SystemException;
 	Proyecto obtenerCostosById(int id) throws SystemException;
-	List<Proyecto> obtenerCostosProyectos() throws SystemException;
+	Proyecto obtenerCostosDetalladoById(int id) throws SystemException;
 }

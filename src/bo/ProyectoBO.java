@@ -54,15 +54,15 @@ public class ProyectoBO {
 		return proyecto;
 	}
 	
-	public List<Proyecto> obtenerCostosProyectos() throws SystemException{
-		List<Proyecto> proyectos = new ArrayList<Proyecto>();
+	public Proyecto obtenerCostosProyectosById(int idProyecto) throws SystemException{
+		Proyecto proyecto = new Proyecto();
 		try {
-			proyectos = proyectoDao.obtenerCostosProyectos();
+			proyecto = proyectoDao.obtenerCostosDetalladoById(idProyecto);
 		}catch (SystemException e) {
 			e.printStackTrace();
-			throw new SystemException(GENERIC_ERROR_BD);
+			throw new SystemException(e.getMessage());
 		}
-		return proyectos;
+		return proyecto;
 	}
 	
 	public void setProyectoDao(ProyectoDAO proyectoDao) {

@@ -243,15 +243,18 @@ public class Handler {
 		frame.cambiarPanel(new ProyectoCosto(this));
 	}
 	
-	public void mostrarCostoProyectoDetallado() {
+	public void mostrarCostoProyectoDetallado(int idProyecto) {
 		try {
-			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectos(),this));
-		} catch (SystemException e) {
+			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectosById(idProyecto),this));
+		} catch (Exception e) {
 			mostrarModal(e.getMessage());
 		}
 	}
 	
-	
+	public void mostrarCostosDetallados() {
+		frame.cambiarPanel(new ProyectoCostoDetallado(this));
+	}
+
 	public Double calcularCostoProyecto(int id) {
 		Double costo = null;
 		try {
@@ -270,7 +273,7 @@ public class Handler {
 			} else {
 				mostrarModal("El empleado no registra horas cargadas");
 			}
-		} catch (Exception e) {
+		} catch (SystemException e) {
 			this.mostrarModal(e.getMessage());
 		}
 	}

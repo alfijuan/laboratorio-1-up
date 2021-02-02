@@ -65,13 +65,18 @@ public class Login extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
         		User user = new User(getUser().getField().getText(), getPass().getField().getText());
-        		
 				getHandler().loginUsuario(user);
+				limpiarDatosLogin();
 			}
 		});
 		return botonera;
 	}
 	
+	private void limpiarDatosLogin() {
+		user.cleanTextField();
+		pass.cleanTextField();
+	};
+
 	protected String setTitulo() {
 		return "Login";
 	};

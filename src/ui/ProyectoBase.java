@@ -16,6 +16,7 @@ public abstract class ProyectoBase extends Base {
 	private JLabel comboProyectoLabel;
 	private JComboBox<String> comboProyecto;
 	private List<Proyecto> proyectos;
+	private JLabel titulo;
 	
 	public ProyectoBase(Handler handler){
 		super(handler);
@@ -26,7 +27,8 @@ public abstract class ProyectoBase extends Base {
 	public void initUI(){
 		Box vertical = Box.createVerticalBox();
 		Box inLineProyecto = Box.createHorizontalBox();
-        
+		
+		titulo = new JLabel(setTitulo(), JLabel.LEFT);
 		proyectos = new ArrayList<Proyecto>();
 		setProyectos(getHandler().obtenerProyectos());
 		
@@ -36,6 +38,9 @@ public abstract class ProyectoBase extends Base {
     		comboProyecto.addItem(String.valueOf(proyecto.getIdProyecto() + "-" + proyecto.getNombre()));
     	}
 		
+    	vertical.add(titulo);
+        vertical.add(Box.createVerticalStrut(getHeightSpace()));
+        
     	comboProyectoLabel = new JLabel("Proyectos", JLabel.LEFT);
     	inLineProyecto.add(comboProyectoLabel);
     	inLineProyecto.add(comboProyecto);
