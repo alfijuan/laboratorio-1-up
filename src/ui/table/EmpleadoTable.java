@@ -3,58 +3,26 @@ package ui.table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableColumnModel;
-
-import empresa.Empleado;
 import ui.Handler;
+import empresa.Empleado;
+public class EmpleadoTable extends TablePanel{
 
-public class EmpleadoTable extends JPanel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5904454874696819147L;
-	private TableModel modelo = new TableModel();
-	private JTable tabla = new JTable(modelo);
-	TableColumnModel columnModel = tabla.getColumnModel();
+	private static final long serialVersionUID = -1878977002724518805L;
 	
-	public EmpleadoTable(List<Empleado> lista, Handler handler) {
-		this.modelo.addColumn("Legajo");
-		this.modelo.addColumn("Nombre");
-		this.modelo.addColumn("Apellido");
-		this.modelo.addColumn("DNI");
-		this.modelo.addColumn("Direccion");
-		this.modelo.addColumn("Honorarios");
+	public EmpleadoTable(JTable tabla, Handler handler, List<Empleado> empleados) {
+		super(tabla);
+		getVertical().add(agregarBotonera(tabla, handler, empleados));
 		
-		columnModel.getColumn(0).setPreferredWidth(500);
-		columnModel.getColumn(1).setPreferredWidth(500);
-		columnModel.getColumn(2).setPreferredWidth(500);
-		columnModel.getColumn(3).setPreferredWidth(500);
-		columnModel.getColumn(4).setPreferredWidth(500);
-		columnModel.getColumn(5).setPreferredWidth(500);
-		
-		for(Empleado empleado : lista) {
-			this.modelo.addRow(new Object[] {
-				empleado.getLegajo(),
-				empleado.getNombre(),
-				empleado.getApellido(),
-				empleado.getDni(),
-				empleado.getDireccion(),
-				empleado.getHonorarios(),
-			});
-			
-		}
-		
-		Box vertical = Box.createVerticalBox();
-		JScrollPane tableContainer = new JScrollPane(this.tabla);
-		vertical.add(tableContainer);
-		vertical.add(Box.createVerticalStrut(20));
+	}
+	
+	public Box agregarBotonera(JTable tabla, Handler handler, List<Empleado> empleados) {
 		Box botonera = Box.createHorizontalBox();
 		JButton editBtn = new JButton("Editar");
 		editBtn.addActionListener(new ActionListener() {
@@ -62,7 +30,7 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					handler.mostrarEditarEmpleado(lista.get(index));
+					handler.mostrarEditarEmpleado(empleados.get(index));
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
@@ -74,7 +42,7 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					handler.calcularCostoEmpleado(lista.get(index).getLegajo());
+					handler.calcularCostoEmpleado(empleados.get(index).getLegajo());
 				} else { 
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
@@ -86,10 +54,10 @@ public class EmpleadoTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if(index != -1) {
-					if (handler.verificarBorradoDeEmpleado(lista.get(index).getLegajo())) {
+					if (handler.verificarBorradoDeEmpleado(empleados.get(index).getLegajo())) {
 						int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "", JOptionPane.OK_CANCEL_OPTION);
 						if(input == 0) {
-							handler.mostrarBorrarEmpleado(lista.get(index).getLegajo());
+							handler.mostrarBorrarEmpleado(empleados.get(index).getLegajo());
 						}
 					} else {
 						handler.mostrarModal("No se puede eliminar el empleado porque tiene horas cargadas en el sistema. Por favor esperar al cierre de liquidación.");
@@ -104,8 +72,13 @@ public class EmpleadoTable extends JPanel {
 		botonera.add(calculateBtn);
 		botonera.add(Box.createHorizontalGlue());
 		botonera.add(deleteBtn);
-		vertical.add(botonera);
-		add(vertical);
+		
+		return botonera;
+		
 	}
+
+
+	
+	
 	
 }

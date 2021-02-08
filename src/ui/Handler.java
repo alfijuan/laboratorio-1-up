@@ -3,6 +3,7 @@ package ui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import bo.EmpleadoBO;
 import bo.HorasBO;
 import bo.ProyectoBO;
@@ -20,10 +21,14 @@ import empresa.Tarea;
 import empresa.User;
 import exceptions.SystemException;
 import exceptions.user.UserOrPassDontExistException;
-import ui.table.EmpleadoTable;
 import ui.table.HorasTable;
+import ui.table.HorasTableModel;
+import ui.table.EmpleadoTable;
+import ui.table.EmpleadoTableModel;
 import ui.table.ProyectoCostoDetalladoTable;
+import ui.table.ProyectoCostoDetalladoTableModel;
 import ui.table.TareaTable;
+import ui.table.TareaTableModel;
 
 public class Handler {
 	
@@ -87,7 +92,9 @@ public class Handler {
 	
 	public void mostrarTablaEmpleado() {
 		try {
-			frame.cambiarPanel(new EmpleadoTable(this.getEmpleadoBO().obtenerEmpleados(), this));
+			List<Empleado> empleados = this.getEmpleadoBO().obtenerEmpleados();
+			JTable table = new JTable(new EmpleadoTableModel(empleados));
+			frame.cambiarPanel(new EmpleadoTable(table, this, empleados));
 		} catch (SystemException e1) {
 			this.mostrarModal(e1.getMessage());
 		}
@@ -147,7 +154,9 @@ public class Handler {
 	
 	public void mostrarTablaTarea() {
 		try {
-			frame.cambiarPanel(new TareaTable(this.getTareaBO().obtenerTareas(), this));			
+			List<Tarea> tareas= this.getTareaBO().obtenerTareas();
+			JTable table = new JTable(new TareaTableModel(tareas));
+			frame.cambiarPanel(new TareaTable(table, this, tareas));			
 		} catch (SystemException e1) {
 			mostrarModal(e1.getMessage());
 		}
@@ -196,7 +205,9 @@ public class Handler {
 	
 	public void mostrarTablaHoras() {
 		try {
-			frame.cambiarPanel(new HorasTable(this.getHorasBO().obtenerHoras(), this));
+			List<Hora> horas = this.getHorasBO().obtenerHoras();
+			JTable table = new JTable(new HorasTableModel(horas));
+			frame.cambiarPanel(new HorasTable(table, this, horas));
 		} catch (SystemException e1) {
 			this.mostrarModal(e1.getMessage());
 		}
@@ -245,7 +256,9 @@ public class Handler {
 	
 	public void mostrarCostoProyectoDetallado(int idProyecto) {
 		try {
-			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectosById(idProyecto),this));
+			Proyecto proyecto = proyectoBO.obtenerCostosProyectosById(idProyecto);
+			JTable table = new JTable(new ProyectoCostoDetalladoTableModel(proyecto));
+			frame.cambiarPanel(new ProyectoCostoDetalladoTable(table, proyecto));
 		} catch (Exception e) {
 			mostrarModal(e.getMessage());
 		}

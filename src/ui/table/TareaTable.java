@@ -3,44 +3,27 @@ package ui.table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import empresa.Tarea;
 import ui.Handler;
 
-public class TareaTable extends JPanel {
+public class TareaTable extends TablePanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 9132454869629348612L;
-	private TableModel modelo = new TableModel();
-	private JTable tabla = new JTable(modelo);
 
-	public TareaTable(List<Tarea> lista, Handler handler) {
-		this.modelo.addColumn("ID");
-		this.modelo.addColumn("Nombre");
-		this.modelo.addColumn("Descripcion");
-		this.modelo.addColumn("Proyecto");
+	
+	public TareaTable(JTable tabla, Handler handler, List<Tarea> tareas) {
+		super(tabla);
+		getVertical().add(agregarBotonera(tabla, handler, tareas));
 		
-		for(Tarea tarea : lista) {
-			this.modelo.addRow(new Object[] {
-					tarea.getId(), 
-					tarea.getNombre(),
-					tarea.getDescripcion(),
-					tarea.getIdProyecto(),
-			});
-		}
-
-		Box vertical = Box.createVerticalBox();
-		JScrollPane tableContainer = new JScrollPane(this.tabla);
-		vertical.add(tableContainer);
-		vertical.add(Box.createVerticalStrut(20));
+	}
+	
+	public Box agregarBotonera(JTable tabla, Handler handler, List<Tarea> tareas) {
 		Box botonera = Box.createHorizontalBox();
 		JButton editBtn = new JButton("Editar");
 		editBtn.addActionListener(new ActionListener() {
@@ -48,7 +31,7 @@ public class TareaTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if (index != -1) {
-					handler.mostrarEditarTarea(lista.get(index));
+					handler.mostrarEditarTarea(tareas.get(index));
 				} else {
 					handler.mostrarModal("Debe seleccionar una fila");
 				}
@@ -60,11 +43,11 @@ public class TareaTable extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = tabla.getSelectedRow();
 				if (index != -1) {
-					if (handler.verificarBorradoDeTarea(lista.get(index).getId())) {
+					if (handler.verificarBorradoDeTarea(tareas.get(index).getId())) {
 						int input = JOptionPane.showConfirmDialog(null, "¿Estas seguro que queres borrar?", "",
 								JOptionPane.OK_CANCEL_OPTION);
 						if (input == 0) {
-							handler.borrarTarea(lista.get(index).getId());
+							handler.borrarTarea(tareas.get(index).getId());
 						}
 					} else {
 						handler.mostrarModal("No se puede eliminar la tarea porque tiene horas asociadas");
@@ -77,7 +60,8 @@ public class TareaTable extends JPanel {
 		botonera.add(editBtn);
 		botonera.add(Box.createHorizontalGlue());
 		botonera.add(deleteBtn);
-		vertical.add(botonera);
-		add(vertical);
+		
+		return botonera;
+		
 	}
 }

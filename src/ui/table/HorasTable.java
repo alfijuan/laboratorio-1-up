@@ -3,50 +3,26 @@ package ui.table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableColumnModel;
 import empresa.Hora;
 import ui.Handler;
 
-public class HorasTable extends JPanel {
+public class HorasTable extends TablePanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1104454874696883336L;
-	private TableModel modelo = new TableModel();
-	private JTable tabla = new JTable(modelo);
-	TableColumnModel columnModel = tabla.getColumnModel();
 	
-	public HorasTable(List<Hora> horas, Handler handler) {
-		this.modelo.addColumn("Legajo");
-		this.modelo.addColumn("Tarea");
-		this.modelo.addColumn("Cantidad");
-		this.modelo.addColumn("Fecha");
+	public HorasTable(JTable tabla, Handler handler, List<Hora> horas) {
+		super(tabla);
+		getVertical().add(agregarBotonera(tabla, handler, horas));
 		
-		columnModel.getColumn(0).setPreferredWidth(500);
-		columnModel.getColumn(1).setPreferredWidth(500);
-		columnModel.getColumn(2).setPreferredWidth(500);
-		columnModel.getColumn(3).setPreferredWidth(500);
-		
-		for(Hora hora : horas) {
-			this.modelo.addRow(new Object[] {
-				hora.getLegajoEmpleado(),
-				hora.getIdTarea(),
-				hora.getCantidad(),
-				hora.getFecha()
-			});
-		}
-		
-		Box vertical = Box.createVerticalBox();
-		JScrollPane tableContainer = new JScrollPane(this.tabla);
-		vertical.add(tableContainer);
-		vertical.add(Box.createVerticalStrut(20));
+	}
+	
+	public Box agregarBotonera(JTable tabla, Handler handler, List<Hora> horas) {
 		Box botonera = Box.createHorizontalBox();
 		JButton editBtn = new JButton("Editar");
 		editBtn.addActionListener(new ActionListener() {
@@ -79,8 +55,10 @@ public class HorasTable extends JPanel {
 		botonera.add(editBtn);
 		botonera.add(Box.createHorizontalGlue());
 		botonera.add(deleteBtn);
-		vertical.add(botonera);
-		add(vertical);
+		
+		return botonera;
+		
 	}
+
 	
 }
