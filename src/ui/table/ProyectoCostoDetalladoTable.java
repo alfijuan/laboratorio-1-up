@@ -1,14 +1,15 @@
 package ui.table;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import empresa.Proyecto;
+import ui.Handler;
 
-public class ProyectoCostoDetalladoTable extends JPanel {
+public class ProyectoCostoDetalladoTable extends TablePanel {
 	/**
 	 * 
 	 */
@@ -17,9 +18,9 @@ public class ProyectoCostoDetalladoTable extends JPanel {
 	private JLabel costoTotalLabel;
 	private JLabel costoTotal;
 	
-	public ProyectoCostoDetalladoTable(JTable tabla, Proyecto proyecto) {
-		Box vertical = Box.createVerticalBox();
-		JScrollPane tableContainer = new JScrollPane(tabla);
+	public ProyectoCostoDetalladoTable(JTable tabla, Proyecto proyecto, Handler handler) {
+		super(tabla);
+		
 		Box nombreProyecto = Box.createHorizontalBox();
 		Box inLineCosto = Box.createHorizontalBox();
 		
@@ -35,17 +36,31 @@ public class ProyectoCostoDetalladoTable extends JPanel {
 		inLineCosto.add(costoTotalLabel);
 		inLineCosto.add(costoTotal);
 		
-		vertical.add(nombreProyecto);
-		vertical.add(Box.createVerticalStrut(20));
+		getVertical().add(nombreProyecto);
+		getVertical().add(Box.createVerticalStrut(20));
 		
-		vertical.add(tableContainer);
-		vertical.add(Box.createVerticalStrut(20));
-
-		vertical.add(inLineCosto);
-		vertical.add(Box.createVerticalStrut(20));
+		getVertical().add(inLineCosto);
+		getVertical().add(Box.createVerticalStrut(20));
 		
-		add(vertical);
+		getVertical().add(agregarBotonera(tabla, handler));
 	}
 	
-	
+	public Box agregarBotonera(JTable tabla, Handler handler) {
+		
+		Box botonera = Box.createHorizontalBox();
+		JButton volverBtn = new JButton("Volver");
+		
+		botonera.add(volverBtn);
+		botonera.add(Box.createHorizontalGlue());
+		
+		volverBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.mostrarCostosDetallados();
+				
+			}
+		});
+		
+		return botonera;
+	}
 }

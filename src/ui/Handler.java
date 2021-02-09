@@ -114,6 +114,7 @@ public class Handler {
 			mostrarModal("Empleado borrado correctamente!");
 			this.mostrarTablaEmpleado();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -123,6 +124,7 @@ public class Handler {
 		try {
 			resultado = empleadoBO.validarEliminacionDeEmpleado(legajo);
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 		return resultado;
@@ -133,6 +135,7 @@ public class Handler {
 			empleadoBO.agregarEmpleado(empleado);
 			mostrarModal("Empleado agregado correctamente!");
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -143,6 +146,7 @@ public class Handler {
 			mostrarModal("Empleado editado correctamente!");
 			mostrarTablaEmpleado();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -166,6 +170,7 @@ public class Handler {
 			tareaBO.agregarTarea(tarea);
 			mostrarModal("Tarea agregada correctamente!");
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -179,6 +184,7 @@ public class Handler {
 			mostrarModal("Tarea editada correctamente!");
 			mostrarTablaTarea();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -189,6 +195,7 @@ public class Handler {
 			mostrarModal("Tarea borrada correctamente!");
 			mostrarTablaTarea();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -197,8 +204,9 @@ public class Handler {
 		Boolean resultado = false;
 		try {
 			resultado = getTareaBO().validarEliminacionDeTarea(id);
-		} catch (SystemException e1) {
-			mostrarModal(e1.getMessage());
+		} catch (SystemException e) {
+			e.printStackTrace();
+			mostrarModal(e.getMessage());
 		}
 		return resultado;
 	}
@@ -222,6 +230,7 @@ public class Handler {
 			horasBO.cargarHoras(hora);
 			mostrarModal("Hora cargada correctamente!");
 		} catch (SystemException e) {
+			e.printStackTrace();
 			mostrarModal(e.getMessage());
 		}
 	}
@@ -246,6 +255,7 @@ public class Handler {
 			mostrarModal("Registro borrado correctamente!");
 			mostrarTablaHoras();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 	}
@@ -258,7 +268,7 @@ public class Handler {
 		try {
 			Proyecto proyecto = proyectoBO.obtenerCostosProyectosById(idProyecto);
 			JTable table = new JTable(new ProyectoCostoDetalladoTableModel(proyecto));
-			frame.cambiarPanel(new ProyectoCostoDetalladoTable(table, proyecto));
+			frame.cambiarPanel(new ProyectoCostoDetalladoTable(table, proyecto, this));
 		} catch (Exception e) {
 			mostrarModal(e.getMessage());
 		}
@@ -273,6 +283,7 @@ public class Handler {
 		try {
 			costo = proyectoBO.obtenerCostosById(id).getCosto();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.mostrarModal(e.getMessage());
 		}
 		return costo;
@@ -297,6 +308,7 @@ public class Handler {
 		try {
 			tareas = getTareaBO().obtenerTareas();
 		} catch (SystemException e) {
+			e.printStackTrace();
 			mostrarModal(e.getMessage());
 		}
 	
@@ -307,7 +319,8 @@ public class Handler {
 		List<Empleado> empleados = new ArrayList<Empleado>();
 		try {
 			 empleados = getEmpleadoBO().obtenerEmpleados();
-		} catch (SystemException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			mostrarModal(e.getMessage());
 		}
 		
@@ -318,7 +331,8 @@ public class Handler {
 		List<Proyecto> proyectos = new ArrayList<Proyecto>();
 		try {
 			 proyectos = getProyectoBO().obtenerProyectos();
-		} catch (SystemException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			mostrarModal(e.getMessage());
 		}
 		return proyectos;

@@ -18,12 +18,7 @@ public class ProyectoBO {
 	
 	public List<Proyecto> obtenerProyectos() throws SystemException {
 		List<Proyecto> proyectos = new ArrayList<Proyecto>();
-		try {
-			proyectos = proyectoDao.obtenerProyectos();
-		}catch (SystemException e) {
-			e.printStackTrace();
-			throw new SystemException(GENERIC_ERROR_BD);
-		}
+		proyectos = proyectoDao.obtenerProyectos();
 		return proyectos;
 	}
 	
@@ -42,12 +37,7 @@ public class ProyectoBO {
 	public Proyecto obtenerCostosById(int id) throws SystemException, ProyectoNotFoundException {
 		Proyecto proyecto = new Proyecto();
 		if(proyectoDao.obtenerProyectoById(id) != null) {
-			try {
 				proyecto = proyectoDao.obtenerCostosById(id);
-			}catch (SystemException e) {
-				e.printStackTrace();
-				throw new SystemException(GENERIC_ERROR_BD);
-			}
 		} else {
 			throw new ProyectoNotFoundException(ERROR_PROYECTO_NO_EXISTE);
 		}
