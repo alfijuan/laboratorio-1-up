@@ -16,9 +16,9 @@ public class HorasTable extends TablePanel {
 	 */
 	private static final long serialVersionUID = -1104454874696883336L;
 	
-	public HorasTable(JTable tabla, Handler handler, List<Hora> horas) {
-		super(tabla);
-		getVertical().add(agregarBotonera(tabla, handler, horas));
+	public HorasTable(Handler handler, List<Hora> horas) {
+		super(new HorasTableModel(horas));
+		getVertical().add(agregarBotonera(getTabla(), handler, horas));
 		
 	}
 	

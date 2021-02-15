@@ -17,9 +17,9 @@ public class TareaTable extends TablePanel {
 	private static final long serialVersionUID = 9132454869629348612L;
 
 	
-	public TareaTable(JTable tabla, Handler handler, List<Tarea> tareas) {
-		super(tabla);
-		getVertical().add(agregarBotonera(tabla, handler, tareas));
+	public TareaTable(Handler handler, List<Tarea> tareas) {
+		super(new TareaTableModel(tareas));
+		getVertical().add(agregarBotonera(getTabla(), handler, tareas));
 		
 	}
 	

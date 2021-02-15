@@ -16,9 +16,9 @@ public class EmpleadoTable extends TablePanel{
 	 */
 	private static final long serialVersionUID = -1878977002724518805L;
 	
-	public EmpleadoTable(JTable tabla, Handler handler, List<Empleado> empleados) {
-		super(tabla);
-		getVertical().add(agregarBotonera(tabla, handler, empleados));
+	public EmpleadoTable(Handler handler, List<Empleado> empleados) {
+		super(new EmpleadoTableModel(empleados));
+		getVertical().add(agregarBotonera(getTabla(), handler, empleados));
 		
 	}
 	

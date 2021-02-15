@@ -18,8 +18,8 @@ public class ProyectoCostoDetalladoTable extends TablePanel {
 	private JLabel costoTotalLabel;
 	private JLabel costoTotal;
 	
-	public ProyectoCostoDetalladoTable(JTable tabla, Proyecto proyecto, Handler handler) {
-		super(tabla);
+	public ProyectoCostoDetalladoTable(Proyecto proyecto, Handler handler) {
+		super(new ProyectoCostoDetalladoTableModel(proyecto));
 		
 		Box nombreProyecto = Box.createHorizontalBox();
 		Box inLineCosto = Box.createHorizontalBox();
@@ -42,7 +42,7 @@ public class ProyectoCostoDetalladoTable extends TablePanel {
 		getVertical().add(inLineCosto);
 		getVertical().add(Box.createVerticalStrut(20));
 		
-		getVertical().add(agregarBotonera(tabla, handler));
+		getVertical().add(agregarBotonera(getTabla(), handler));
 	}
 	
 	public Box agregarBotonera(JTable tabla, Handler handler) {
