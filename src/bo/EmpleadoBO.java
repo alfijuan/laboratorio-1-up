@@ -11,13 +11,13 @@ import exceptions.empleado.EmpleadoNotFoundException;
 
 public class EmpleadoBO {
 	private EmpleadoDAO empDao;
-	private static final String ERROR_EMPLEADO_YA_EXISTE = "El empleado ya existe";
+	private static final String ERROR_EMPLEADO_YA_EXISTE = "Ya existe un empleado con el dni ingresado";
 	private static final String ERROR_EMPLEADO_NO_EXISTE = "El empleado no existe";
 	
 	public EmpleadoBO() {}
 	
 	public void agregarEmpleado(Empleado emp) throws SystemException, EmpleadoAlreadyExists{
-		if(empDao.obtenerEmpleado(emp.getLegajo()) == null) {
+		if(empDao.obtenerEmpleado(emp.getDni()) == null) {
 			empDao.crearEmpleado(emp);
 		} else {
 			throw new EmpleadoAlreadyExists(ERROR_EMPLEADO_YA_EXISTE);

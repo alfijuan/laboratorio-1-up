@@ -115,7 +115,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		Empleado empleado = null;
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado where legajo =?");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado where dni =?");
 			sql.setInt(1, legajo);
 			
 			ResultSet rs = sql.executeQuery();

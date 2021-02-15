@@ -3,7 +3,6 @@ package ui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import bo.EmpleadoBO;
 import bo.HorasBO;
 import bo.ProyectoBO;
@@ -22,13 +21,9 @@ import empresa.User;
 import exceptions.SystemException;
 import exceptions.user.UserOrPassDontExistException;
 import ui.table.HorasTable;
-import ui.table.HorasTableModel;
 import ui.table.EmpleadoTable;
-import ui.table.EmpleadoTableModel;
 import ui.table.ProyectoCostoDetalladoTable;
-import ui.table.ProyectoCostoDetalladoTableModel;
 import ui.table.TareaTable;
-import ui.table.TareaTableModel;
 
 public class Handler {
 	
