@@ -14,4 +14,5 @@ public interface EmpleadoDAO {
 	Empleado obtenerEmpleado(int legajo) throws SystemException;
 	List<Empleado> obtenerEmpleados() throws SystemException;
 	Boolean verificarEliminacionEmpleado (int legajo) throws SystemException;
+	Boolean verificarDniExistente (int dni) throws SystemException;
 }

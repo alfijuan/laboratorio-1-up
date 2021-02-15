@@ -37,7 +37,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos insertar el empleado");
+			throw new SystemException("Error en la base de datos al insertar el empleado");
 		} finally {
 			try {
 				con.close();
@@ -70,7 +70,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos al modificar el usuario.");
+			throw new SystemException("Error en la base de datos al modificar el empleado.");
 		} finally {
 			try {
 				con.close();
@@ -98,7 +98,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos al borrar el usuario");
+			throw new SystemException("Error en la base de datos al borrar el empleado");
 		} finally {
 			try {
 				con.close();
@@ -115,7 +115,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 		Empleado empleado = null;
 		
 		try {
-			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado where dni =?");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM empleado where legajo =?");
 			sql.setInt(1, legajo);
 			
 			ResultSet rs = sql.executeQuery();
@@ -137,7 +137,7 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			throw new SystemException("Error en la base de datos al intentar obtener los empleados.");
+			throw new SystemException("Error en la base de datos al intentar obtener el empleado.");
 		} finally {
 			try {
 				con.close();
@@ -198,6 +198,32 @@ public class EmpleadoDaoImpl implements EmpleadoDAO{
 			} catch (SQLException e1) {
 			}
 			throw new SystemException("Error en la base de datos al verificar la eliminacion del empleado.");
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e1) {
+			}
+		}
+		return resultado;
+	}
+	
+	public Boolean verificarDniExistente(int dni) throws SystemException {
+		Boolean resultado= false;
+		Connection con = DBManager.getInstance().connect();
+		try {
+			PreparedStatement sql = con.prepareStatement("SELECT count(*) FROM empleado WHERE dni =?");
+			sql.setInt(1, dni);
+			
+			ResultSet rs = sql.executeQuery();
+			rs.next();
+			resultado = rs.getInt("count") == 0;
+			
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+			}
+			throw new SystemException("Error en la base de datos al verificar la existencia del dni");
 		} finally {
 			try {
 				con.close();
