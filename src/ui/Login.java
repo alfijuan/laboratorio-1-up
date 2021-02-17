@@ -7,6 +7,8 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import empresa.User;
 import ui.containers.InputContainer;
 import ui.containers.SalirListener;
@@ -16,7 +18,8 @@ public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private static final int HEIGHT = 20; 
 	private InputContainer user;
-	private InputContainer pass;
+	private JPasswordField pass;
+	private JLabel passLabel;
 	private JLabel titulo;
 	
 	private Handler handler;
@@ -29,9 +32,12 @@ public class Login extends JPanel {
 	private void createUI(){
 		Box vertical = Box.createVerticalBox();
 		titulo = new JLabel(setTitulo(), JLabel.LEFT);
+		passLabel = new JLabel("Password ",JLabel.LEFT);
+		
+		Box inLinePass = Box.createHorizontalBox();
 		
 		user = new InputContainer("User", 30);
-		pass = new InputContainer("Password", 30);
+		pass = new JPasswordField("", 30);
         
 		vertical.add(titulo);
 		vertical.add(Box.createVerticalStrut(HEIGHT));
@@ -39,7 +45,9 @@ public class Login extends JPanel {
         vertical.add(user.createHelperBox());
         vertical.add(Box.createVerticalStrut(HEIGHT));
         
-        vertical.add(pass.createHelperBox());
+        inLinePass.add(passLabel);
+        inLinePass.add(pass);
+        vertical.add(inLinePass);
         
         vertical.add(Box.createVerticalStrut(40));
         vertical.add(agregarBotones());
@@ -64,7 +72,7 @@ public class Login extends JPanel {
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-        		User user = new User(getUser().getField().getText(), getPass().getField().getText());
+        		User user = new User(getUser().getField().getText(), String.valueOf(getPass().getPassword()));
 				getHandler().loginUsuario(user);
 				limpiarDatosLogin();
 			}
@@ -74,7 +82,7 @@ public class Login extends JPanel {
 	
 	private void limpiarDatosLogin() {
 		user.cleanTextField();
-		pass.cleanTextField();
+		pass.setText("");
 	};
 
 	protected String setTitulo() {
@@ -97,11 +105,7 @@ public class Login extends JPanel {
 		this.user = user;
 	}
 
-	public InputContainer getPass() {
-		return pass;
-	}
-
-	public void setPass(InputContainer pass) {
+	public void setPass(JPasswordField pass) {
 		this.pass = pass;
 	}
 
@@ -111,6 +115,10 @@ public class Login extends JPanel {
 
 	public void setTitulo(JLabel titulo) {
 		this.titulo = titulo;
+	}
+
+	public JPasswordField getPass() {
+		return pass;
 	}
 
 }

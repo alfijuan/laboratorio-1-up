@@ -60,11 +60,15 @@ public abstract class EmpleadoBase extends Base {
 	@Override
 	public Empleado panelToObject() {
 		Empleado empleado = new Empleado();
-		empleado.setDni(Integer.parseInt(getDni().getField().getText()));
 		empleado.setNombre(getNombre().getField().getText());
 		empleado.setApellido(getApellido().getField().getText());
 		empleado.setDireccion(getDireccion().getField().getText());
-		empleado.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));
+		try {
+			empleado.setDni(Integer.parseInt(getDni().getField().getText()));
+			empleado.setHonorarios(Float.parseFloat(getHonorarios().getField().getText()));			
+		}catch (NumberFormatException e) {
+			throw new NumberFormatException(e.getMessage());
+		}
 		return empleado;
 	}
 	
@@ -79,6 +83,19 @@ public abstract class EmpleadoBase extends Base {
 		getHonorarios().getField().setText(Float.toString(empleado.getHonorarios()));
 	}
 	
+	protected Boolean validateFields() {
+		Boolean result = true;
+		
+		if( getDni().getField().getText().isEmpty() ||
+			getNombre().getField().getText().isEmpty() ||
+			getApellido().getField().getText().isEmpty() ||
+			getDireccion().getField().getText().isEmpty() ||
+			getHonorarios().getField().getText().isEmpty()) {			
+			return false;
+		}
+		return result;
+	}
+
 	public InputContainer getNombre() {
 		return nombre;
 	}

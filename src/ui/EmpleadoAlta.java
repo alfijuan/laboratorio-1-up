@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.JButton;
 
+import exceptions.empleado.EmpleadoValidateFieldsException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,9 +42,18 @@ public class EmpleadoAlta extends EmpleadoBase {
 		
 		OKBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				getHandler().agregarEmpleado(panelToObject());
-				limpiarCampos();
+			public void actionPerformed(ActionEvent e){
+				if(validateFields()) {
+					try {
+						getHandler().agregarEmpleado(panelToObject());
+						limpiarCampos();
+					}catch(NumberFormatException ex) {
+						ex.printStackTrace();
+						getHandler().mostrarModal("Verifique los campos DNI/Honorarios. Solo se permite el ingreso de numeros");
+					}
+				}else {
+					getHandler().mostrarModal("Por favor completar todos los campos");
+				}
 			}
 		});
 		
@@ -68,5 +79,5 @@ public class EmpleadoAlta extends EmpleadoBase {
 		getDireccion().cleanTextField();
 		getHonorarios().cleanTextField();
 	}
-
+	
 }
