@@ -44,10 +44,10 @@ public class ProyectoBO {
 		return proyecto;
 	}
 	
-	public Proyecto obtenerCostosProyectosById(int idProyecto) throws SystemException{
+	public Proyecto obtenerCostosProyectosById(int idProyecto, int mes, int anio) throws SystemException{
 		Proyecto proyecto = new Proyecto();
 		try {
-			proyecto = proyectoDao.obtenerCostosDetalladoById(idProyecto);
+			proyecto = proyectoDao.obtenerCostosDetalladoById(idProyecto, mes, anio);
 		}catch (SystemException e) {
 			e.printStackTrace();
 			throw new SystemException(e.getMessage());

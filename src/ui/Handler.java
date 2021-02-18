@@ -253,9 +253,9 @@ public class Handler {
 		frame.cambiarPanel(new ProyectoCosto(this));
 	}
 	
-	public void mostrarCostoProyectoDetallado(int idProyecto) {
+	public void mostrarCostoProyectoDetallado(int idProyecto, int mes, int anio) {
 		try {
-			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectosById(idProyecto), this));
+			frame.cambiarPanel(new ProyectoCostoDetalladoTable(proyectoBO.obtenerCostosProyectosById(idProyecto, mes, anio), this));
 		} catch (Exception e) {
 			mostrarModal(e.getMessage());
 		}

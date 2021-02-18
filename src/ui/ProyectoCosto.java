@@ -91,5 +91,9 @@ public class ProyectoCosto extends ProyectoBase {
 	protected void limpiarCampos() {
 	}
 
+	@Override
+	public void agregarDatosExtras() {
+	}
+
 	
 }

@@ -17,6 +17,7 @@ public abstract class ProyectoBase extends Base {
 	private JComboBox<String> comboProyecto;
 	private List<Proyecto> proyectos;
 	private JLabel titulo;
+	private Box vertical;
 	
 	public ProyectoBase(Handler handler){
 		super(handler);
@@ -25,7 +26,7 @@ public abstract class ProyectoBase extends Base {
 	
 	@Override
 	public void initUI(){
-		Box vertical = Box.createVerticalBox();
+		vertical = Box.createVerticalBox();
 		Box inLineProyecto = Box.createHorizontalBox();
 		
 		titulo = new JLabel(setTitulo(), JLabel.LEFT);
@@ -48,12 +49,14 @@ public abstract class ProyectoBase extends Base {
     	vertical.add(Box.createVerticalStrut(getHeightSpace()));
     	
         vertical.add(Box.createVerticalStrut(40));
+        agregarDatosExtras();
         vertical.add(agregarBotones());
         
         add(vertical);
 	}
 	
-
+	public abstract void agregarDatosExtras();
+	
 	public JComboBox<String> getComboProyecto() {
 		return comboProyecto;
 	}
@@ -68,6 +71,14 @@ public abstract class ProyectoBase extends Base {
 
 	public void setProyectos(List<Proyecto> proyectos) {
 		this.proyectos = proyectos;
+	}
+
+	public Box getVertical() {
+		return vertical;
+	}
+
+	public void setVertical(Box vertical) {
+		this.vertical = vertical;
 	}
 
 }

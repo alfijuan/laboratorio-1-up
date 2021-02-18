@@ -124,12 +124,18 @@ public class ProyectoDaoImpl implements ProyectoDAO{
 	}
 
 	@Override
-	public Proyecto obtenerCostosDetalladoById(int idProyecto) throws SystemException {
+	public Proyecto obtenerCostosDetalladoById(int idProyecto, int mes, int anio) throws SystemException {
 		Proyecto proyecto = new Proyecto();
 		Connection con = DBManager.getInstance().connect();
+		String dateFrom = String.valueOf(anio) + "-" + String.valueOf(mes) + "-01";
+		String dateTo = String.valueOf(anio) + "-" + String.valueOf(mes) + "-31";
+
 		try {
-			PreparedStatement sql = con.prepareStatement("select sum(horas.cantidad * empleado.honorarios) as costo, empleado.legajo, empleado.honorarios, tarea.id_proyecto, proyecto.nombre from tarea inner join horas on tarea.id = horas.tarea_id inner join empleado on empleado.legajo = horas.empleado_legajo inner join proyecto on proyecto.id_proyecto = tarea.id_proyecto where proyecto.id_proyecto = ? group by empleado.legajo, tarea.id_proyecto, proyecto.nombre order by tarea.id_proyecto;");
+			PreparedStatement sql = con.prepareStatement("select sum(horas.cantidad * empleado.honorarios) as costo, empleado.legajo, empleado.honorarios, tarea.id_proyecto, proyecto.nombre from tarea inner join horas on tarea.id = horas.tarea_id inner join empleado on empleado.legajo = horas.empleado_legajo inner join proyecto on proyecto.id_proyecto = tarea.id_proyecto where proyecto.id_proyecto = ? and (horas.fecha >= '2020-08-01' and horas.fecha <= '2020-08-31') group by empleado.legajo, tarea.id_proyecto, proyecto.nombre order by tarea.id_proyecto;");
 			sql.setInt(1, idProyecto);
+			sql.setString(2, dateFrom);
+			sql.setString(3, dateTo);
+			
 			ResultSet rs = sql.executeQuery();
 			if(rs.isBeforeFirst()) {
 				List<Empleado> empleados = null;
